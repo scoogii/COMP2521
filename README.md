@@ -1,3 +1,8 @@
 # COMP2521 20T3
 
-Christian Nguyen
+- Lecture Exercises
+- Labs
+- Weekly Tests
+- Assignments
+
+Gangsta :alien:
