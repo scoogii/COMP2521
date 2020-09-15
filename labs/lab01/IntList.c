@@ -117,8 +117,7 @@ void IntListInsertInOrder(IntList L, int v) {
     // integer is '<=' next node's data (taking into account b) and c))
     struct IntListNode *previous = NULL;
     struct IntListNode *current = L->first;
-    while (current != NULL) {
-
+    for (; current != NULL; current = current->next) {
         if (v <= current->data) {
             // b) If it's the smallest integer
             if (previous == NULL) {
@@ -134,7 +133,6 @@ void IntListInsertInOrder(IntList L, int v) {
             return;
         }
         previous = current;
-        current = current->next;
     }
 
     // d) If while loop finishes, then integer is largest
