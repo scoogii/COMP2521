@@ -1,0 +1,18 @@
+- very last out of order
+- very first out of order
+- in order already
+- empty
+- 1 number in list
+- 1 smallest must be sorted
+- 1 middle must be sorted
+- 1 largest must be sorted
+- dupes
+    - largest (3 of)
+    - smallest (2 of)
+    - middle(2 of 1, 3 of 1)
+    - all except 1 and 2 are dupes
+    - mix of smallest and largest dupes
+- 20 reversed
+- randlist
+    - seeded, non-seeded
+- random using `sort - R`
