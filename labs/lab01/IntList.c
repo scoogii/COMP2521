@@ -119,11 +119,10 @@ void IntListInsertInOrder(IntList L, int v) {
     for (; current != NULL; current = current->next) {
         // Insert before the larger node
         if (v <= current->data) {
-            // If previous NULL, then insert as new head
-            if (previous == NULL) {
+            if (previous == NULL) {  // If prev NULL, insert as head
                 newNode->next = L->first;
                 L->first = newNode;
-            } else {
+            } else {  // otherwise, insert within the list
                 newNode->next = current;
                 previous->next = newNode;
             }
@@ -132,7 +131,6 @@ void IntListInsertInOrder(IntList L, int v) {
         }
         previous = current;
     }
-
     // d) If while loop finishes, then integer is largest - append
     IntListInsert(L, v);
 }
