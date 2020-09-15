@@ -63,6 +63,7 @@ be executed when the input size was small.
 
 ->As the input size grew, it was clear that the my program was progressively becoming slower,
 jumping from ~1s to ~4s when changing input size from 20000->40000.
+
 ->However, something that remained pretty constant was the speed of my program when the initial
 order is set to 'reverse' - in every case it matched the speed of the sort command and for the 40000
 and 80000 duped reverse test, and even beat it a few times which is crazy.
@@ -71,14 +72,21 @@ and 80000 duped reverse test, and even beat it a few times which is crazy.
    Hence, this could explain why all reversed cases were really fast because in terms of runtimes,
    the program would be very fast to insert a new head every instance.
 
--> Something that I noticed were the differing user times between random and sorted.
+-> Something that I noticed were the differing user times between random and sorted when using
+useIntList.c.
    ->With smaller input sizes, the difference in user time between random and sorted are pretty
    close to each other, which kind of makes sense since random requires the program to traverse
    through a lot of the list while sorted will require the program to traverse to the end of the
    list every time. However, it gets weird once the input size increases past 40000, the sorted
    tests seem to be faster, finishing in basically half the time of the random test case. To me this
    doesn't make sense since the sorted test cases should take the longest because the program would
-   have to traverse the whole list each time. For the reason why this happens, I've got no clue.
+   have to traverse the whole list each time.
+
+   ->A possible reason why this happens is not because of the code in the function, but instead how
+   the program was compiled (using make - gcc) which could've tried to optimise how the program
+   executes, but inadvertently slowed the user time down in the end.
+
+
 
 Apart from these 2 big observations, I don't think there was anything else I spotted and this may be
 due to how I wrote the code for the function in the program.
