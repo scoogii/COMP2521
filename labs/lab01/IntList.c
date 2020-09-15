@@ -102,8 +102,8 @@ void IntListInsertInOrder(IntList L, int v) {
     assert(L != NULL);
 
     // Cases: a) empty, b) smallest value, c) in middle, d) largest
-    // a) If list is empty, insert as head
-    if (L->size == 0) {
+    // a), d) 'append' if list is empty or v is largest
+    if (L->size == 0 || v >= L->last->data) {
         IntListInsert(L, v);
         return;
     }
@@ -112,27 +112,25 @@ void IntListInsertInOrder(IntList L, int v) {
     struct IntListNode *newNode = malloc(sizeof(struct IntListNode));
     newNode->data = v;
 
-    // b), c) Find the first instance where
-    // integer is '<=' next node's data
-    struct IntListNode *previous = NULL;
-    struct IntListNode *current = L->first;
-    for (; current != NULL; current = current->next) {
-        // Insert before the larger node
-        if (v <= current->data) {
-            if (previous == NULL) {  // If prev NULL, insert as head
-                newNode->next = L->first;
-                L->first = newNode;
-            } else {  // otherwise, insert within the list
-                newNode->next = current;
-                previous->next = newNode;
-            }
-            L->size++;
-            return;
-        }
-        previous = current;
+    // b) If smallest value, insert as new head
+    if (v <= L->first->data) {
+        newNode->next = L->first;
+        L->first = newNode;
+        L->size++;
+        return;
     }
-    // d) If while loop finishes, then integer is largest - append
-    IntListInsert(L, v);
+
+    // c) Find the first instance where integer is '<=' next node's data
+    struct IntListNode *current = L->first;
+    for (; current->next != NULL; current = current->next) {
+        // Insert before the larger node
+        if (v <= current->next->data) {
+            newNode->next = current->next;
+            current->next = newNode;
+            L->size++;
+            break;
+        }
+    }
 }
 
 /**
