@@ -1,6 +1,14 @@
    Input     Has      Initial    Number	      AvgTime	        AvgTime
    Size	     Dups      Order     of runs     foruseInt          forsort
 -----------------------------------------------------------------------------
+|   100   |   no   |  random    |   5   |
+|   100   |   no   |  sorted    |   5   |
+|   100   |   no   |  reverse   |   5   |
+-----------------------------------------------------------------------------
+|  1000   |   no   |  random    |   5   |
+|  1000   |   no   |  sorted    |   5   |
+|  1000   |   no   |  reverse   |   5   |
+-----------------------------------------------------------------------------
 |  10000  |   no   |  random    |   5   |      0.18 	  |      0.02       |
 |  10000  |   no   |  sorted    |   5   |      0.23 	  |      0.01       |
 |  10000  |   no   |  reverse   |   5   |      0.01* 	  |      0.01       |
@@ -25,3 +33,29 @@
 |  40000  |   yes  |  sorted	|   5   |      3.56 	  |      0.01       |
 |  40000  |   yes  |  reverse	|   5   |      0.03* 	  |      0.04       |
 -----------------------------------------------------------------------------
+|  80000  |   no   |  random    |   5   |
+|  80000  |   no   |  sorted    |   5   |
+|  80000  |   no   |  reverse   |   5   |
+-----------------------------------------------------------------------------
+
+---------------
+|Observations |
+---------------
+
+->In terms of noticeability, there wasn't really a big difference in the time taken for the code to be executed for smaller input sizes.
+->I expected the sort command to be faster because I assumed the command to be more efficient than the program I ran.
+->Also, the command might've also not used linked lists, which I suspect may be slower than using arrays.
+->Overall, I didn't see any pattern at around 10000 - 20000
+
+->As the input size grew, it was clear that the my program was progressively becoming slower,
+jumping from ~1s to ~4s when changing input size from 20000->40000.
+->However, something that remained pretty constant was the speed of my program when the initial
+order is set to 'reverse' - in every case it matched the speed of the sort command and for the 40000
+duped reverse test, it even beat the built-in command which is crazy.
+   ->I suspect that this is due to how I structured my function in the program - traverse through
+   the list and find when the passed in value is the smallest and insert before the next node.
+   Hence, this could explain why all reversed cases were really fast because in terms of runtimes,
+   the program would have constant runtimes every single instance it inserts a new node.
+
+->Apart from this finding, I can't really spot any other patterns, it seems that for how I have
+written the function in the program, it greatly affected the way reversed cases ran.
