@@ -12,111 +12,101 @@
 
 // data structures representing IntList
 struct IntListNode {
-	int data;
-	struct IntListNode *next;  // pointer to next node
+    int data;
+    struct IntListNode *next;  // pointer to next node
 };
 
 struct IntListRep {
-	int size;                  // number of elements in the list
-	struct IntListNode *first; // pointer to node containing first value
-	struct IntListNode *last;  // pointer to node containing last value
+    int size;                   // number of elements in the list
+    struct IntListNode *first;  // pointer to node containing first value
+    struct IntListNode *last;   // pointer to node containing last value
 };
 
 /**
  * Create a new, empty IntList.
  */
-IntList newIntList(void)
-{
-	struct IntListRep *L = malloc(sizeof(*L));
-	if (L == NULL) err(EX_OSERR, "couldn't allocate IntList");
-	L->size = 0;
-	L->first = NULL;
-	L->last = NULL;
-	return L;
+IntList newIntList(void) {
+    struct IntListRep *L = malloc(sizeof(*L));
+    if (L == NULL) err(EX_OSERR, "couldn't allocate IntList");
+    L->size = 0;
+    L->first = NULL;
+    L->last = NULL;
+    return L;
 }
 
 /**
  * Release all resources associated with an IntList.
  */
-void freeIntList(IntList L)
-{
-	if (L == NULL) return;
+void freeIntList(IntList L) {
+    if (L == NULL) return;
 
-	struct IntListNode *curr = L->first;
-	while (curr != NULL) {
-		struct IntListNode *temp = curr;
-		curr = curr->next;
-		free(temp);
-	}
-	free(L);
+    struct IntListNode *curr = L->first;
+    while (curr != NULL) {
+        struct IntListNode *temp = curr;
+        curr = curr->next;
+        free(temp);
+    }
+    free(L);
 }
 
 /**
  * Create an IntList by reading values from a file.
  * Assume that the file is open for reading.
  */
-IntList getIntList(FILE *inf)
-{
-	IntList L = newIntList ();
+IntList getIntList(FILE *inf) {
+    IntList L = newIntList();
 
-	int v;
-	while (fscanf(inf, "%d", &v) == 1)
-		IntListInsert(L, v);
+    int v;
+    while (fscanf(inf, "%d", &v) == 1) IntListInsert(L, v);
 
-	return L;
+    return L;
 }
 
 /**
  * Display IntList as one integer per line on `stdout`.
  */
-void showIntList(IntList L)
-{
-	IntListPrint(stdout, L);
-}
+void showIntList(IntList L) { IntListPrint(stdout, L); }
 
 /**
  * Create a new IntListNode with value v
  * (this function is local to this ADT)
  */
-static struct IntListNode *newIntListNode(int v)
-{
-	struct IntListNode *n = malloc(sizeof(*n));
-	if (n == NULL) err(EX_OSERR, "couldn't allocate IntList node");
-	n->data = v;
-	n->next = NULL;
-	return n;
+static struct IntListNode *newIntListNode(int v) {
+    struct IntListNode *n = malloc(sizeof(*n));
+    if (n == NULL) err(EX_OSERR, "couldn't allocate IntList node");
+    n->data = v;
+    n->next = NULL;
+    return n;
 }
 
 /**
  * Append one integer to the end of an IntList.
  */
-void IntListInsert(IntList L, int v)
-{
-	assert(L != NULL);
+void IntListInsert(IntList L, int v) {
+    assert(L != NULL);
 
-	struct IntListNode *n = newIntListNode(v);
-	if (L->first == NULL)
-		L->first = L->last = n;
-	else {
-		L->last->next = n;
-		L->last = n;
-	}
-	L->size++;
+    struct IntListNode *n = newIntListNode(v);
+    if (L->first == NULL)
+        L->first = L->last = n;
+    else {
+        L->last->next = n;
+        L->last = n;
+    }
+    L->size++;
 }
 
 /**
  * Insert an integer into correct place in a sorted IntList.
  */
-void IntListInsertInOrder(IntList L, int v)
-{
+void IntListInsertInOrder(IntList L, int v) {
     assert(L != NULL);
 
     // Cases: a) empty, b) smallest value, c) in middle, d) largest
 
     // a) If list is empty, insert new node as head
     if (L->size == 0) {
-      IntListInsert(L, v);
-      return;
+        IntListInsert(L, v);
+        return;
     }
 
     // Create new node to be inserted
@@ -129,22 +119,22 @@ void IntListInsertInOrder(IntList L, int v)
     struct IntListNode *current = L->first;
     while (current != NULL) {
 
-      if (v <= current->data) {
-        // b) If it's the smallest integer
-        if (previous == NULL) {
-          newNode->next = L->first;
-          L->first = newNode;
+        if (v <= current->data) {
+            // b) If it's the smallest integer
+            if (previous == NULL) {
+                newNode->next = L->first;
+                L->first = newNode;
+            }
+            // c) Otherwise, it's somewhere in the middle
+            else {
+                newNode->next = current;
+                previous->next = newNode;
+            }
+            L->size++;
+            return;
         }
-        // c) Otherwise, it's somewhere in the middle
-        else {
-          newNode->next = current;
-          previous->next = newNode;
-        }
-        L->size++;
-        return;
-      }
-      previous = current;
-      current = current->next;
+        previous = current;
+        current = current->next;
     }
 
     // d) If while loop finishes, then integer is largest
@@ -155,91 +145,78 @@ void IntListInsertInOrder(IntList L, int v)
 /**
  * Return the number of elements in an IntList.
  */
-int IntListLength(IntList L)
-{
-	assert(L != NULL);
-	return L->size;
+int IntListLength(IntList L) {
+    assert(L != NULL);
+    return L->size;
 }
 
 /**
  * Make a copy of an IntList.
  * New list should look identical to the original list.
  */
-IntList IntListCopy(IntList L)
-{
-	assert(L != NULL);
-	struct IntListRep *Lnew = newIntList();
-	for (struct IntListNode *curr = L->first;
-			curr != NULL; curr = curr->next)
-		IntListInsert(Lnew, curr->data);
-	return Lnew;
+IntList IntListCopy(IntList L) {
+    assert(L != NULL);
+    struct IntListRep *Lnew = newIntList();
+    for (struct IntListNode *curr = L->first; curr != NULL; curr = curr->next)
+        IntListInsert(Lnew, curr->data);
+    return Lnew;
 }
 
 /**
  * Make a sorted copy of an IntList.
  */
-IntList IntListSortedCopy(IntList L)
-{
-	assert(L != NULL);
-	struct IntListRep *Lnew = newIntList();
-	for (struct IntListNode *curr = L->first;
-			curr != NULL; curr = curr->next)
-		IntListInsertInOrder(Lnew, curr->data);
-	return Lnew;
+IntList IntListSortedCopy(IntList L) {
+    assert(L != NULL);
+    struct IntListRep *Lnew = newIntList();
+    for (struct IntListNode *curr = L->first; curr != NULL; curr = curr->next)
+        IntListInsertInOrder(Lnew, curr->data);
+    return Lnew;
 }
 
 /**
  * Check whether an IntList is sorted in ascending order.
  * Returns `false` if list is not sorted, `true` if it is.
  */
-bool IntListIsSorted(IntList L)
-{
-	assert(L != NULL);
+bool IntListIsSorted(IntList L) {
+    assert(L != NULL);
 
-	// trivial cases, 0 or 1 items
-	if (L->size < 2)
-		return true;
+    // trivial cases, 0 or 1 items
+    if (L->size < 2) return true;
 
-	// scan list, looking for out-of-order pair
-	for (struct IntListNode *curr = L->first;
-			curr->next != NULL; curr = curr->next)
-		if (curr->next->data < curr->data)
-			return false;
+    // scan list, looking for out-of-order pair
+    for (struct IntListNode *curr = L->first; curr->next != NULL;
+            curr = curr->next)
+        if (curr->next->data < curr->data) return false;
 
-	// nothing out-of-order, must be sorted
-	return true;
+    // nothing out-of-order, must be sorted
+    return true;
 }
 
 /**
  * Check internal consistency of an IntList.
  */
-bool IntListOK(IntList L)
-{
-	if (L == NULL)
-		return true;
+bool IntListOK(IntList L) {
+    if (L == NULL) return true;
 
-	if (L->size == 0)
-		return (L->first == NULL && L->last == NULL);
+    if (L->size == 0) return (L->first == NULL && L->last == NULL);
 
-	// scan to (but not past) last node
-	struct IntListNode *p = L->first;
-	int count = 1; // at least one node
-	while (p->next != NULL) {
-		count++;
-		p = p->next;
-	}
+    // scan to (but not past) last node
+    struct IntListNode *p = L->first;
+    int count = 1;  // at least one node
+    while (p->next != NULL) {
+        count++;
+        p = p->next;
+    }
 
-	return (count == L->size && p == L->last);
+    return (count == L->size && p == L->last);
 }
 
 /**
  * Display an IntList as one integer per line to a file.
  * Assume that the file is open for writing.
  */
-void IntListPrint(FILE *outf, IntList L)
-{
-	assert(L != NULL);
-	for (struct IntListNode *curr = L->first;
-			curr != NULL; curr = curr->next)
-		fprintf(outf, "%d\n", curr->data);
+void IntListPrint(FILE *outf, IntList L) {
+    assert(L != NULL);
+    for (struct IntListNode *curr = L->first; curr != NULL; curr = curr->next)
+        fprintf(outf, "%d\n", curr->data);
 }
