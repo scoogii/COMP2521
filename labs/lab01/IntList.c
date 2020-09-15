@@ -121,9 +121,9 @@ void IntListInsertInOrder(IntList L, int v) {
     }
 
     // c) Find the first instance where integer is '<=' next node's data
+    // insert before that node
     struct IntListNode *current = L->first;
     for (; current->next != NULL; current = current->next) {
-        // Insert before the larger node
         if (v <= current->next->data) {
             newNode->next = current->next;
             current->next = newNode;
