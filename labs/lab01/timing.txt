@@ -1,13 +1,21 @@
    Input     Has      Initial    Number	      AvgTime	        AvgTime
    Size	     Dups      Order     of runs     foruseInt          forsort
 -----------------------------------------------------------------------------
-|   100   |   no   |  random    |   5   |
-|   100   |   no   |  sorted    |   5   |
-|   100   |   no   |  reverse   |   5   |
+|   100   |   no   |  random    |   5   |      0.00       |      0.00       |
+|   100   |   no   |  sorted    |   5   |      0.00       |      0.00       |
+|   100   |   no   |  reverse   |   5   |      0.00       |      0.00       |
 -----------------------------------------------------------------------------
-|  1000   |   no   |  random    |   5   |
-|  1000   |   no   |  sorted    |   5   |
-|  1000   |   no   |  reverse   |   5   |
+|   100   |   yes  |  random    |   5   |      0.00       |      0.00       |
+|   100   |   yes  |  sorted    |   5   |      0.00       |      0.00       |
+|   100   |   yes  |  reverse   |   5   |      0.00       |      0.00       |
+-----------------------------------------------------------------------------
+|  1000   |   no   |  random    |   5   |      0.00       |      0.00       |
+|  1000   |   no   |  sorted    |   5   |      0.00       |      0.00       |
+|  1000   |   no   |  reverse   |   5   |      0.00       |      0.00       |
+-----------------------------------------------------------------------------
+|  1000   |   yes  |  random    |   5   |      0.00       |      0.00       |
+|  1000   |   yes  |  sorted    |   5   |      0.01       |      0.00       |
+|  1000   |   yes  |  reverse   |   5   |      0.00       |      0.00       |
 -----------------------------------------------------------------------------
 |  10000  |   no   |  random    |   5   |      0.18 	  |      0.02       |
 |  10000  |   no   |  sorted    |   5   |      0.23 	  |      0.01       |
@@ -33,29 +41,48 @@
 |  40000  |   yes  |  sorted	|   5   |      3.56 	  |      0.01       |
 |  40000  |   yes  |  reverse	|   5   |      0.03* 	  |      0.04       |
 -----------------------------------------------------------------------------
-|  80000  |   no   |  random    |   5   |
-|  80000  |   no   |  sorted    |   5   |
-|  80000  |   no   |  reverse   |   5   |
+|  80000  |   no   |  random    |   5   |      36.4       |      0.18       |
+|  80000  |   no   |  sorted    |   5   |      16.0       |      0.11       |
+|  80000  |   no   |  reverse   |   5   |      0.08*      |      0.09       |
 -----------------------------------------------------------------------------
+|  80000  |   yes  |  random    |   5   |      32.5       |      0.20       |
+|  80000  |   yes  |  sorted    |   5   |      16.3       |      0.11       |
+|  80000  |   yes  |  reverse   |   5   |      0.09*      |      0.11       |
+-----------------------------------------------------------------------------
+
 
 ---------------
 |Observations |
 ---------------
 
-->In terms of noticeability, there wasn't really a big difference in the time taken for the code to be executed for smaller input sizes.
+->In terms of noticeability, there wasn't really a big difference in the time taken for the code to
+be executed when the input size was small.
 ->I expected the sort command to be faster because I assumed the command to be more efficient than the program I ran.
 ->Also, the command might've also not used linked lists, which I suspect may be slower than using arrays.
-->Overall, I didn't see any pattern at around 10000 - 20000
+->Overall, I didn't see any noticeable trends at around 100 - 20000 input size.
 
 ->As the input size grew, it was clear that the my program was progressively becoming slower,
 jumping from ~1s to ~4s when changing input size from 20000->40000.
 ->However, something that remained pretty constant was the speed of my program when the initial
 order is set to 'reverse' - in every case it matched the speed of the sort command and for the 40000
-duped reverse test, it even beat the built-in command which is crazy.
-   ->I suspect that this is due to how I structured my function in the program - traverse through
+and 80000 duped reverse test, and even beat it a few times which is crazy.
+   ->I suspect that this is due to how I wrote the inserting in order function in the program - traverse through
    the list and find when the passed in value is the smallest and insert before the next node.
    Hence, this could explain why all reversed cases were really fast because in terms of runtimes,
-   the program would have constant runtimes every single instance it inserts a new node.
+   the program would be very fast to insert a new head every instance.
 
-->Apart from this finding, I can't really spot any other patterns, it seems that for how I have
-written the function in the program, it greatly affected the way reversed cases ran.
+-> Something that I noticed were the differing user times between random and sorted.
+   ->With smaller input sizes, the difference in user time between random and sorted are pretty
+   close to each other, which kind of makes sense since random requires the program to traverse
+   through a lot of the list while sorted will require the program to traverse to the end of the
+   list every time. However, it gets weird once the input size increases past 40000, the sorted
+   tests seem to be faster, finishing in basically half the time of the random test case. To me this
+   doesn't make sense since the sorted test cases should take the longest because the program would
+   have to traverse the whole list each time. For the reason why this happens, I've got no clue.
+
+Apart from these 2 big observations, I don't think there was anything else I spotted and this may be
+due to how I wrote the code for the function in the program.
+
+Hence from these tests, it seems ideal to use useIntList.c whenever it is given that the list of
+numbers are sorted in REVERSE order, otherwise using the built-in command sort will provide much
+more value in terms of time.
