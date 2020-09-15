@@ -1,22 +1,27 @@
-Input	Has	Initial	Number	AvgTime	AvgTime
-Size	Dups	Order	of runs	forusel	forsort
-10000	no	random	N	T1sec	T2sec
-10000	no	sorted	N	T1sec	T2sec
-10000	no	reverse	N	T1sec	T2sec
-10000	yes	random	N	T1sec	T2sec
-10000	yes	sorted	N	T1sec	T2sec
-10000	yes	reverse	N	T1sec	T2sec
-20000	no	random	N	T1sec	T2sec
-20000	no	sorted	N	T1sec	T2sec
-20000	no	reverse	N	T1sec	T2sec
-20000	yes	random	N	T1sec	T2sec
-20000	yes	sorted	N	T1sec	T2sec
-20000	yes	reverse	N	T1sec	T2sec
-40000	no	random	N	T1sec	T2sec
-40000	no	sorted	N	T1sec	T2sec
-40000	no	reverse	N	T1sec	T2sec
-40000	yes	random	N	T1sec	T2sec
-40000	yes	sorted	N	T1sec	T2sec
-40000	yes	reverse	N	T1sec	T2sec
-...
-
+   Input     Has      Initial    Number	      AvgTime	        AvgTime
+   Size	     Dups      Order     of runs     foruseInt          forsort
+-----------------------------------------------------------------------------
+|  10000  |   no   |  random    |   5   |      0.18 	  |      0.02       |
+|  10000  |   no   |  sorted    |   5   |      0.23 	  |      0.01       |
+|  10000  |   no   |  reverse   |   5   |      0.01* 	  |      0.01       |
+-----------------------------------------------------------------------------
+|  10000  |   yes  |  random    |   5   |      0.17 	  |      0.02       |
+|  10000  |   yes  |  sorted	|   5   |      0.23 	  |      0.01       |
+|  10000  |   yes  |  reverse	|   5   |      0.00* 	  |      0.00       |
+-----------------------------------------------------------------------------
+|  20000  |   no   |  random	|   5   |      0.84 	  |      0.03       |
+|  20000  |   no   |  sorted	|   5   |      0.87 	  |      0.02       |
+|  20000  |   no   |  reverse	|   5   |      0.02* 	  |      0.02       |
+-----------------------------------------------------------------------------
+|  20000  |   yes  |  random	|   5   |      0.83 	  |      0.03       |
+|  20000  |   yes  |  sorted	|   5   |      0.88 	  |      0.02       |
+|  20000  |   yes  |  reverse	|   5   |      0.02* 	  |      0.02       |
+-----------------------------------------------------------------------------
+|  40000  |   no   |  random    |   5   |      4.94       |      0.07       |
+|  40000  |   no   |  sorted	|   5   |      3.46 	  |      0.04       |
+|  40000  |   no   |  reverse	|   5   |      0.03* 	  |      0.03       |
+-----------------------------------------------------------------------------
+|  40000  |   yes  |  random	|   5   |      4.84 	  |      0.08       |
+|  40000  |   yes  |  sorted	|   5   |      3.56 	  |      0.01       |
+|  40000  |   yes  |  reverse	|   5   |      0.03* 	  |      0.04       |
+-----------------------------------------------------------------------------
