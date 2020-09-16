@@ -10,7 +10,7 @@ do
 
 	if [[ $DIFF != "" ]];
 	then
-		echo "  \033[0;31TEST FAILED\033[0m"
+		echo "  \033[0;31mTEST FAILED\033[0m"
 	else
 		echo "  \033[0;32mTEST PASSED\033[0m"
 	fi
