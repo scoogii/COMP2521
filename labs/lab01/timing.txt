@@ -70,8 +70,8 @@ some level of proportionality.
 == Dupes ==
 I couldn't see much of a trend when it came to dupes both for my program and sort. 
 There didn't seem to be much of a difference between the user times of lists that had dupes and lists 
-that didn't. It's also hard to say because I've written my code so that sorted and reverse orders
-would be optimised to finish extremely fast, leaving only random orders left to be analysed. Random
+that didn't. It's also hard to say because I've written my code so that sorted and reverse order
+would be optimised to finish extremely fast, while random order still takes a while. Random
 orders aren't very reliable but based off the averages it still seems to show that there is no
 difference in user time when running into a list with duplicates or none at all.
 
@@ -80,7 +80,8 @@ From the way I wrote my code, the user times were as expected since I have taken
 being the largest and smallest values first before having to traverse through the list of numbers.
 Sorted and reversed order align with my expectations with basically the same user time while random
 is the longest since it will actually have to traverse over the list of numbers frequently. This
-observation applies both to the program I used and the built-in sort command. 
+observation applies both to the program I used and the built-in sort command. However, it looks like
+sort has a fast way of dealing with random orders too, hence why it's way faster than useIntList.c.
 
 == Conclusion ==
 From what I've tested, I can confidently say that it would be ideal to use useIntList.c whenever it
