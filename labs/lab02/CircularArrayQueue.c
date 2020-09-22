@@ -60,7 +60,7 @@ void QueueEnqueue(Queue q, Item it) {
         return;
     }
 
-    // Calculate backIndex - this ensures it wraps around array
+    // Calculate backIndex - modulo ensures it wraps around array correctly
     int backIndex = (q->frontIndex + (q->size - 1)) % q->capacity;
 
     // 2 cases: if queue is not full or full
@@ -75,19 +75,18 @@ void QueueEnqueue(Queue q, Item it) {
 }
 
 /**
- * Function that shifts all values from index 'frontIndex' to
- * the very right once the full queue is expanded
- * Function returns the new capacity size
+ * Function doubles the capacity of the queue's items array
+ * and shifts all values proceeding from frontIndex to the very right
+ * if necessary. Should happen if frontIndex > backIndex
  */
 void extendQueue(Queue q, Item it, int backIndex) {
     // Double the size of the previous array using realloc
     q->items = realloc(q->items, (q->capacity * 2) * sizeof(Item));
 
-    // If front > back, need to shift queue items to the very end of the new
-    // queue
+    // If frontIndex > backIndex, shift all values proceeding frontIndex
+    // to the very right to make space for insertion after backIndex
     if (q->frontIndex > backIndex) {
-        // Loop through frontIndex to end of queue and shift them
-        // in the extended queue
+        // Loop through frontIndex to end of old queue and shift them
         for (int i = (q->capacity - 1); i >= q->frontIndex; i--) {
             q->items[i + q->capacity] = q->items[i];
         }
@@ -103,12 +102,12 @@ void extendQueue(Queue q, Item it, int backIndex) {
  * Assumes that the queue is not empty
  */
 Item QueueDequeue(Queue q) {
-    // Store initial front item and reduce size
+    // Store initial front item and reduce size of queue
     Item front = QueueFront(q);
-    q->size--;
 
     // Adjust front index and return deq'd item
     q->frontIndex = (q->frontIndex + 1) % q->capacity;
+    q->size--;
     return front;
 }
 
