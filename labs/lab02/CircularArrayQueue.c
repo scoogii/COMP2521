@@ -68,7 +68,6 @@ void QueueEnqueue(Queue q, Item it) {
         q->items[(backIndex + 1) % q->capacity] = it;
         q->size++;
     } else {  // Case 2 - full
-        if (q->frontIndex > backIndex) q->frontIndex += q->capacity;
         extendQueue(q, it, backIndex);
         q->capacity *= 2;
     }
