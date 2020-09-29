@@ -122,9 +122,8 @@ void BSTreeLevelOrder(BSTree t) {
     // Add t's root node to queue
     QueueEnqueue(q, t);
 
-    for (int i = 0; i < BSTreeNumNodes(t); i++) {
-        // Dequeue the front BSTree node in the queue and set the new current
-        // Current becomes previous front item of queue
+    while (QueueSize(q) > 0) {
+        // Dequeue the front BSTree node in the queue and set current
         BSTLink current = QueueDequeue(q);
 
         // Print the value of the front BSTree node in the queue
@@ -134,6 +133,8 @@ void BSTreeLevelOrder(BSTree t) {
         if (current->left != NULL) QueueEnqueue(q, current->left);
         if (current->right != NULL) QueueEnqueue(q, current->right);
     }
+
+    QueueFree(q);
 }
 
 ////////////////////////////////////////////////////////////////////////
