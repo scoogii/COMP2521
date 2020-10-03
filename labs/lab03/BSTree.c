@@ -127,7 +127,7 @@ void BSTreeLevelOrder(BSTree t) {
         BSTLink current = QueueDequeue(q);
 
         // Print the value of the front BSTree node in the queue
-        printf("%d ", current->value);
+        showBSTreeNode(current);
 
         // If left and right child exists, add to queue in this specific order
         if (current->left != NULL) QueueEnqueue(q, current->left);
