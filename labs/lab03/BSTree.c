@@ -117,6 +117,8 @@ void BSTreePostfix(BSTree t) {
 // Prints the values in the given BSTree in level-order
 // Time complexity: O(n)
 void BSTreeLevelOrder(BSTree t) {
+    if (t == NULL) return;
+
     // Initialise queue
     Queue q = QueueNew();
     // Add t's root node to queue
