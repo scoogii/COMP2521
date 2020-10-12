@@ -1,0 +1,120 @@
+
+Test 1
+
+
+Rotating left at the root...
+
+
+Test 2
+
+Mar 15 15:00 (height: 2)
+┕━╸L: Mar 15 13:00 (height: 1)
+      ┝━╸L: Mar 15 12:00 (height: 0)
+      ┕━╸R: Mar 15 14:00 (height: 0)
+
+Rotating left at the root...
+
+Mar 15 15:00 (height: 2)
+┕━╸L: Mar 15 13:00 (height: 1)
+      ┝━╸L: Mar 15 12:00 (height: 0)
+      ┕━╸R: Mar 15 14:00 (height: 0)
+
+Test 3
+
+Mar 15 12:00 (height: 2)
+┝━╸L: Mar 13 12:00 (height: 1)
+│     ┝━╸L: Mar 12 12:00 (height: 0)
+│     ┕━╸R: Mar 14 12:00 (height: 0)
+┕━╸R: Mar 17 12:00 (height: 1)
+      ┝━╸L: Mar 16 12:00 (height: 0)
+      ┕━╸R: Mar 18 12:00 (height: 0)
+
+Rotating left at the root...
+
+Mar 17 12:00 (height: 3)
+┝━╸L: Mar 15 12:00 (height: 2)
+│     ┝━╸L: Mar 13 12:00 (height: 1)
+│     │     ┝━╸L: Mar 12 12:00 (height: 0)
+│     │     ┕━╸R: Mar 14 12:00 (height: 0)
+│     ┕━╸R: Mar 16 12:00 (height: 0)
+┕━╸R: Mar 18 12:00 (height: 0)
+
+Rotating left at the root...
+
+Mar 18 12:00 (height: 4)
+┕━╸L: Mar 17 12:00 (height: 3)
+      ┕━╸L: Mar 15 12:00 (height: 2)
+            ┝━╸L: Mar 13 12:00 (height: 1)
+            │     ┝━╸L: Mar 12 12:00 (height: 0)
+            │     ┕━╸R: Mar 14 12:00 (height: 0)
+            ┕━╸R: Mar 16 12:00 (height: 0)
+
+Rotating left at the root...
+
+Mar 18 12:00 (height: 4)
+┕━╸L: Mar 17 12:00 (height: 3)
+      ┕━╸L: Mar 15 12:00 (height: 2)
+            ┝━╸L: Mar 13 12:00 (height: 1)
+            │     ┝━╸L: Mar 12 12:00 (height: 0)
+            │     ┕━╸R: Mar 14 12:00 (height: 0)
+            ┕━╸R: Mar 16 12:00 (height: 0)
+
+Test 4
+
+Jan 01 12:00 (height: 4)
+┕━╸R: Apr 01 12:00 (height: 3)
+      ┝━╸L: Mar 01 12:00 (height: 1)
+      │     ┕━╸L: Feb 01 12:00 (height: 0)
+      ┕━╸R: Jul 01 12:00 (height: 2)
+            ┝━╸L: May 01 12:00 (height: 1)
+            │     ┕━╸R: Jun 01 12:00 (height: 0)
+            ┕━╸R: Sep 01 12:00 (height: 1)
+                  ┕━╸L: Aug 01 12:00 (height: 0)
+
+Rotating left at the root...
+
+Apr 01 12:00 (height: 3)
+┝━╸L: Jan 01 12:00 (height: 2)
+│     ┕━╸R: Mar 01 12:00 (height: 1)
+│           ┕━╸L: Feb 01 12:00 (height: 0)
+┕━╸R: Jul 01 12:00 (height: 2)
+      ┝━╸L: May 01 12:00 (height: 1)
+      │     ┕━╸R: Jun 01 12:00 (height: 0)
+      ┕━╸R: Sep 01 12:00 (height: 1)
+            ┕━╸L: Aug 01 12:00 (height: 0)
+
+Rotating left at the root...
+
+Jul 01 12:00 (height: 4)
+┝━╸L: Apr 01 12:00 (height: 3)
+│     ┝━╸L: Jan 01 12:00 (height: 2)
+│     │     ┕━╸R: Mar 01 12:00 (height: 1)
+│     │           ┕━╸L: Feb 01 12:00 (height: 0)
+│     ┕━╸R: May 01 12:00 (height: 1)
+│           ┕━╸R: Jun 01 12:00 (height: 0)
+┕━╸R: Sep 01 12:00 (height: 1)
+      ┕━╸L: Aug 01 12:00 (height: 0)
+
+Rotating left at the root...
+
+Sep 01 12:00 (height: 5)
+┕━╸L: Jul 01 12:00 (height: 4)
+      ┝━╸L: Apr 01 12:00 (height: 3)
+      │     ┝━╸L: Jan 01 12:00 (height: 2)
+      │     │     ┕━╸R: Mar 01 12:00 (height: 1)
+      │     │           ┕━╸L: Feb 01 12:00 (height: 0)
+      │     ┕━╸R: May 01 12:00 (height: 1)
+      │           ┕━╸R: Jun 01 12:00 (height: 0)
+      ┕━╸R: Aug 01 12:00 (height: 0)
+
+Rotating left at the root...
+
+Sep 01 12:00 (height: 5)
+┕━╸L: Jul 01 12:00 (height: 4)
+      ┝━╸L: Apr 01 12:00 (height: 3)
+      │     ┝━╸L: Jan 01 12:00 (height: 2)
+      │     │     ┕━╸R: Mar 01 12:00 (height: 1)
+      │     │           ┕━╸L: Feb 01 12:00 (height: 0)
+      │     ┕━╸R: May 01 12:00 (height: 1)
+      │           ┕━╸R: Jun 01 12:00 (height: 0)
+      ┕━╸R: Aug 01 12:00 (height: 0)

@@ -1,0 +1,258 @@
+
+Test 1
+
+Inserting Jun 01 12:00
+
+Jun 01 12:00 (height: 0)
+
+Inserting Mar 01 12:00
+
+Jun 01 12:00 (height: 1)
+┕━╸L: Mar 01 12:00 (height: 0)
+
+Inserting Feb 01 12:00
+
+Mar 01 12:00 (height: 1)
+┝━╸L: Feb 01 12:00 (height: 0)
+┕━╸R: Jun 01 12:00 (height: 0)
+
+Test 2
+
+Inserting Jul 01 12:00
+
+Jul 01 12:00 (height: 0)
+
+Inserting Jan 01 12:00
+
+Jul 01 12:00 (height: 1)
+┕━╸L: Jan 01 12:00 (height: 0)
+
+Inserting Mar 01 12:00
+
+Mar 01 12:00 (height: 1)
+┝━╸L: Jan 01 12:00 (height: 0)
+┕━╸R: Jul 01 12:00 (height: 0)
+
+Test 3
+
+Inserting Apr 01 12:00
+
+Apr 01 12:00 (height: 0)
+
+Inserting Aug 01 12:00
+
+Apr 01 12:00 (height: 1)
+┕━╸R: Aug 01 12:00 (height: 0)
+
+Inserting May 01 12:00
+
+May 01 12:00 (height: 1)
+┝━╸L: Apr 01 12:00 (height: 0)
+┕━╸R: Aug 01 12:00 (height: 0)
+
+Test 4
+
+Inserting Jan 01 12:00
+
+Jan 01 12:00 (height: 0)
+
+Inserting May 01 12:00
+
+Jan 01 12:00 (height: 1)
+┕━╸R: May 01 12:00 (height: 0)
+
+Inserting Sep 01 12:00
+
+May 01 12:00 (height: 1)
+┝━╸L: Jan 01 12:00 (height: 0)
+┕━╸R: Sep 01 12:00 (height: 0)
+
+Test 5
+
+Inserting May 01 12:00
+
+May 01 12:00 (height: 0)
+
+Inserting Apr 01 12:00
+
+May 01 12:00 (height: 1)
+┕━╸L: Apr 01 12:00 (height: 0)
+
+Inserting Feb 01 12:00
+
+Apr 01 12:00 (height: 1)
+┝━╸L: Feb 01 12:00 (height: 0)
+┕━╸R: May 01 12:00 (height: 0)
+
+Inserting Sep 01 12:00
+
+Apr 01 12:00 (height: 2)
+┝━╸L: Feb 01 12:00 (height: 0)
+┕━╸R: May 01 12:00 (height: 1)
+      ┕━╸R: Sep 01 12:00 (height: 0)
+
+Inserting Jul 01 12:00
+
+Apr 01 12:00 (height: 2)
+┝━╸L: Feb 01 12:00 (height: 0)
+┕━╸R: Jul 01 12:00 (height: 1)
+      ┝━╸L: May 01 12:00 (height: 0)
+      ┕━╸R: Sep 01 12:00 (height: 0)
+
+Inserting Jun 01 12:00
+
+May 01 12:00 (height: 2)
+┝━╸L: Apr 01 12:00 (height: 1)
+│     ┕━╸L: Feb 01 12:00 (height: 0)
+┕━╸R: Jul 01 12:00 (height: 1)
+      ┝━╸L: Jun 01 12:00 (height: 0)
+      ┕━╸R: Sep 01 12:00 (height: 0)
+
+Inserting Mar 01 12:00
+
+May 01 12:00 (height: 2)
+┝━╸L: Mar 01 12:00 (height: 1)
+│     ┝━╸L: Feb 01 12:00 (height: 0)
+│     ┕━╸R: Apr 01 12:00 (height: 0)
+┕━╸R: Jul 01 12:00 (height: 1)
+      ┝━╸L: Jun 01 12:00 (height: 0)
+      ┕━╸R: Sep 01 12:00 (height: 0)
+
+Inserting Oct 01 12:00
+
+May 01 12:00 (height: 3)
+┝━╸L: Mar 01 12:00 (height: 1)
+│     ┝━╸L: Feb 01 12:00 (height: 0)
+│     ┕━╸R: Apr 01 12:00 (height: 0)
+┕━╸R: Jul 01 12:00 (height: 2)
+      ┝━╸L: Jun 01 12:00 (height: 0)
+      ┕━╸R: Sep 01 12:00 (height: 1)
+            ┕━╸R: Oct 01 12:00 (height: 0)
+
+Inserting Dec 01 12:00
+
+May 01 12:00 (height: 3)
+┝━╸L: Mar 01 12:00 (height: 1)
+│     ┝━╸L: Feb 01 12:00 (height: 0)
+│     ┕━╸R: Apr 01 12:00 (height: 0)
+┕━╸R: Jul 01 12:00 (height: 2)
+      ┝━╸L: Jun 01 12:00 (height: 0)
+      ┕━╸R: Oct 01 12:00 (height: 1)
+            ┝━╸L: Sep 01 12:00 (height: 0)
+            ┕━╸R: Dec 01 12:00 (height: 0)
+
+Test 6
+
+Inserting Jul 01 12:00
+
+Jul 01 12:00 (height: 0)
+
+Inserting May 01 12:00
+
+Jul 01 12:00 (height: 1)
+┕━╸L: May 01 12:00 (height: 0)
+
+Inserting Sep 01 12:00
+
+Jul 01 12:00 (height: 1)
+┝━╸L: May 01 12:00 (height: 0)
+┕━╸R: Sep 01 12:00 (height: 0)
+
+Inserting Mar 01 12:00
+
+Jul 01 12:00 (height: 2)
+┝━╸L: May 01 12:00 (height: 1)
+│     ┕━╸L: Mar 01 12:00 (height: 0)
+┕━╸R: Sep 01 12:00 (height: 0)
+
+Inserting Jun 01 12:00
+
+Jul 01 12:00 (height: 2)
+┝━╸L: May 01 12:00 (height: 1)
+│     ┝━╸L: Mar 01 12:00 (height: 0)
+│     ┕━╸R: Jun 01 12:00 (height: 0)
+┕━╸R: Sep 01 12:00 (height: 0)
+
+Inserting Aug 01 12:00
+
+Jul 01 12:00 (height: 2)
+┝━╸L: May 01 12:00 (height: 1)
+│     ┝━╸L: Mar 01 12:00 (height: 0)
+│     ┕━╸R: Jun 01 12:00 (height: 0)
+┕━╸R: Sep 01 12:00 (height: 1)
+      ┕━╸L: Aug 01 12:00 (height: 0)
+
+Inserting Feb 01 12:00
+
+Jul 01 12:00 (height: 3)
+┝━╸L: May 01 12:00 (height: 2)
+│     ┝━╸L: Mar 01 12:00 (height: 1)
+│     │     ┕━╸L: Feb 01 12:00 (height: 0)
+│     ┕━╸R: Jun 01 12:00 (height: 0)
+┕━╸R: Sep 01 12:00 (height: 1)
+      ┕━╸L: Aug 01 12:00 (height: 0)
+
+Inserting Apr 01 12:00
+
+Jul 01 12:00 (height: 3)
+┝━╸L: May 01 12:00 (height: 2)
+│     ┝━╸L: Mar 01 12:00 (height: 1)
+│     │     ┝━╸L: Feb 01 12:00 (height: 0)
+│     │     ┕━╸R: Apr 01 12:00 (height: 0)
+│     ┕━╸R: Jun 01 12:00 (height: 0)
+┕━╸R: Sep 01 12:00 (height: 1)
+      ┕━╸L: Aug 01 12:00 (height: 0)
+
+Inserting May 15 12:00
+
+Jul 01 12:00 (height: 3)
+┝━╸L: May 01 12:00 (height: 2)
+│     ┝━╸L: Mar 01 12:00 (height: 1)
+│     │     ┝━╸L: Feb 01 12:00 (height: 0)
+│     │     ┕━╸R: Apr 01 12:00 (height: 0)
+│     ┕━╸R: Jun 01 12:00 (height: 1)
+│           ┕━╸L: May 15 12:00 (height: 0)
+┕━╸R: Sep 01 12:00 (height: 1)
+      ┕━╸L: Aug 01 12:00 (height: 0)
+
+Inserting Jun 15 12:00
+
+Jul 01 12:00 (height: 3)
+┝━╸L: May 01 12:00 (height: 2)
+│     ┝━╸L: Mar 01 12:00 (height: 1)
+│     │     ┝━╸L: Feb 01 12:00 (height: 0)
+│     │     ┕━╸R: Apr 01 12:00 (height: 0)
+│     ┕━╸R: Jun 01 12:00 (height: 1)
+│           ┝━╸L: May 15 12:00 (height: 0)
+│           ┕━╸R: Jun 15 12:00 (height: 0)
+┕━╸R: Sep 01 12:00 (height: 1)
+      ┕━╸L: Aug 01 12:00 (height: 0)
+
+Inserting Aug 15 12:00
+
+Jul 01 12:00 (height: 3)
+┝━╸L: May 01 12:00 (height: 2)
+│     ┝━╸L: Mar 01 12:00 (height: 1)
+│     │     ┝━╸L: Feb 01 12:00 (height: 0)
+│     │     ┕━╸R: Apr 01 12:00 (height: 0)
+│     ┕━╸R: Jun 01 12:00 (height: 1)
+│           ┝━╸L: May 15 12:00 (height: 0)
+│           ┕━╸R: Jun 15 12:00 (height: 0)
+┕━╸R: Aug 15 12:00 (height: 1)
+      ┝━╸L: Aug 01 12:00 (height: 0)
+      ┕━╸R: Sep 01 12:00 (height: 0)
+
+Inserting May 10 12:00
+
+Jun 01 12:00 (height: 3)
+┝━╸L: May 01 12:00 (height: 2)
+│     ┝━╸L: Mar 01 12:00 (height: 1)
+│     │     ┝━╸L: Feb 01 12:00 (height: 0)
+│     │     ┕━╸R: Apr 01 12:00 (height: 0)
+│     ┕━╸R: May 15 12:00 (height: 1)
+│           ┕━╸L: May 10 12:00 (height: 0)
+┕━╸R: Jul 01 12:00 (height: 2)
+      ┝━╸L: Jun 15 12:00 (height: 0)
+      ┕━╸R: Aug 15 12:00 (height: 1)
+            ┝━╸L: Aug 01 12:00 (height: 0)
+            ┕━╸R: Sep 01 12:00 (height: 0)

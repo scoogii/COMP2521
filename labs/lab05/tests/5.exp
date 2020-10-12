@@ -1,0 +1,24 @@
+
+Test 1
+
+
+The ceiling of Jul 02 12:00 is NULL
+
+Test 2
+
+Apr 14 12:00 (height: 2)
+┝━╸L: Feb 17 12:00 (height: 1)
+│     ┝━╸L: Jan 04 12:00 (height: 0)
+│     ┕━╸R: Mar 29 12:00 (height: 0)
+┕━╸R: Jun 06 12:00 (height: 1)
+      ┝━╸L: May 19 12:00 (height: 0)
+      ┕━╸R: Jul 07 12:00 (height: 0)
+
+The ceiling of Jan 01 12:00 is Jan 04 12:00
+The ceiling of Jan 09 12:00 is Feb 17 12:00
+The ceiling of Mar 15 12:00 is Mar 29 12:00
+The ceiling of Apr 01 12:00 is Apr 14 12:00
+The ceiling of Apr 27 12:00 is May 19 12:00
+The ceiling of May 30 12:00 is Jun 06 12:00
+The ceiling of Jun 22 12:00 is Jul 07 12:00
+The ceiling of Jul 12 12:00 is NULL
