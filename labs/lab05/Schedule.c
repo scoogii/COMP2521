@@ -9,7 +9,7 @@
 
 struct schedule {
     Tree times;
-    int  count;
+    int count;
 };
 
 // Creates a new schedule
@@ -32,14 +32,17 @@ void ScheduleFree(Schedule s) {
 }
 
 // Gets the number of times added to the schedule
-int  ScheduleCount(Schedule s) {
-    return s->count;
-}
+int ScheduleCount(Schedule s) { return s->count; }
 
 // Attempts to schedule a new landing time. Returns true if the time was
 // successfully added, and false otherwise.
 bool ScheduleAdd(Schedule s, Time t) {
-    // TODO: Modify the following code
+    // If time is NULL, then cannot be added
+    if (t == NULL) return false;
+
+    // If schedule has no times, insert time has root
+    if (s == NULL) TreeInsert(s->times, t);
+
     TreeInsert(s->times, t);
     s->count++;
     return true;
