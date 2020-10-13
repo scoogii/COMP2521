@@ -191,9 +191,13 @@ Time doTreeFloor(Node node, Time time) {
     if (TimeCmp(node->time, time) < 0) {
         if (node->left == NULL || node->right == NULL) return node->time;
 
-        if (TimeCmp(time, node->left->time) > 0 &&
-                TimeCmp(time, node->right->time) < 0) {
-            return node->time;
+        // If it's possible to go right, recurse down
+        if (node->right != NULL) {
+            Time timeFloor = doTreeFloor(node->right, time);
+            if (timeFloor == NULL) return node->time;
+
+            // Check whether the node further down on the right is later
+            return (TimeCmp(timeFloor, time) <= 0) ? timeFloor : node->time;
         }
 
         return doTreeFloor(node->right, time);
@@ -218,22 +222,24 @@ Time doTreeCeiling(Node node, Time time) {
     // current time < given time
     if (TimeCmp(node->time, time) < 0) return doTreeCeiling(node->right, time);
 
-    // current time > given time
+    // current time < given time
     if (TimeCmp(node->time, time) > 0) {
         if (node->left == NULL || node->right == NULL) return node->time;
 
-        if (node->left != NULL && node->right != NULL) {
-            if (TimeCmp(time, node->left->time) > 0 &&
-                    TimeCmp(time, node->right->time) < 0)
-                return node->time;
+        // If it's possible to go left, recurse down
+        if (node->left != NULL) {
+            Time timeCeiling = doTreeCeiling(node->left, time);
+            if (timeCeiling == NULL) return node->time;
+
+            // Check whether the node further down on the left is earlier
+            return (TimeCmp(timeCeiling, time) >= 0) ? timeCeiling : node->time;
         }
 
         return doTreeCeiling(node->left, time);
     }
-    // time is found
-    else {
-        return time;
-    }
+
+    // Given time is found
+    return time;
 }
 
 ////////////////////////////////////////////////////////////////////////
