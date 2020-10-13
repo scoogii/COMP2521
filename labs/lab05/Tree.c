@@ -191,18 +191,16 @@ Time doTreeFloor(Node node, Time time) {
     if (TimeCmp(node->time, time) < 0) {
         if (node->left == NULL || node->right == NULL) return node->time;
 
-        if (node->left != NULL && node->right != NULL) {
-            if (TimeCmp(time, node->left->time) > 0 &&
-                    TimeCmp(time, node->right->time) < 0)
-                return node->time;
+        if (TimeCmp(time, node->left->time) > 0 &&
+                TimeCmp(time, node->right->time) < 0) {
+            return node->time;
         }
 
         return doTreeFloor(node->right, time);
     }
-    // time is found
-    else {
-        return time;
-    }
+
+    // Given time is found
+    return time;
 }
 
 // Returns the earliest time in the tree that is later than or equal  to
