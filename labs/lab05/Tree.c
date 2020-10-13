@@ -202,7 +202,7 @@ Time doTreeFloor(Node node, Time time) {
         }
     }
 
-    // Given time is found
+    // Given time is found OR there was no right node that was < time
     return time;
 }
 
@@ -236,7 +236,7 @@ Time doTreeCeiling(Node node, Time time) {
         }
     }
 
-    // Given time is found
+    // Given time is found OR there was no left node that was > time
     return time;
 }
 
