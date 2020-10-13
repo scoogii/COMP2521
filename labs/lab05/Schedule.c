@@ -40,8 +40,22 @@ bool ScheduleAdd(Schedule s, Time t) {
     // If time is NULL, then cannot be added
     if (t == NULL) return false;
 
-    // If schedule has no times, insert time has root
-    if (s == NULL) TreeInsert(s->times, t);
+    Time timeFloor = TreeFloor(s->times, t);
+    Time timeCeiling = TreeCeiling(s->times, t);
+
+    // Lower and upper bounds for available times
+    Time t1 = TimeSubtractMinutes(t, 10);
+    Time t2 = TimeAddMinutes(t, 10);
+
+    // If a floor exists, check that t1 (lower bound) is within floor
+    if (timeFloor != NULL) {
+        if (TimeCmp(t1, timeFloor) <= 0) return false;
+    }
+
+    // If a ceiling exists, check that t2 (upper bound) is within ceiling
+    if (timeCeiling != NULL) {
+        if (TimeCmp(t2, timeCeiling) >= 0) return false;
+    }
 
     TreeInsert(s->times, t);
     s->count++;
