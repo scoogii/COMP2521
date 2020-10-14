@@ -90,9 +90,9 @@ bool SetContains(Set s, int elem) {
 
     // iterative search
     while (n != NULL) {
-        if (elem == n->elem) { return true; }
-        if (elem < n->elem) { n = n->left; }
-        if (elem > n->elem) { n = n->right; }
+        if (elem == n->elem) return true;
+        if (elem < n->elem) n = n->left;
+        if (elem > n->elem) n = n->right;
     }
 
     return false;  // couldn't find element
