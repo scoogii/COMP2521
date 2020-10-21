@@ -1,6 +1,7 @@
 ////////////////////////////////////////////////////////////////////////
 // 					    COMP2521 Assignment 1                         //
 //					    Information Retrieval                         //
+//                       Implementation File                          //
 //                                                                    //
 //				     Christian Nguyen - z5310911                      //
 ////////////////////////////////////////////////////////////////////////
@@ -14,23 +15,12 @@
 
 ////////////////////////////////////////////////////////////////////////
 
-#define MAX_WORD_LEN 100
+#define MAX_WORD_LEN 101
 
 ////////////////////////////////////////////////////////////////////////
 
-/**
- * Creates a new FileListNode pointer and returns it
- */
 FileList newFileListNode(char *filename, double tf);
-
-/* Creates a new empty InvertedIndexBST */
 InvertedIndexBST InvertedIndexBSTNew(void);
-
-/**
- * Inserts a new FileListNode into the given InvertedIndexBST and returns
- * the root of the updated InvertedIndexBST. Does not insert
- * duplicate values
- */
 InvertedIndexBST FileListInsert(InvertedIndexBST, FileList);
 
 ////////////////////////////////////////////////////////////////////////
@@ -68,5 +58,28 @@ InvertedIndexBST FileListInsert(InvertedIndexBST, FileList);
  * modify the given string - do not create a copy of it.
  */
 char *normaliseWord(char *str) {
-    // Remove all leading and trailing spaces
+    // Make all characters lowercase
+    for (char *currChar = str; *currChar; currChar++) {
+        *currChar = tolower(*currChar);
+    }
+
+    // Remove leading whitespaces
+    while (isspace(str[0])) str++;
+
+    // Create pointer to last character of string
+    char *lastChar = str + strlen(str) - 1;
+
+    // Remove trailing whitespaces
+    while (isspace((*lastChar))) lastChar--;
+
+    // Remove ending punctuation mark
+    if (*lastChar == '.' || *lastChar == ',' || *lastChar == ';' ||
+        *lastChar == '?')
+        lastChar--;
+
+    // Adding new null terminator taken from Stack Overflow
+    // Post was about how to trim trailing whitespaces
+    lastChar[1] = '\0';
+
+    return str;
 }
