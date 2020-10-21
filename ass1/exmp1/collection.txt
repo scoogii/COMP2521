@@ -1,0 +1,7 @@
+
+ nasa.txt     news1.txt 
+     file11.txt   mixed.txt   planets.txt
+file21.txt  
+ info31.txt 
+
+

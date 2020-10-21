@@ -1,0 +1,7 @@
+COMP3151 Foundations of Concurrency  
+Concurrency = processes + communication. Communication via shared variables vs message passing.
+Models of concurrency: true concurrency vs interleaving. Abstractions: atomicity, locks and barriers,
+semaphores, monitors, threads, RPC, rendezvous. Classical problems: mutual exclusion, dining philosophers, sleeping
+barber, termination detection, gravitational N-body problem.Practical work: programming assignments using the C-like
+language MDP.  
+ 

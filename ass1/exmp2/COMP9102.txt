@@ -1,0 +1,8 @@
+COMP9102 Programming Languages and Compilers  
+Covers the fundamental principles in programming languages and implementation techniques for compilers
+ emphasis on compiler front ends. Course contents include: program syntax and semantics,
+formal translation of programming languages, finite-state recognisers and regular expressions, context-free parsing
+techniques such as LL k  and LR k, attribute grammars, syntax-directed translation, type checking
+and code generation. Lab: implementation of a compiler in a modern programming
+language for a small programming language.  
+ 

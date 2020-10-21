@@ -1,0 +1,6 @@
+COMP3411 Artificial Intelligence  
+Machine intelligence. Principles: knowledge representation, automated reasoning, machine learning. Tools: AI programming
+languages, control methods, search strategies, pattern matching. Applications: computer vision, speech recognition,
+natural language processing, expert systems, game playing, computer-aided learning. Philosophical and psychological
+issues. Lab: logic programming assignments.  
+ 

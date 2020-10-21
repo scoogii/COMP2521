@@ -1,0 +1,4 @@
+COMP9024 Data Structures and Algorithms  
+Data types and data structures: abstractions and representations; lists, stacks, queues, heaps,
+graphs; dictionaries and hash tables; search trees; searching and sorting algorithms.  
+ 

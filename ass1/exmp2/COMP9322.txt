@@ -1,0 +1,17 @@
+COMP9322 Software Service Design and Engineering  
+The notion of &ldquo;software as a service&rdquo;  SaaS  plays a critical role
+in building distributed, scalable application platforms. This course arms students with the
+knowledge and expertise to design and engineer services using modern Web technologies.
+Based on Service Oriented Architecture  SOA  principles, students will be exposed to
+various design and implementation methodologies, including microservices and their associated design patterns,
+and API design and managment. In addition, this course will strengthen students&rsquo;
+data modeling expertise, covering topics on semantic modelling of both simple and
+complex structures, and its usage in business analysis. The course will also
+describe the technical standards and technologies that support semantic data modelling. After
+completing this course, students will be able to  i  describe different architectural
+design approaches and their role in engineering software.  ii  apply Web service
+composition techniques in a concrete setting,  iii  be competent in designing, managing,
+documenting, testing and securing APIs,  iv  understand techniques for semantic modelling of
+simple and complex structures, as well as their associated technical standards and
+technologies.  
+ 

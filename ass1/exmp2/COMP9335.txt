@@ -1,0 +1,12 @@
+COMP9335 Wireless Mesh and Sensor Networks  
+Wireless mesh networks  WMNs  and wireless sensor networks  WSNs  are two emerging
+wireless technologies which will have important impact in the future. In fact,
+the significance of WSNs has led to it being labelled as one
+of the most important technologies in the 21st century.This course will cover
+the fundamental design principles behind building scalable WMNs and WSNs. The following
+aspects on wireless mesh and sensor networks will be covered: medium access
+control protocol, routing protocol design, transport layer issues, middleware, application and security.
+It will also cover case studies on deploying wireless mesh and sensor
+networks.This course includes a laboratory component and minor design project. It may
+also include guest lectures from leading industrial and academic researchers.  
+ 

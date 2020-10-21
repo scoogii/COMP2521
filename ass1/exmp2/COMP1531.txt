@@ -1,0 +1,18 @@
+COMP1531 Software Engineering Fundamentals  
+This course provides an introduction to software engineering principles: basic software lifecycle
+concepts, modern development methodologies, conceptual modeling and how these activities relate to
+programming. It also introduces the basic notions of team-based project management via
+conducting a project to design, build and deploy a simple web-based application.
+It is typically taken in the semester after completing COMP1511, but could
+be delayed and taken later. It provides essential background for the teamwork
+and project management required in many later courses.  
+The goal of this course is to expose the students to:  
+ 
+basic elements of software engineering - derived from the lifecycle of a
+software system, including requirements elicitation, analysis and specification; design; construction; verification and
+validation; deployment; and operation and maintenance  
+data modelling and fundamental database techniques  
+software engineering methodologies, processes, measurements, tools and techniques  
+Web-based system architecture and development practices on Web platforms  
+ 
+ 

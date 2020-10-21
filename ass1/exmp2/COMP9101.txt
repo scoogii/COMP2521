@@ -1,0 +1,7 @@
+COMP9101 Design and Analysis of Algorithms  
+Techniques for design and performance analysis of algorithms for a variety of
+computational problems. Asymptotic notations, bounding summations, recurrences, best-case, worst-case and average-case analysis.
+Design techniques: divide-and-conquer, dynamic programming and memorisation, greedy strategy, backtracking, branch-and-bound. Algorithms:
+sorting and order statistics, trees, graphs and flow networks, matrices, arithmetic circuits.
+Intractability: classes P, NP, and NP-completeness, approximation algorithms.  
+ 

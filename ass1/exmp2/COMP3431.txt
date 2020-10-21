@@ -1,0 +1,7 @@
+COMP3431 Robotic Software Architecture  
+An introduction to Intelligent agent design. Picking actions using planning, learning or
+engineered control. Both practical and theoretical components. Practical component: Re-implement parts of
+a real agent architecture on a robot. Assignment based. Emphasis on engineering
+a working system. Theoretical component: Introduction to a variety of research agent
+architectures including classical planning and reinforcement learning. Lecture and lab based.  
+ 

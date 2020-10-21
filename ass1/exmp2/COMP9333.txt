@@ -1,0 +1,12 @@
+COMP9333 Advanced Computer Networks  
+This course teaches the fundamentals and practical solutions to quality of service
+ Qos  based networks, with an emphasis on the next generation Internet architectures
+and protocols. Topics include: scheduling policies  fair queueing, priority queueing etc., congestion
+avoidance/control schemes  RED, RIO etc, admission control, multimedia protocols  RTP, RTCP etc.This
+course will also cover recent Qos related developments by IETF/IEEE such as
+: Intserv, Diffserv, RSVP, LAN, Qos. There will be hands on practical
+labs on network performance measurement and some network programming. The assessment of
+the course includes a substantial hands on project on building a network
+system in Linux/FreeBSD environment. C programming knowledge is assumed for labs and
+the project.  
+ 

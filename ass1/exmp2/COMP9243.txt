@@ -1,0 +1,7 @@
+COMP9243 Distributed Systems  
+A detailed coverage of distributed systems, with a particular focus on operating
+systems issues: client-server paradigm, remote-procedure call as OS support for client-server; distributed
+shared memory, distributed memory coherency; distributed file systems; distributed process management, including
+load sharing and process migration; concurrency control; fault tolerance, recoverability and distributed
+transactions; naming; industry standards; case studies.  
+ 

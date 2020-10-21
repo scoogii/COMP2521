@@ -1,0 +1,11 @@
+COMP4141 Theory of Computation  
+Computability: formal languages and problems, Turing Machines  TMs, computability,  semi- decidability, universal TMs,
+Church-Turing thesis, halting problem, reduction and undecidability proofs, examples; Complexity: run time,
+space, complexity classes, non-determinism and NP, polynomial reductions and NP completeness, optimisation
+problems and approximation, randomisation; Languages and Automata: regular expressions and languages, finite
+automata, determinisation, context-free grammars and languages  CFLs, Chomsky normal form, word problems,
+pumping lemma, push-down automata, decidability problems for CFLs; Semantics and Correctness: while
+programs, assertions and program correctness, Hoare logic, loops and loop invariants, relative
+completeness of Hoare logic  and its role in a proof of G&ouml;del's
+incompleteness result   
+ 

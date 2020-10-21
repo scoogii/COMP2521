@@ -1,0 +1,7 @@
+COMP9020 Foundations of Computer Science  
+Scope: * Mathematical methods for designing correct and efficient programs.* Mathematics for
+algorithm analysis.* Logic for proving and verification.Topics: * Introduction to set and
+relation theory* Propositional logic and boolean algebras* Induction, recursion and recurrence relations 
+Order of growth of functions. Structured counting  combinatorics * Discrete probability* Graph theory*
+Trees for algorithmic applications  
+ 

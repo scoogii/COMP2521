@@ -1,0 +1,10 @@
+COMP4418 Knowledge Representation and Reasoning  
+Knowledge Representation and Reasoning  KRR  is at the core of Artificial Intelligence.
+It is concerned with the representation of knowledge in symbolic form and
+the use of this knowledge for reasoning. This course presents current trends
+and research issues in Knowledge Representation and Reasoning  KRR. It enables students
+interested in Artificial Intelligence to deepen their knowledge in this important area
+and gives them a solid background for doing their own work/research in
+this area. The topics covered in more detail are AI Logics, Probablilistic
+Reasoning, Constraints, and Game Theory.  
+ 

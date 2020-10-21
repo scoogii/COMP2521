@@ -1,0 +1,11 @@
+COMP9018 Advanced Graphics  
+Assumed knowledge: Experience with OpenGL and Java.This course covers advanced topics in
+graphics and related technologies with a strong hands-on and interactive focus. Topics
+include: advanced features of OpenGL; 2D and 3D still, interactive and animated
+file formats; advanced modelling and animation techniques; detailed surface models; performance optimisation;
+radiosity; ray tracing and optimisations; Monte Carlo and metropolis rendering; volumetric rendering;
+image based rendering; interactivity; collision detection and 3D graphics hardware design. Students
+will be given the opportunity to present seminars on research areas of
+interest to them, as well as experiment with 3D graphics software.This course
+will be extremely interactive. You'll be expected to be involved.  
+ 

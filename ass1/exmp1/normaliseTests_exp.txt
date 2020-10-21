@@ -1,0 +1,9 @@
+Testing function  normaliseWord 
+Test Passed: .Net to .net
+Test Passed: smh.com.au to smh.com.au
+Test Passed: Sydney! to sydney!
+Test Passed: wHy? to why
+Test Passed: ORDER. to order
+Test Passed: Text; to text
+Test Passed: abc.net.au. to abc.net.au
+Test Passed: Sydney??? to sydney??

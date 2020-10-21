@@ -1,0 +1,9 @@
+COMP6714 Information Retrieval and Web Search  
+Information Retrieval:  a  Document modeling  b  Inverted index construction and compression 
+ c  Vector
+space model and ranking methods  d  Probabilistic and language models  e  Evaluation
+methods  f  Relevance feedback and query expansion. 
+Web Search:  a  Web search engine
+architecture  b  Web crawling and indexing  c  Web structure and usage analytics.
+The lecture materials will be complemented by projects and assignments.  
+ 

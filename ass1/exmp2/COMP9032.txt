@@ -1,0 +1,8 @@
+COMP9032 Microprocessors and Interfacing  
+Instruction Set Architecture  ISA, floating point number representation, computer arithmetic, assembly and
+machine language programming, machine language fundamentals; addressing modes; instruction repertoire, assembly language
+programming methodology, interrupts and I/O interfacing  hardware and software, serial communication, timers,
+analog input and output, converting analog signals to digital signals  data acquisition,
+taking input from a variety of sensors and driving actuators, buses and
+memory system, low level device drivers.  
+ 

@@ -1,0 +1,8 @@
+COMP4601 Design Project B  
+Hardware design and systems prototyping using field-programmable gate arrays. Emphasises laboratory experience
+in programming and interfacing with FPGAs. Acceleration of soft-core processors, design of
+custom accelerator blocks and configurable logic-based applications from areas such as telecommunications,
+signal processing, cryptography and biological sequencing. Techniques for designing and implementing configurable
+systems. CAD challenges posed by the area. Design validation, performance analysis and
+power consumption. Reconfigurable systems.  
+ 

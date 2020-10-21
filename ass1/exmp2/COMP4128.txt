@@ -1,0 +1,9 @@
+COMP4128 Programming Challenges  
+The focus of the course is the development and implementation of advanced
+algorithms. Students will learn to select appropriate algorithms for a given problem,
+integrate multiple algorithms for solving a complex problem, design new algorithms, and
+implement them. Algorithms covered include dynamic programming, shortest path, max flow, suffix
+trees, and combinatorial algorithms. They will also learn skills required for programming
+contests, which include evaluation of problem difficulty, solving problems in teams, and
+work under time pressure.  
+ 

@@ -1,0 +1,7 @@
+COMP9161 Concepts of Programming Languages  
+Programming language paradigms: imperative, object oriented, declarative  i.e., functional and logic. Theoretical
+foundations of programming languages: syntax, operatational, axiomatic and denotational semantics. Implementation aspects
+of central language features, such as dynamic and strong typing, polymorphism, overloading
+and automatic memory management. Abstracting over programming languages and architectures: byte code
+approach, component software.  
+ 
