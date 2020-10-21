@@ -11,13 +11,27 @@
 #include <string.h>
 
 #include "invertedIndex.h"
-#include "myBST.h"
 
 ////////////////////////////////////////////////////////////////////////
 
 #define MAX_WORD_LEN 100
 
 ////////////////////////////////////////////////////////////////////////
+
+/**
+ * Creates a new FileListNode pointer and returns it
+ */
+FileList newFileListNode(char *filename, double tf);
+
+/* Creates a new empty InvertedIndexBST */
+InvertedIndexBST InvertedIndexBSTNew(void);
+
+/**
+ * Inserts a new FileListNode into the given InvertedIndexBST and returns
+ * the root of the updated InvertedIndexBST. Does not insert
+ * duplicate values
+ */
+InvertedIndexBST FileListInsert(InvertedIndexBST, FileList);
 
 ////////////////////////////////////////////////////////////////////////
 //                    BST FUNCTIONS FROM LAB03                        //
