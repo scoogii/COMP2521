@@ -23,6 +23,9 @@ FileList newFileListNode(char *filename, double tf);
 InvertedIndexBST InvertedIndexBSTNew(void);
 InvertedIndexBST FileListInsert(InvertedIndexBST tree, FileList fileNode);
 double calculateTf(char *filename, char *term);
+static void showInvertedIndexBSTNode(FILE* f, InvertedIndexBST tree);
+static void showFileListNodes(FILE *f, FileList list); 
+void BSTreeInfixToFile(FILE *f, InvertedIndexBST tree);
 
 ////////////////////////////////////////////////////////////////////////
 //                  ADAPTED BST FUNCTIONS FROM LAB03                  //
@@ -120,6 +123,30 @@ InvertedIndexBST FileListInsert(InvertedIndexBST tree, FileList fileNode) {
     return tree;
 }
 
+static void showInvertedIndexBSTNode(FILE* f, InvertedIndexBST tree) {
+    if (tree == NULL) return;
+
+    fprintf(f, "%s ", tree->word);
+}
+
+
+static void showFileListNodes(FILE *f, FileList list) {
+    if (list == NULL) return;
+
+    for (; list != NULL; list = list->next) fprintf(f, "%s (%lf) ", list->filename, list->tf);
+    fprintf(f, "\n");
+}
+
+
+void BSTreeInfixToFile(FILE *f, InvertedIndexBST tree) {
+    if (tree == NULL) return;
+
+    BSTreeInfixToFile(f,tree->left);
+    showInvertedIndexBSTNode(f, tree);
+    showFileListNodes(f, tree->fileList);
+    BSTreeInfixToFile(f, tree->right);
+}
+
 
 ////////////////////////////////////////////////////////////////////////
 //  					 PART 1 FUNCTIONS                             //
@@ -179,10 +206,10 @@ double calculateTf(char *filename, char *term) {
  * index.
  */
 InvertedIndexBST generateInvertedIndex(char *collectionFilename) {
-    // Create a new InvertedIndexBST that is currently empty
+    // Create a InvertedIndexBST root node that is currently empty
     InvertedIndexBST root = NULL;
 
-    // Open collection file with error checking
+    // Open collection file
     FILE *collectionFile = fopen(collectionFilename, "r");
     if (collectionFile == NULL) {
         perror(collectionFilename);
@@ -211,3 +238,28 @@ InvertedIndexBST generateInvertedIndex(char *collectionFilename) {
 
     return root;
 }
+
+
+/**
+ * Outputs  the  given inverted index to a file named invertedIndex.txt.
+ * The output should contain one line per word, with the  words  ordered
+ * alphabetically  in ascending order. Each list of filenames for a word
+ * should be ordered alphabetically in ascending order.
+ */
+void printInvertedIndex(InvertedIndexBST tree) {
+    // Create or overwrite the file invertedIndex.txt
+    FILE *outputStream = fopen("invertedIndex.txt", "w");
+    if (outputStream == NULL) {
+        perror("invertedIndex.txt");
+        exit(1);
+    }
+
+    // If tree is empty, don't print anything and return
+    if (tree == NULL) {
+        return;
+    }
+
+    // Print out tree nodes and their lists in ascending order (i.e. infix)
+    BSTreeInfixToFile(outputStream, tree);
+    fclose(outputStream);
+} 

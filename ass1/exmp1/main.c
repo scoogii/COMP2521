@@ -15,10 +15,10 @@ static void showListNodes(FileList list);
 void BSTreeInfix(InvertedIndexBST t);
 
 int main(void) {
-    InvertedIndexBST n = generateInvertedIndex("collection.txt");
+    InvertedIndexBST t = generateInvertedIndex("collection.txt");
 
     // Check deets are right
-    BSTreeInfix(n);
+    printInvertedIndex(t);
 
     return 0;
 }
