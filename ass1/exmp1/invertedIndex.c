@@ -7,6 +7,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 #include <ctype.h>
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -26,6 +27,8 @@ double calculateTf(char *filename, char *term);
 static void showInvertedIndexBSTNode(FILE* f, InvertedIndexBST tree);
 static void showFileListNodes(FILE *f, FileList list); 
 void BSTreeInfixToFile(FILE *f, InvertedIndexBST tree);
+FileList InvertedIndexBSTFind(InvertedIndexBST tree, char *key);
+int findLengthList(FileList list);
 
 ////////////////////////////////////////////////////////////////////////
 //                  ADAPTED BST FUNCTIONS FROM LAB03                  //
@@ -36,6 +39,12 @@ void BSTreeInfixToFile(FILE *f, InvertedIndexBST tree);
  * Creates a new InvertedIndexBST that is initialised as NULL
  */
 InvertedIndexBST InvertedIndexBSTNew(void) { return NULL;}
+
+
+/*
+ * Creates a new TfIdfList that is initialised as NULL
+ */
+TfIdfList TfIdfListNew(void) { return NULL; }
 
 
 /**
@@ -67,7 +76,21 @@ FileList newFileListNode(char *filename, double tf) {
 
 
 /**
- * Inserts an initialised InvertedIndexBST into the current tree and
+ * Takes in a FileList node and the idf value
+ * Creates a new TfIdfNode pointer from them and returns it
+ */
+TfIdfList newTfIdfListNode(FileList list, double idf) {
+    TfIdfList new = malloc(sizeof(struct TfIdfNode));
+    new->filename = strdup(list->filename);
+    new->tfIdfSum = (list->tf * idf);
+    new->next = NULL;
+
+    return new;
+}
+
+
+/**
+ * Inserts an initialised InvertedIndexBST node into the current tree and
  * returns the root of the updated tree. Does not insert duplicate keys
  */
 InvertedIndexBST InvertedIndexBSTInsert(InvertedIndexBST tree, char *filename, char *key) {
@@ -94,7 +117,7 @@ InvertedIndexBST InvertedIndexBSTInsert(InvertedIndexBST tree, char *filename, c
 
 
 /**
- * Inserts a new FileListNode into the given InvertedIndexBST and returns
+ * Inserts a new FileList node into the given InvertedIndexBST and returns
  * the root of the updated InvertedIndexBST
  */
 InvertedIndexBST FileListInsert(InvertedIndexBST tree, FileList fileNode) {
@@ -121,10 +144,59 @@ InvertedIndexBST FileListInsert(InvertedIndexBST tree, FileList fileNode) {
         }
     }
 
-    // Case 4. fileNode to be inserted as the last node
+    // Case 4. fileNode to be inserted as the tail
     prev->next = fileNode;
     fileNode->next = NULL;
     return tree;
+}
+
+
+/**
+ * Inserts a new TfIdfList node into the current TfIdfList and returns
+ * the head of the updated TfIdfList
+ */
+TfIdfList TfIdfListInsert(TfIdfList head, FileList node, double idf) {
+    // Create new TfIdfList node to be inserted
+    TfIdfList newNode = newTfIdfListNode(node, idf);
+
+    // Case 1 & 2. head is NULL or idf is the largest
+    if (head == NULL || newNode->tfIdfSum > head->tfIdfSum) {
+        newNode->next = head;
+        head = newNode;
+        return newNode;
+    }
+
+    // Case 3. node to be inseted somewhere within the list
+    TfIdfList prev = head;
+    TfIdfList curr = head;
+    for (; curr != NULL; prev = curr, curr = curr->next) {
+        if (newNode->tfIdfSum > curr->tfIdfSum) {
+            prev->next = newNode;
+            newNode->next = curr;
+            return head;
+        }
+
+        // If idf values are equal, insert in ascending filename order
+        if (newNode->tfIdfSum == curr->tfIdfSum) {
+            // Inserting before
+            if (strcmp(node->filename, curr->filename) < 0) {
+                prev->next = newNode;
+                newNode->next = curr;
+            }
+            // Inserting after
+            else {
+                newNode->next = curr->next;
+                curr->next = newNode;
+            }
+
+            return head;
+        }
+    }
+
+    // Case 4. node to be inserted as the tail
+    prev->next = newNode;
+    newNode->next = NULL;
+    return head;
 }
 
 
@@ -162,6 +234,43 @@ void BSTreeInfixToFile(FILE *f, InvertedIndexBST tree) {
     showInvertedIndexBSTNode(f, tree);
     showFileListNodes(f, tree->fileList);
     BSTreeInfixToFile(f, tree->right);
+}
+
+
+/**
+ * Takes in an InvertedIndexBST node and a given 'key'
+ * Function searches for a node with a matching 'key' and returns it
+ * If not node is found, NULL is returned
+ */
+FileList InvertedIndexBSTFind(InvertedIndexBST tree, char *key) {
+    // If tree is NULL no key is found, return NULL
+    if (tree == NULL) {
+        return NULL;
+    }
+    // Traverse left subtree if key is 'before' tree->word
+    else if (strcmp(key, tree->word) < 0) {
+        return InvertedIndexBSTFind(tree->left, key);
+    }
+    // Traverse right subtree if key is 'after' tree->word
+    else if (strcmp(key, tree->word) > 0) {
+        return InvertedIndexBSTFind(tree->right, key);
+    }
+    // If there is a match, return the FileList
+    else {
+        return tree->fileList;
+    }
+}
+
+
+/**
+ * Takes in a FileList as an argument and returns the length
+ * of it
+ */
+int findLengthList(FileList list) {
+    int listLength = 0;
+    for (; list != NULL; list = list->next) listLength++;
+
+    return listLength;
 }
 
 
@@ -280,3 +389,32 @@ void printInvertedIndex(InvertedIndexBST tree) {
     BSTreeInfixToFile(outputStream, tree);
     fclose(outputStream);
 } 
+
+
+/**
+ * Returns  an  ordered list where each node contains a filename and the 
+ * corresponding tf-idf value for a given searchWord. You only  need  to
+ * include documents (files) that contain the given searchWord. The list
+ * must  be  in  descending order of tf-idf value. If there are multiple
+ * files with same tf-idf, order them by  their  filename  in  ascending
+ * order. D is the total number of documents in the collection.
+ */
+TfIdfList calculateTfIdf(InvertedIndexBST tree, char *searchWord, int D) {
+    // Create a InvertedIndexBST root node that is currently empty
+    TfIdfList head = TfIdfListNew();
+
+    // Search for the given 'key'
+    FileList filenames = InvertedIndexBSTFind(tree, searchWord);
+    // If it doesn't exist, return NULL head node
+    if (filenames == NULL) {
+        return head;
+    }
+
+    double idf = log10(D / (double)findLengthList(filenames));
+
+    for (FileList curr = filenames; curr != NULL; curr = curr->next) {
+        head = TfIdfListInsert(head, curr, idf);
+    }
+
+    return head;
+}

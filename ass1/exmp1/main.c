@@ -10,9 +10,11 @@
 
 #include "invertedIndex.h"
 
+
 static void showBSTreeNode(InvertedIndexBST t);
 static void showListNodes(FileList list);
 void BSTreeInfix(InvertedIndexBST t);
+
 
 int main(void) {
     InvertedIndexBST t = generateInvertedIndex("collection.txt");
@@ -20,14 +22,22 @@ int main(void) {
     // Check deets are right
     printInvertedIndex(t);
 
+    TfIdfList list = calculateTfIdf(t, "moon", 7);
+    for (TfIdfList curr = list; curr != NULL; curr = curr->next) {
+        printf("Filename is: '%s' with idf:", curr->filename);
+        printf("'%lf'\n", curr->tfIdfSum);
+    }
+
     return 0;
 }
+
 
 // Prints the value in the given node
 static void showBSTreeNode(InvertedIndexBST t) {
     if (t == NULL) return;
     printf("%s :=: ", t->word);
 }
+
 
 // Prints out the filelist
 static void showListNodes(FileList list) {
@@ -39,6 +49,7 @@ static void showListNodes(FileList list) {
     }
     printf("*\n");
 }
+
 
 // Prints the values in the given BSTree in infix order
 void BSTreeInfix(InvertedIndexBST t) {
