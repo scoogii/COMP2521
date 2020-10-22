@@ -13,28 +13,28 @@
 
 */
 
-#include <stdio.h>
-#include <ctype.h>
-#include <string.h>
 #include "invertedIndex.h" 
+#include <ctype.h>
+#include <stdio.h>
+#include <string.h>
 
 /** Util function below ...
 */
-void printTfIdfList(char *filename, TfIdfList list){
+/*void printTfIdfList(char *filename, TfIdfList list){*/
 	
-	FILE *fp = fopen(filename, "w");
-	if( fp == NULL ) { 
-		printf("Error opening file : %s \n", filename );
-		return;
-	}
+	/*FILE *fp = fopen(filename, "w");*/
+	/*if( fp == NULL ) { */
+		/*printf("Error opening file : %s \n", filename );*/
+		/*return;*/
+	/*}*/
 
-	TfIdfList cur = list;
-	while(cur != NULL) {
-		fprintf(fp, "%.6f  %s\n",  cur->tfIdfSum, cur->filename );
-		cur = cur->next;
-	}
-	fclose(fp);
-}
+	/*TfIdfList cur = list;*/
+	/*while(cur != NULL) {*/
+		/*fprintf(fp, "%.6f  %s\n",  cur->tfIdfSum, cur->filename );*/
+		/*cur = cur->next;*/
+	/*}*/
+	/*fclose(fp);*/
+/*}*/
 
 
 void checkNormalisedString(char *origString, char *answerString){
