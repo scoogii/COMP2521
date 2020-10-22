@@ -33,6 +33,12 @@ void BSTreeInfixToFile(FILE *f, InvertedIndexBST tree);
 
 
 /**
+ * Creates a new InvertedIndexBST that is initialised as NULL
+ */
+InvertedIndexBST InvertedIndexBSTNew(void) { return NULL;}
+
+
+/**
  * Creates a new InvertedIndexBSTNode pointer and returns it
  */
 InvertedIndexBST newInvertedIndexBST(char *key) {
@@ -92,15 +98,8 @@ InvertedIndexBST InvertedIndexBSTInsert(InvertedIndexBST tree, char *filename, c
  * the root of the updated InvertedIndexBST
  */
 InvertedIndexBST FileListInsert(InvertedIndexBST tree, FileList fileNode) {
-    // Case 1. Tree is NULL
-    if (tree->fileList == NULL) {
-        tree->fileList = fileNode;
-        fileNode->next = NULL;
-        return tree;
-    }
-
-    // Case 2. If fileNode's filename is before first filename
-    if (strcmp(fileNode->filename, tree->fileList->filename) < 0) {
+    // Case 1 & 2. Tree is NULL or filename is before first filename in the list
+    if (tree->fileList == NULL || strcmp(fileNode->filename, tree->fileList->filename) < 0) {
         fileNode->next = tree->fileList;
         tree->fileList = fileNode;
         return tree;
@@ -115,21 +114,34 @@ InvertedIndexBST FileListInsert(InvertedIndexBST tree, FileList fileNode) {
             fileNode->next = curr;
             return tree;
         }
+
+        // Repeated files should not be inserted again
+        if (strcmp(fileNode->filename, curr->filename) == 0) {
+            return tree;
+        }
     }
 
-    // Case 4. fileNode to be inserted as the last node in the list
+    // Case 4. fileNode to be inserted as the last node
     prev->next = fileNode;
     fileNode->next = NULL;
     return tree;
 }
 
+
+/**
+ * Takes in a file pointer and InvertedIndexBST node and prints the tree's 'key'
+ * to the output file
+ */
 static void showInvertedIndexBSTNode(FILE* f, InvertedIndexBST tree) {
     if (tree == NULL) return;
-
     fprintf(f, "%s ", tree->word);
 }
 
 
+/**
+ * Takes in a file pointer and FileList node and prints the list of files
+ * and its tf values to the output file
+ */
 static void showFileListNodes(FILE *f, FileList list) {
     if (list == NULL) return;
 
@@ -138,6 +150,11 @@ static void showFileListNodes(FILE *f, FileList list) {
 }
 
 
+/**
+ * Takes in a file pointer and InvertedIndexBST node and prints out the 'keys'
+ * of the nodes in infix order while also printing out the list of filenames
+ * and its tf value in each node to the output file
+ */
 void BSTreeInfixToFile(FILE *f, InvertedIndexBST tree) {
     if (tree == NULL) return;
 
@@ -207,7 +224,7 @@ double calculateTf(char *filename, char *term) {
  */
 InvertedIndexBST generateInvertedIndex(char *collectionFilename) {
     // Create a InvertedIndexBST root node that is currently empty
-    InvertedIndexBST root = NULL;
+    InvertedIndexBST root = InvertedIndexBSTNew();
 
     // Open collection file
     FILE *collectionFile = fopen(collectionFilename, "r");
