@@ -11,7 +11,12 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "aux.h"
 #include "myLists.h"
+
+////////////////////////////////////////////////////////////////////////
+
+#define MAX_WORD_LEN 101
 
 ////////////////////////////////////////////////////////////////////////
 //                        FileList Functions                          //
@@ -25,7 +30,7 @@
  */
 FileList newFileListNode(char *filename, double tf) {
     FileList new = malloc(sizeof(struct FileListNode));
-    new->filename = strdup(filename);
+    new->filename = generateNewString(filename);
     new->tf = tf;
     new->next = NULL;
 
@@ -110,7 +115,7 @@ TfIdfList TfIdfListNew(void) { return NULL; }
  */
 TfIdfList newTfIdfListNode(char *filename, double tfidf) {
     TfIdfList new = malloc(sizeof(struct TfIdfNode));
-    new->filename = strdup(filename);
+    new->filename = generateNewString(filename);
     new->tfIdfSum = tfidf;
     new->next = NULL;
 

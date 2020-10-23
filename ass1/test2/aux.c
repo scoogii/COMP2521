@@ -8,6 +8,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "aux.h"
@@ -17,6 +18,18 @@
 #define MAX_WORD_LEN 101
 
 ////////////////////////////////////////////////////////////////////////
+
+/**
+ * Function takes in a string and creates a new string with allocated
+ * memory which is returned
+ */
+char *generateNewString(char* word) {
+    // Allocate enough memory for the string + null terminator
+    char *newString = malloc(strlen(word + 1));
+    strcpy(newString, word);
+
+    return newString;
+}
 
 /**
  * Function takes in a file pointer and calculates the relative term

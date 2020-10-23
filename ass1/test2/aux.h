@@ -19,6 +19,12 @@
 ////////////////////////////////////////////////////////////////////////
 
 /**
+ * Function takes in a string and creates a new string with allocated
+ * memory which is returned
+ */
+char *generateNewString(char* word);
+
+/**
  * Function takes in a file pointer and calculates the relative term
  * frequency adjusted for the document length of file f
  */

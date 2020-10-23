@@ -22,7 +22,7 @@
 #define MAX_WORD_LEN 101
 
 ////////////////////////////////////////////////////////////////////////
-//                  ADAPTED BST FUNCTIONS FROM LAB03                  //
+//                   InvertedIndexBST Functions                       //
 ////////////////////////////////////////////////////////////////////////
 
 
@@ -42,7 +42,7 @@ InvertedIndexBST newInvertedIndexBST(char *key) {
     new->fileList = NULL;
     new->left = NULL;
     new->right = NULL;
-    new->word = strdup(key);
+    new->word = generateNewString(key);
 
     return new;
 }
