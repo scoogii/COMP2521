@@ -179,7 +179,7 @@ TfIdfList TfIdfListInsert(TfIdfList head, TfIdfList node) {
             // Inserting 'after' the first tfidf match, loop to look for when node
             // should be inserted such that the filenames are ascending
             else if (strcmp(node->filename, curr->filename) > 0) {
-                while (node->tfIdfSum == curr->tfIdfSum && curr != NULL) {
+                while (curr != NULL && node->tfIdfSum == curr->tfIdfSum) {
                     // Find breaking case
                     if (strcmp(node->filename, curr->filename) < 0) break;
                     prev = curr;
