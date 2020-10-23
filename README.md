@@ -2,7 +2,6 @@
 
 - Lecture Exercises
 - Labs
-- Weekly Tests
 - Assignments
 
 Gangsta :alien:
