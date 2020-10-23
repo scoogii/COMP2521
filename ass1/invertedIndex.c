@@ -413,8 +413,19 @@ TfIdfList calculateTfIdf(InvertedIndexBST tree, char *searchWord, int D) {
     double idf = log10(D / (double)findLengthList(filenames));
 
     for (FileList curr = filenames; curr != NULL; curr = curr->next) {
+        if (strcmp(filenames->filename, "COMP9415") == 0) {
+            printf("Gonna insert '%s' from file '%s'", searchWord, filenames->filename);
+        }
         head = TfIdfListInsert(head, curr, idf);
     }
 
     return head;
+}
+
+
+TfIdfList retrieve(InvertedIndexBST tree, char *searchWords[], int D) {
+    tree = NULL;
+    searchWords = NULL;
+    D = 0;
+    return NULL;
 }
