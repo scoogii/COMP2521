@@ -1,0 +1,6 @@
+COMP6324 Internet of Things Service Design and Engineering  
+This course aims to introduce the students to core concepts and practical
+skills for designing and engineering IoT services and applications. Specifically, the course
+aims to expose students to IoT business strategy, requirements, IoT technologies, solution
+design and implementation.  
+ 

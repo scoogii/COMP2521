@@ -1,0 +1,10 @@
+COMP4431 Game Design Workshop  
+No change to existing descripton:Game design. How do I invent a new
+game? What makes a game fun? What is the role of story
+in games? What makes a game balanced?This subject aims to bring together
+students from Digital Media, Media and Communications and Computer Science to work
+in teams together to invent, prototype and workshop games. The focus is
+on the design of play, not on programming or graphics. An iterative
+design process is used, involving prototyping and playtesting. There will also be
+guest lectures from the games industry.  
+ 

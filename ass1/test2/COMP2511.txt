@@ -1,0 +1,17 @@
+COMP2511 Object-Oriented Design & Programming  
+This course aims to introduce students to the principles of object-oriented design
+and to fundamental techniques in object-oriented programming. It is typically taken in
+the second year of study, after COMP2521, to ensure an appropriate background
+in data structures. The knowledge gained in COMP2511 is useful in a
+wide range of later-year CS courses.  
+The goal of the course is to expose students to:  
+ 
+the fundamental principles of object-oriented design  
+object-oriented programming and object-oriented design in Java  
+the application of sound programming and design skills  
+problem solving and modeling of real world problems from science, engineering, and
+economics using the object-oriented paradigm  
+ 
+Topics: Objects. Object-oriented design. Design patterns. Design by contract. Object-oriented programming in
+Java. Practical work: labs, design project, implementation project.  
+ 

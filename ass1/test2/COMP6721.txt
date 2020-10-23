@@ -1,0 +1,18 @@
+COMP6721  In- Formal Methods: The Lost Art  
+ In- Formal Methods are practical structuring and design patterns that encourage programming that
+is easy to understand and to maintain. They are only a part
+of the large body of  good programming practices, distinguished from that larger
+set because -for the methods we consider- the computer science community has
+determined the science behind the structures: we know why they are effective.Unusually,
+this course does not take the traditional route of teaching that science
+first, and then turning it into practical programming  tools-of-thought. Instead, we teach
+the mental tools first, try them on examples and only then, once
+their effectiveness has been demonstrated, will we look behind the scenes to
+see where they come from.Initially the material will deal with conventional programs,
+those that much  give the right output.  this is known as functional
+correctness, and a sorting program is a simple example. Later in the
+course we will look at additional correctness criteria, such as security  perform
+this calculation in a way that keeps part of the answer hidden 
+and randomisation  implement over-the-internet protocols that depend intrinsically on coin-flipping. Those last
+two topics will draw on up-to-the-minute research.  
+ 

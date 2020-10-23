@@ -1,0 +1,10 @@
+COMP4931 Thesis Part B  
+Thesis part A and B are done in the last two semesters
+of the BE degree program or during the two semesters of the
+CS Honours program. Students undertake directed laboratory and research work on an
+approved topic under the guidance of members of the academic staff. Usually,
+the Thesis involves the design and construction of experimental apparatus and/or software,
+together with appropriate testing and evaluation. For Part A, students are required
+to present a seminar and deliver a preliminary project report. For Part
+B, a written thesis describing the entire project must be submitted.  
+ 

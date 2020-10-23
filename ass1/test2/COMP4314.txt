@@ -1,0 +1,10 @@
+COMP4314 Next Generation Database Systems  
+Detailed examination of current developments and future trends in database, web technologies
+and multimedia applications. The emphasis will be on the following topics: data
+streams, web databases, web searching, multimedia databases.We will introduce stream data managment
+system and web application system, respectively, with the focus on query processing
+optimisation techniques. We will also introduce the state-of-art technology in web searching
+and multimedia databases. These include: 1  Stream Computation, 2  DB and IR,
+3  Web Searching and XML technology, 4  Indexing and Searching for multimedia
+data.  
+ 

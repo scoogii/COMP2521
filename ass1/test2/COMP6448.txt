@@ -1,0 +1,6 @@
+COMP6448 Security Engineering Masterclass  
+This is an occasional course that will involve a visiting expert in
+the security area giving a series of lectures and workshops on an
+advanced topic in cyber security. The precise timing and topics depend on
+the visitor. The course will be run in intensive mode.  
+ 

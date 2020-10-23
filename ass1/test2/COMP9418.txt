@@ -1,0 +1,14 @@
+COMP9418 Advanced Topics in Statistical Machine Learning  
+This course provides an in-depth study of statistical machine learning approaches. The
+focus will be on methods for learning and inference in structured probabilistic
+models, with a healthy balance of theory and practice. It is aimed
+at postgraduate students and advanced undergraduates who are willing to be go
+beyond basic understanding of machine learning. The course provides fundamental support for
+those willing to intensify their knowledge in the area of big data
+analytics.  
+It will cover topics on exact and approximate inference in probabilistic graphical
+models; learning in structured latent variable models; posterior inference in non-parametric models
+based on Gaussian processes; and relational learning.  
+ 
+ 
+ 

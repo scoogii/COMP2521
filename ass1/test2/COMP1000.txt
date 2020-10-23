@@ -1,0 +1,25 @@
+COMP1000 Introduction to World Wide Web, Spreadsheets and Databases  
+World wide web WWW  dependent activities have become an essential part of our
+existence and yet many of us do not know much about how
+they works. In the first part of this course, we introduce the
+abstract features of the internet and the software that makes it so
+powerful. Knowledge about the architecure of the internet, world wide web, browsers,
+seach engines, e-commerce, security, etc. will be helpful in using the internet
+more effectively as well as becoming aware of the several pifalls associated
+with this modern technology.  
+Spreadsheets and databases are two of the most commonly used and powerful
+computer tools yet they are often poorly utilised and the reasons for
+using one rather than the other are poorly understood. Many people purchase
+Microsoft Office which comes bundled with Microsoft Excel and Microsoft Access -
+a spreadsheet and a database application - yet while many people have
+some familiarity with Microsoft Excel, Microsoft Access is rarely utilised. This course
+aims to explain in straightforward terms the concepts underlying both of these
+powerful pieces of software so that students can exploit them effectively for
+both their studies and future careers. It will investigate how to design
+and implement effective spreadsheet and database applications. Students should also be able
+to transfer these skills to other, similar spreadsheet and database packages. Students
+will be expected to have personal copies of Microsoft Excel and Microsoft
+Access on their own computers.  
+Note s : This course may not be taken by students enrolled in an
+Engineering program.  
+ 

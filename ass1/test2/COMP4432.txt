@@ -1,0 +1,9 @@
+COMP4432 Game Design Studio  
+Game Design Studio provides you with an opportunity to practice and consolidate
+your game design skills. The course builds on the iterative game design
+process taught in COMP4431 Game Design Workshop. Students work individually or in
+pairs to design, prototype and playtest their own games, while also expanding
+their understanding of the theory of game design by participating in a
+weekly reading group. This course assumes familiarity with an appropriate game-development tool
+such as Flash, Unity, Game Maker or Game Salad.  
+ 

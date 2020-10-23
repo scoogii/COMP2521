@@ -1,0 +1,15 @@
+COMP6449 Security Engineering Professional Practice  
+The professional practice of cyber security. Students learn how to be effective
+and ethical cyber security professionals.  
+Students from this course will engage in real world case studies and
+analyse and critique effective professional responses to situations and challenges. Guest lecturers
+from Industry will give a number of different views into the world
+of cyber security professionals, the key issues they face, and current
+best practice.  
+Coverage includes Standards, Audits, Organisational Analysis and Testing, Best Practice, Ethics, Legal,
+Professionalism. Professional issues and best practice in cybercrime, censorship terrorism, IP, mandatory
+data breech disclosure, privacy, risk assessment, institutional response to risk, leadership, organisational
+change management and culture change, Professional Practice and professionalism. Course coverage will
+be regularly updated over time to reflect emerging best practice in the
+security engineering profession.  
+ 

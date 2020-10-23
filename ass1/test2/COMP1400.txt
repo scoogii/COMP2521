@@ -1,0 +1,6 @@
+COMP1400 Programming for Designers  
+An introduction to the concepts and techniques of object oriented programming with
+a focus on the construction of interactive multimedia applications. Delivery is through
+lectures and computer lab classes. Assessment will be via a number of
+in-class exercises and staged assignments.  
+ 
