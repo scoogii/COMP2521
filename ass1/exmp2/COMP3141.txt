@@ -1,0 +1,7 @@
+COMP3141 Software System Design and Implementation  
+This course will present rigorous and formal methods for the design and
+implementation phases of software system development. Also considered are testing and reuse
+of designs. As far as possible, software tools that can assist the
+process will be used. The material will be presented using case studies,
+and students will be required to undertake a project.  
+ 

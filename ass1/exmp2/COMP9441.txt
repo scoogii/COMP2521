@@ -1,0 +1,12 @@
+COMP9441 Security Engineering  
+Introduction to computer security, cybercrime, and cyberterror. The principles of engineering secure
+systems.Engineering secure systems. How security fails. Security analysis and design. Private and
+public cryptographic protocols. Physical security, social engineering, sniffing, intrusion detection, prevention and
+response, firewalls, honeypots. Digital forensics. Case studies drawn from the history of
+hacking and from current events.Additional topics drawn from recent developments and current
+research in applied computer security.No computing pre-requisites assumed, student need a keen
+devious and analytical mind.Please note that this course was revised at the
+end of 2009 from a level 2 to a level 0 courseStudents
+with a strong interest in security should also consider taking the complementary
+security courses COMP4442, COMP9447.  
+ 

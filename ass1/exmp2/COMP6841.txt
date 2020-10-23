@@ -1,0 +1,27 @@
+COMP6841 Extended Security Engineering and Cyber Security  
+Introduction to computer security, cybercrime, and cyberterror. The principles of engineering secure
+systems. How to think like a security engineer.  
+Engineering secure systems. How security fails. Security analysis and design. Private and
+public cryptographic protocols. Introduction to information security: Confidentiality, Integrity, Authentication, Non-repudiation, hashing,
+signatures, bits of security. Physical security, social engineering, sniffing, intrusion detection, prevention
+and response, firewalls, honeypots. Overview of vulnerabilities and exploits including areas such
+as buffer overflow, inter overflow, heap attacks, Return-Oriented-Programming, heap attacks. Principles of
+risk and security. Case studies drawn from the history of hacking and
+from current events.  
+Additional topics drawn from recent developments and current research in applied computer
+security.  
+There are numerous formative assessments and activities throughout the course to provide
+feedback and learning opportunities. These do not directly contribute to your final
+grade but are expected to be used to provide evidence of your
+capabilities in your portfolio.  
+A programming background is required, especially for the more applied topics.
+Students need a keen devious and analytical mind. To get the most
+from this course students will need to engage in independent study and
+research and be able to act as independent self-directed learners.  
+ 
+This is the extended version of COMP6441. In addition to the COMP6441
+material above, this course includes coverage of reversing x86 machine code into
+C/C++ and an introduction to malware decomposition and analysis  
+Note: This course requires knowledge of C programming  
+ 
+ 

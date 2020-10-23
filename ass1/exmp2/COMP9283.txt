@@ -1,0 +1,3 @@
+COMP9283 Extended Operating Systems  
+As for COMP9201 Operating Systems but in greater depth and breadth.  
+ 

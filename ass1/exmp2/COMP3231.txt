@@ -1,0 +1,6 @@
+COMP3231 Operating Systems  
+Operating System Organisation and services. Process management: scheduling, synchronisation and communication. Memory
+management: virtual memory, paging and segmentation. Storage management: disk scheduling, file systems.
+Protection and security. Distributed operating systems and file systems. Case studies: UNIX
+& NT. Lab: Programming assignments.Assumed Knowledge: C  
+ 

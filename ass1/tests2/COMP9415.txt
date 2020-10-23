@@ -1,0 +1,6 @@
+COMP9415 Computer Graphics  
+Graphics hardware: scan conversion of lines and polygons. 2D transformations: windowing, clipping,
+viewports. User interfaces. 3D transformations: perspective transformation, 3D clipping, hidden surface removal,
+lighting and texture maps. Hierarchical modelling of objects, modelling curves and surfaces
+with splines and fractals. Graphics standards. Lab: programming assignments.  
+ 

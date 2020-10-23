@@ -1,0 +1,6 @@
+COMP3601 Design Project A  
+Embedded system design team projects. Embedded system design life cycle. Software/hardware codesign.
+Hardware slection process. Software development techniques. Hardware/software integration and system testing. Ethics
+in teams, ethics in design, IP protection, IP reuse, project report writing.
+Project and team managment.  
+ 

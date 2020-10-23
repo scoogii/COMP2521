@@ -1,0 +1,3 @@
+COMP9844 Extended Neural Networks and Deep Learning  
+As for COMP9444 but in greater depth and breadth.  
+ 

@@ -1,0 +1,19 @@
+COMP9319 Web Data Compression and Search  
+Data Compression:  
+ 
+Adaptive Coding, Information Theory  
+Text Compression  ZIP, GZIP, BZIP, etc   
+Burrows-Wheeler Transform and Backward Search  
+XML Compression  
+ 
+Search:  
+ 
+Indexing  
+Pattern Matching and Regular Expression Search  
+Distributed Querying  
+Fast Index Construction  
+Implementation  
+ 
+If time allows: Streaming Algorithms, On-Line Data Analytics The lecture materials will
+be complemented by projects and assignments.  
+ 

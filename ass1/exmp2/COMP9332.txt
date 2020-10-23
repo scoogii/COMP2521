@@ -1,0 +1,11 @@
+COMP9332 Network Routing and Switching  
+This course will focus on the routing and switching architectures, algorithms and
+protocols for packet switching networks, both connectionless and connection oriented networks  such
+as IP and ATM networks. Advanced Internet addressing : CIDR, VPN, NAT.
+In depth discussion of interior and exterior routing protocols, such BGP, OSPF.
+IP over ATM solutions : such as LANE, Classical IP over ATM.
+IP switching and MPLS. Mobile IP. Internet Multicasting. Overview of emerging switching
+and routing technologies, such as optical routing and QoS routing. There is
+a substantial network programming component in the assessable material, for which C
+prgramming knowledge is assumed.  
+ 

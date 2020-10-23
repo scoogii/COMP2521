@@ -1,0 +1,9 @@
+COMP9242 Advanced Operating Systems  
+Covers operating systems design and implementation issues at an advanced level, focussing
+on specific issues such as performance and on current OS research areas.
+Topics selected from: Microkernels; user-level servers; performance; kernel implementation; device drivers; scheduling
+for real-time; effects and control of hardware caches; security and protection; persistent
+systems; security; dealing with large, sparse address spaces; experimental systems. A laboratory
+running a state-of-the-art microkernal system will be used to provide hands-on experience
+with low-level implementation of OS components.  
+ 

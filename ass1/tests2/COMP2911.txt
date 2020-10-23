@@ -1,0 +1,5 @@
+COMP2911 Engineering Design in Computing  
+The engineering design and use of reliable and complex systems. Object orientation
+and design. Problem solving design methodologies: backtrack, greedy method, divide and conquer,
+dynamic methods. Practical assignments, laboratory exercises, formal examination.  
+ 

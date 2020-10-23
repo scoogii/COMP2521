@@ -1,0 +1,7 @@
+COMP4121 Advanced and Parallel Algorithms  
+Topics chosen from: Spatial, semi-structured and multi-dimensional data storage and manipulation techniques,
+non Von-Neumann techniques, advanced and parallel algorithmic techniques, algorithm engineering and problem
+solving practices; algorithms for matrices and systems of linear equations, approximation algorithms,
+FFT and convolution and their software and circuit implementations, iteration methods for
+the solution of operator equations.  
+ 

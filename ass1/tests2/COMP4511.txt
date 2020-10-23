@@ -1,0 +1,18 @@
+COMP4511 User Interface Design and Construction  
+This course is a project-based course designed to build on the basic
+skills acquired in COMP3511 &ndash; Human Computer Interaction. The course addresses the
+skills and knowledge required in industry to brainstorm, design, implement, and evaluate
+an application through the user-centred design process. Because this is an iterative
+process, students will be required to build their interface at least three
+times, starting with a low-fidelity prototype and building to high-fidelity and more
+complete prototypes. By the end of the course, students should have a
+solid understanding of the importance of user-centred design and how it is
+applied in the industry to design, test and build a functioning application.
+ 
+The course is built to reflect up-to-date industry practice and methods. You
+would have benefitted from also completing COMP2911, which introduces you to object-oriented
+techniques, UML and design patterns. Whilst you will be coding in this
+course to build an iteration of your application, this is not the
+focus of the course, which remains on design practices and testing of
+graphical user interfaces.  
+ 

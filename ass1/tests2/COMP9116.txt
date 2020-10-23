@@ -1,0 +1,18 @@
+COMP9116 Software System Development Using the B-Method and B-Toolkit  
+The B-Method is a rigorous mathematically based method for the development of
+reliable software. The method covers the complete software cycle from requirement s
+analysis through specification, design, implementation, testing, maintenance, and re-use. The B-Method is
+supported by the B-Toolkit: a collection tools of that provide for specification
+animation, proof obligation generation, theorem proving, configuration management, code generation, and documentation.
+The B-Method uses similar mathematical notation to Z, but does not use
+Z. Specifications are given in AMN  Abstract Machine Notation, which is a
+small abstract programmin g language. The B-Method is object based in the
+sense that systems of machines use a number of different forms of
+inheritance to control visibility and inherit operations. There is no dependence on
+a particular programming language, but the current code generator generates C. This
+course will explore the use of the B-Method and the B-Toolkit. The
+topics covered will include: The Abstract Machine Notation; Machine Composition; Refinement; Implementation;
+The method of presentation will use case studies to present the method;
+laboratory exercises to use the tools; a major project to apply all
+aspects of the method, and use of the tools.  
+ 

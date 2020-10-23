@@ -1,0 +1,11 @@
+COMP9211 Computer Architecture  
+Study the architecture & organisation of modern processors, and influences upon these,
+with emphasis on pipelined RISC machines; gain understanding of the design of
+the memory subsystem, I/O, and system level interconnect; become proficient in the
+use of tools such as VHDL and SimpleScalar for the description, simulation,
+and verification of architectural designs; complete a series of assignments leading to
+the design, implementation, validation and assessment of a RISC system. It is
+assumed students are familiar with combinational and sequential logic design principles and
+have some experience in the use of CAD tools to describe and
+simulate digital systems.  
+ 

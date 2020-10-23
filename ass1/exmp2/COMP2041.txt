@@ -1,0 +1,5 @@
+COMP2041 Software Construction: Techniques and Tools  
+Software system decomposition and design. Overview of the software development life-cycle. Command
+languages. Version control and configuration management, programming for reliability. Testing and debugging
+techniques. Profiling and code improvement techniques. Practical work involving programming-in-the-large.  
+ 

@@ -1,0 +1,6 @@
+COMP3121 Algorithms and Programming Techniques  
+Correctness and efficiency of algorithms. Computational complexity: time and space bounds. Techniques
+for best-case, worst-case and average-case time and space analysis. Designing algorithms using
+induction, divide-and-conquer and greedy strategies. Algorithms: sorting and order statistics, trees, graphs,
+matrices. Intractability: classes P, NP, and NP-completeness, approximation algorithms.  
+ 

@@ -1,0 +1,13 @@
+COMP6733 Internet of Things Experimental Design Studio  
+Internet of Things  IoT  will play a key role in the next
+frontier of computing. The new course will provide an experimental approach to
+cover fundamental design principles behind building IoT applications, with hands-on experience with
+a popular end-to-end IoT platform.Topics covered will include a selection from: IoT
+technology and services, IoT system architecture, Low Power communications  Bluetooth Low Energy
+and 6LoWPAN  and security issues, sensors and sensor data smoothing and filtering,
+light-weight in-situ machine learning and data fusion, inertial sensing, activity recognition and
+fitness morning, voice-based stress level sensing, biometric authentication, anonymity, cloud services for
+IoT. This course assumes familiarity with a high level programming language such
+as Java and Python AND a low level programming language such as
+C.  
+ 

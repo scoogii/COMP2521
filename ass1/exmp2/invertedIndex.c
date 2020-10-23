@@ -178,28 +178,18 @@ TfIdfList TfIdfListInsert(TfIdfList head, FileList node, double idf) {
 
         // If idf values are equal, insert in ascending filename order
         if (newNode->tfIdfSum == curr->tfIdfSum) {
-            // Inserting 'before'
+            // Inserting before
             if (strcmp(node->filename, curr->filename) < 0) {
                 prev->next = newNode;
                 newNode->next = curr;
             }
-            // Inserting 'after' or 'last'
-            else if (strcmp(newNode->filename, curr->filename) > 0) {
-                while (newNode->tfIdfSum == curr->tfIdfSum && curr != NULL) {
-                    // Inserting 'after'
-                    if (strcmp(newNode->filename, curr->filename) < 0) {
-                        prev->next = newNode;
-                        newNode->next = curr;
-                        return head;
-                    }
-                    prev = curr;
-                    curr = curr->next;
-                }
-                // If the while loop ends, insert 'last'
-                prev->next = newNode;
-                newNode->next = curr;
-                return head;
+            // Inserting after
+            else {
+                newNode->next = curr->next;
+                curr->next = newNode;
             }
+
+            return head;
         }
     }
 

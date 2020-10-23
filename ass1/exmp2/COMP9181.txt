@@ -1,0 +1,11 @@
+COMP9181 Language-based Software Safety  
+Trust in the safety and security of software systems is increasingly important
+with the use of software in systems where failure or sabotage can
+lead to loss of life or be very expensive  this includes medical
+and financial applications as well as software used for power grids, amss
+transport systems, and security infrastructure. This course covers language based safety engineering
+techniques advanced type systems, specification-based test generators, domain-specific languages, and prototyping for
+high-assurance. It demonstrates via concrete examples, including security infrastructure software, how modern
+functional languages are used to achieve high assurance, and conveys hands-on experience
+via practical assignments.  
+ 

@@ -1,0 +1,7 @@
+COMP9444 Neural Networks and Deep Learning  
+Topics chosen from: perceptrons, feedforward neural networks, backpropagation, Hopfield and Kohonen networks,
+restricted Boltzmann machine and autoencoders, deep convolutional networks for image processing; geometric
+and complexity analysis of trained neural networks; recurrent networks, language processing, semantic
+analysis, long short term memory; designing successful applications of neural networks; recent
+developments in neural networks and deep learning.  
+ 

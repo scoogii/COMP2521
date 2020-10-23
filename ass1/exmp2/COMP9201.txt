@@ -1,0 +1,6 @@
+COMP9201 Operating Systems  
+Operating system organisation and services. Process management: scheduling, synchronisation and communication. Memory
+management: virtual memory, paging and segmentation. Storage management: Disk scheduling, file systems.
+Protection and Security. Distributed operating systems and file systems. Case studies drawn
+from UNIX, MS-DOS, Mach. Lab. programming assignments.  
+ 

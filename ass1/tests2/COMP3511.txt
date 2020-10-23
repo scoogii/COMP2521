@@ -1,0 +1,6 @@
+COMP3511 Human Computer Interaction  
+Provides an introduction to user-system interactions, both analysis and design. The approach
+is cognitive, focusing on matching user goals with computer technologies. Topics: the
+human information processing system, models of interaction, strategies for and process of
+design and evaluation. Project work is emphasised.  
+ 

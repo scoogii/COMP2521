@@ -1,0 +1,11 @@
+COMP9945 Research Project  
+Students in their final semester of study in MIT  8543  have the
+option of replacing three courses with a 18UOC research project.To be able
+to enrol in COMP9945, students must meet the following criteria: 1. Have
+completed  or have advanced standing in  72uoc; and 2. Have obtained agreement
+from a CSE academic supervisor; and 3. Have maintained a distinction level
+performance in the program.Projects are graded, and students deliver a seminar and
+submit a written report. More information is available in the Course Outline.
+Students should seek agreement from a supervisor prior to submitting a Project
+Nomination form to the CSE Student Office.  
+ 

@@ -1,0 +1,7 @@
+COMP6442 Extended Security Engineering  
+Computational thinking is a critical skill in modern society. This course aims
+to provide you with an understanding of the foundations of computing, how
+software systems work, and how to construct new software systems. By the
+end of the course, you will have produced an application  app  of
+your choice, solving a problem that's important to you.  
+ 

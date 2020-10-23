@@ -1,0 +1,8 @@
+COMP4129 Programming Challenges B  
+This course builds on the activities from COMP4128 with the development and
+implementation of more advanced algorithms, such as maximum matching, A*, geometric algorithms,
+iterative deepening and advanced dynamic programming.They will also practice the skills required
+for programming contests -- evaluation of problems, team work and time management.
+ 
+ 
+ 

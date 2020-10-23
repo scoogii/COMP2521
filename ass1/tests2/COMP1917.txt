@@ -1,0 +1,7 @@
+COMP1917 Computing 1  
+The objective of this course is for students to develop proficiency in
+programming using a high level language. Topics covered include: fundamental programming concepts,
+program testing and debugging, the underlying memory representation of data, programming style.
+Practical experience of these topics is supplied by laboratory programming exercises and
+assignments.  
+ 

@@ -1,0 +1,4 @@
+COMP3891 Extended Operating Systems  
+As for COMP3231 Operating Systems but in greater depth and breadth.Assumed Knowledge:
+C  
+ 

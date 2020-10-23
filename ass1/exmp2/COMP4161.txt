@@ -1,0 +1,15 @@
+COMP4161 Advanced Topics in Software Verification  
+This course is about mechanical proof assistants, how they work, and what
+they can be used for. It presents specification and proof techniques used
+in industrial grade theorem provers, teaches the theoretical background to the techniques
+involved, and shows how to use a theorem prover to conduct formal
+proofs in practice. The courses is intended to bring third/fourth year and
+postgraduate students into contact with the current research topics in the field
+of theorem proving and automated deduction and to teach them the necessary
+skills to successfully use industrial grade verification environments in modelling and verification.
+ 
+Topics covered included: higher order logic, natural deduction, lambda calculus, term rewriting,
+data types and recursive functions, induction principles, calculational reasoning, mathematical proofs, decision
+procedures for a variety of logical domains, and proofs about programs.  
+Note: experience with  first-order  logic and functional programming is required.  
+ 

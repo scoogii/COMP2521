@@ -1,0 +1,9 @@
+COMP9447 Security Engineering Workshop  
+Applied workshop in computer security and cybercrime: attack, defense, auditing.The course will
+consist of a weekly seminar followed by a three hour per week
+workshop and lab session on the seminar topic. Topics are drawn from
+data sniffing, firewalls and attacks on firewalls, root-kits, exploits, denial of service
+attacks, intrusion detection systems, honeypots, malware, digital rights management, cryptanalysis, cross site
+scripting attacks, code injection attacks, threats and countermeasures, penetration testing, and current
+topics in security.  
+ 

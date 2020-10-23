@@ -1,0 +1,11 @@
+COMP6731 Geometric and Graph Theoretic Data Processing  
+Scope of topics to be covered: Geometry - orthogonal and simplex search
+- proximity search - point location - binary and adaptive space partition
+- motion planning and patterns * proporties/constraints that simplify required structures Graph
+Theory - connectivity - planarity - flow, transshipment, and transprtation problems -
+chromatic number - isomorphism - disjoint paths and cycles - centrality -
+distances and eccentricity * proporties/constraints that affect the above properties. API use
+and development - collection APIs - generics - design, implementation, documentation and
+deployment.  
+ 
+ 

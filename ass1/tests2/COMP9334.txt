@@ -1,0 +1,6 @@
+COMP9334 Capacity Planning of Computer Systems and Networks  
+Techniques for performance evaluation of distributed systems. These techniques will then be
+applied to designing systems to have good performance, and to the analysis
+of future workloads and the system changes required to cope with them.
+ 
+ 
