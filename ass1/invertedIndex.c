@@ -239,8 +239,7 @@ TfIdfList TfIdfListMerge(TfIdfList list1, TfIdfList list2) {
 
     for (TfIdfList curr = list2; curr != NULL; curr = curr->next) {
         TfIdfList newNode = newTfIdfListNode(curr->filename, curr->tfIdfSum);
-        /*newNode->next = curr->next;*/
-        TfIdfListInsert(list1, newNode);
+        list1 = TfIdfListInsert(list1, newNode);
     }
 
     return list1;
@@ -506,10 +505,6 @@ TfIdfList retrieve(InvertedIndexBST tree, char *searchWords[], int D) {
         TfIdfList unsortedList = calculateTfIdf(tree, searchWords[i], D);
 
         head = TfIdfListMerge(head, unsortedList);
-    }
-
-    for (TfIdfList curr = head; curr != NULL; curr = curr->next) {
-        printf("%lf %s\n", curr->tfIdfSum, curr->filename);
     }
 
     // Re-insert nodes into another list such that it is ordered
