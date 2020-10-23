@@ -1,0 +1,6 @@
+COMP1927 Computing 2  
+Programming in the large, abstraction and ADTs, interfaces, complexity. Data types and
+data structures: lists, trees, graphs; and associated algorithms. Programming assignments, laboratory exercises,
+formal examination. Preparation work may be available for interested students before the
+course starts  see course outline for details.  
+ 

@@ -1,0 +1,8 @@
+COMP4411 Experimental Robotics  
+Artificial Intelligence Concepts in Robotics. The approach is experimental, with hands-on experience
+with a small mobile robot kit. Topics covered will include a selection
+from: history and philosophy of robotics, hardware components and subsystems, sensors, measurements
+and perception, robotic architectures, multiple robot systems, localisation problem and solutions, robot
+learning, navigation and obstacle avoidance, robot planning, robot vision and vision processing.
+ 
+ 

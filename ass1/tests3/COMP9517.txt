@@ -1,0 +1,7 @@
+COMP9517 Computer Vision  
+Cameras and Radiometry, local shading models, Colour Vision perception, representation, modelling, linear
+filters for smoothing, edge detection using concvolution, fourier transform, scale and image
+pyramids, texture, segmentation by clustering, model fitting and probabilistic methods, tracking and
+Kalman filters, model-based vision, template matching using classifiers, recognition by relations, applications
+in robotics, medical imaging, satellite image analysis.  
+ 

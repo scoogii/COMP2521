@@ -1,0 +1,7 @@
+COMP9171 Object-Oriented Programming  
+This course introduces the fundamentals and advanced techniques of object-oriented programming in
+C++.Object-oriented inheritance techniques. Advanced techniques with functions. Memory and resource managment. Namespaces.
+Run time type information. Templates and generic programming. C++ Template metaprogramming. The
+Standard Template Library  e.g., algorithms, containers and iterators. Input/Output wth C++ iostreams
+library. Exception handling. C++ and Efficiency issues. Effective C++ design guidelines.  
+ 

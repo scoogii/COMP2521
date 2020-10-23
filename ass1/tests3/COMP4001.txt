@@ -1,0 +1,8 @@
+COMP4001 Object-Oriented Software Development  
+This course will cover object-oriented design and implementation methods for complex software
+systems. Topics covered include: object-oriented program design techniques, concurrent programming in Java,
+software reuse and designing for reuse, design patterns and styles, some more
+advanced OO topics. Examples from a wide range of application areas will
+be used at all stages to illustrate concepts and techniques.Assumed Knowledge: Competency
+in Java.  
+ 

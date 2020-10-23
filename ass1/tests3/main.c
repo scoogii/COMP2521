@@ -20,13 +20,21 @@ int main(void) {
     InvertedIndexBST t = generateInvertedIndex("collection.txt");
 
     // Check deets are right
-    printInvertedIndex(t);
+    /*printInvertedIndex(t);*/
 
-    TfIdfList list = calculateTfIdf(t, "moon", 7);
-    for (TfIdfList curr = list; curr != NULL; curr = curr->next) {
-        printf("Filename is: '%s' with idf:", curr->filename);
-        printf("'%lf'\n", curr->tfIdfSum);
+    /*TfIdfList list = calculateTfIdf(t, "moon", 7);*/
+    /*for (TfIdfList curr = list; curr != NULL; curr = curr->next) {*/
+        /*printf("Filename is: '%s' with idf:", curr->filename);*/
+        /*printf("'%lf'\n", curr->tfIdfSum);*/
+    /*}*/
+
+    char *searchWords[] = {"software", "security", NULL};
+    TfIdfList list = retrieve(t, searchWords, 141);
+    if (list == NULL) printf("why is list null...\n");
+    for (; list != NULL; list = list->next) {
+        printf("%lf %s\n", list->tfIdfSum, list->filename);
     }
+    
 
     return 0;
 }

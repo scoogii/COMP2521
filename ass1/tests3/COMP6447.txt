@@ -1,0 +1,22 @@
+COMP6447 System and Software Security Assessment  
+This course looks at cyber attack and defence. Students learn how to
+assess and identify vulnerabilities and how vulnerabilities are exploited. Students learn the
+principles and theory of exploitation, the common security models, and how approaches
+to exploitation and defence have evolved over time.  
+Students from this course will engage in war games competitions, analyse real
+world case studies of vulnerabilities in complex software used on widespread systems,
+and gain an understanding of the technical process of finding and fixing
+low-level software vulnerabilities and also of the economics and causal factors involved
+with their real world use.  
+The course covers techniques and skills including vulnerability classes, Source code auditing
+Fuzzing Security Bugs Software Security Assurance Taint Analysis Memory Corruption, Overflows, Return
+Oriented Programming Course coverage will be constantly updated over time to reflect
+emerging attack and defence methods.  
+There are numerous formative assessments and activities throughout the course to provide
+feedback and learning opportunities. These do not directly contribute to your final
+grade but are expected to be used to provide evidence of your
+capabilities in your portfolio.  
+Students need a keen devious and analytical mind. To get the most
+from this course students will need to engage in independent study and
+research and be able to act as independent self directed learners.  
+ 

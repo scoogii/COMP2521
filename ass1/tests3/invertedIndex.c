@@ -29,6 +29,9 @@ static void showFileListNodes(FILE *f, FileList list);
 void BSTreeInfixToFile(FILE *f, InvertedIndexBST tree);
 FileList InvertedIndexBSTFind(InvertedIndexBST tree, char *key);
 int findLengthList(FileList list);
+TfIdfList TfIdfListInsert(TfIdfList head, TfIdfList node);
+TfIdfList TfIdfListMerge(TfIdfList list1, TfIdfList list2);
+TfIdfList TfIdfListFind(TfIdfList head, char *filename);
 
 ////////////////////////////////////////////////////////////////////////
 //                  ADAPTED BST FUNCTIONS FROM LAB03                  //
@@ -79,10 +82,10 @@ FileList newFileListNode(char *filename, double tf) {
  * Takes in a FileList node and the idf value
  * Creates a new TfIdfNode pointer from them and returns it
  */
-TfIdfList newTfIdfListNode(FileList list, double idf) {
+TfIdfList newTfIdfListNode(char *filename, double tfidf) {
     TfIdfList new = malloc(sizeof(struct TfIdfNode));
-    new->filename = strdup(list->filename);
-    new->tfIdfSum = (list->tf * idf);
+    new->filename = strdup(filename);
+    new->tfIdfSum = tfidf;
     new->next = NULL;
 
     return new;
@@ -154,59 +157,93 @@ InvertedIndexBST FileListInsert(InvertedIndexBST tree, FileList fileNode) {
 /**
  * Inserts a new TfIdfList node into the current TfIdfList and returns
  * the head of the updated TfIdfList
+ * List is sorted in descending tfidf value order and if values are equal
+ * it is sorted in ascending filename order
  */
-TfIdfList TfIdfListInsert(TfIdfList head, FileList node, double idf) {
-    // Create new TfIdfList node to be inserted
-    TfIdfList newNode = newTfIdfListNode(node, idf);
-
-    // Case 1 & 2. head is NULL or idf is the largest
-    if (head == NULL || newNode->tfIdfSum > head->tfIdfSum) {
-        newNode->next = head;
-        head = newNode;
-        return newNode;
+TfIdfList TfIdfListInsert(TfIdfList head, TfIdfList node) {
+    TfIdfList filenameFound = TfIdfListFind(head, node->filename);
+    /*If node already exists, sum tfidf value instead*/
+    if (filenameFound != NULL) {
+        filenameFound->tfIdfSum += node->tfIdfSum;
+        return head;
     }
 
-    // Case 3. node to be inseted somewhere within the list
+    // Case 1 & 2. head is NULL or tfidf is the largest
+    if (head == NULL || node->tfIdfSum > head->tfIdfSum) {
+        node->next = head;
+        head = node;
+        return head;
+    }
+
+    // Case 3. node to be inserted somewhere within the list
     TfIdfList prev = head;
     TfIdfList curr = head;
     for (; curr != NULL; prev = curr, curr = curr->next) {
-        if (newNode->tfIdfSum > curr->tfIdfSum) {
-            prev->next = newNode;
-            newNode->next = curr;
+        if (node->tfIdfSum > curr->tfIdfSum) {
+            prev->next = node;
+            node->next = curr;
             return head;
         }
 
         // If idf values are equal, insert in ascending filename order
-        if (newNode->tfIdfSum == curr->tfIdfSum) {
+        if (node->tfIdfSum == curr->tfIdfSum) {
             // Inserting 'before'
             if (strcmp(node->filename, curr->filename) < 0) {
-                prev->next = newNode;
-                newNode->next = curr;
+                prev->next = node;
+                node->next = curr;
             }
             // Inserting 'after' or 'last'
-            else if (strcmp(newNode->filename, curr->filename) > 0) {
-                while (newNode->tfIdfSum == curr->tfIdfSum && curr != NULL) {
+            else if (strcmp(node->filename, curr->filename) > 0) {
+                while (node->tfIdfSum == curr->tfIdfSum && curr != NULL) {
                     // Inserting 'after'
-                    if (strcmp(newNode->filename, curr->filename) < 0) {
-                        prev->next = newNode;
-                        newNode->next = curr;
+                    if (strcmp(node->filename, curr->filename) < 0) {
+                        prev->next = node;
+                        node->next = curr;
                         return head;
                     }
                     prev = curr;
                     curr = curr->next;
                 }
                 // If the while loop ends, insert 'last'
-                prev->next = newNode;
-                newNode->next = curr;
+                prev->next = node;
+                node->next = curr;
                 return head;
             }
         }
     }
 
-    // Case 4. node to be inserted as the tail
-    prev->next = newNode;
-    newNode->next = NULL;
+    // Case 4. node to be inserted as the tail of the list
+    prev->next = node;
+    node->next = NULL;
     return head;
+}
+
+
+/**
+ * Function that merges two TfIdfList's together (list2 into list1)
+ * If certain nodes have the same filenames, their tfidf values are summed
+ * Returns the merged TfIdfList
+ */
+TfIdfList TfIdfListMerge(TfIdfList list1, TfIdfList list2) {
+    // If one of the lists are NULL, return the latter or if both are NULL,
+    // return NULL
+    if (list1 != NULL && list2 == NULL) {
+        return list1;
+    }
+    else if (list1 == NULL && list2 != NULL) {
+        return list2;
+    }
+    else if (list1 == NULL && list2 == NULL) {
+        return NULL;
+    }
+
+    for (TfIdfList curr = list2; curr != NULL; curr = curr->next) {
+        TfIdfList newNode = newTfIdfListNode(curr->filename, curr->tfIdfSum);
+        /*newNode->next = curr->next;*/
+        TfIdfListInsert(list1, newNode);
+    }
+
+    return list1;
 }
 
 
@@ -269,6 +306,19 @@ FileList InvertedIndexBSTFind(InvertedIndexBST tree, char *key) {
     else {
         return tree->fileList;
     }
+}
+
+
+/**
+ * Function that returns the TfIdfList node if a filenane in a TfIdfList
+ * is found otherwise returns NULL
+ */
+TfIdfList TfIdfListFind(TfIdfList head, char *filename) {
+    for (; head != NULL; head = head->next) {
+        if (strcmp(head->filename, filename) == 0) return head;
+    }
+
+    return NULL;
 }
 
 
@@ -401,6 +451,11 @@ void printInvertedIndex(InvertedIndexBST tree) {
 } 
 
 
+////////////////////////////////////////////////////////////////////////
+//  					 PART 2 FUNCTIONS                             //
+////////////////////////////////////////////////////////////////////////
+
+
 /**
  * Returns  an  ordered list where each node contains a filename and the 
  * corresponding tf-idf value for a given searchWord. You only  need  to
@@ -410,7 +465,7 @@ void printInvertedIndex(InvertedIndexBST tree) {
  * order. D is the total number of documents in the collection.
  */
 TfIdfList calculateTfIdf(InvertedIndexBST tree, char *searchWord, int D) {
-    // Create a InvertedIndexBST root node that is currently empty
+    // Create a TfIdfList head node that is currently empty
     TfIdfList head = TfIdfListNew();
 
     // Search for the given 'key'
@@ -423,19 +478,46 @@ TfIdfList calculateTfIdf(InvertedIndexBST tree, char *searchWord, int D) {
     double idf = log10(D / (double)findLengthList(filenames));
 
     for (FileList curr = filenames; curr != NULL; curr = curr->next) {
-        if (strcmp(filenames->filename, "COMP9415") == 0) {
-            printf("Gonna insert '%s' from file '%s'", searchWord, filenames->filename);
-        }
-        head = TfIdfListInsert(head, curr, idf);
+        // Create new TfIdfList node to be inserted
+        TfIdfList newNode = newTfIdfListNode(curr->filename, (curr->tf * idf));
+        head = TfIdfListInsert(head, newNode);
     }
 
     return head;
 }
 
 
+/**
+ * Returns  an  ordered list where each node contains a filename and the
+ * summation of tf-idf values of all the matching search words for  that
+ * file.  You only need to include documents (files) that contain one or
+ * more of the given search words. The list must be in descending  order
+ * of summation of tf-idf values (tfIdfSum). If there are multiple files
+ * with  the  same tf-idf sum, order them by their filename in ascending
+ * order. D is the total number of documents in the collection.
+ */
 TfIdfList retrieve(InvertedIndexBST tree, char *searchWords[], int D) {
-    tree = NULL;
-    searchWords = NULL;
-    D = 0;
-    return NULL;
+    // Create a TfIdfList head node that is currently empty
+    TfIdfList head = TfIdfListNew();
+
+    // Search for each given 'key' in the array of words
+    // Generate a new TfIdfList from it and combine with other lists if appropriate
+    for (int i = 0; searchWords[i] != NULL; i++) {
+        TfIdfList unsortedList = calculateTfIdf(tree, searchWords[i], D);
+
+        head = TfIdfListMerge(head, unsortedList);
+    }
+
+    for (TfIdfList curr = head; curr != NULL; curr = curr->next) {
+        printf("%lf %s\n", curr->tfIdfSum, curr->filename);
+    }
+
+    // Re-insert nodes into another list such that it is ordered
+    TfIdfList sortedList = TfIdfListNew();
+    for (TfIdfList curr = head; curr != NULL; curr = curr->next) {
+        TfIdfList newNode = newTfIdfListNode(curr->filename, curr->tfIdfSum);
+        sortedList = TfIdfListInsert(sortedList, newNode);
+    }
+
+    return sortedList;
 }

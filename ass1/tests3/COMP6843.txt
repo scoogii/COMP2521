@@ -1,0 +1,24 @@
+COMP6843 Extended Web Application Security and Testing  
+Web applications are currently the predominant source of software vulnerabilities exploited in
+in online attacks. There is a growing need and growing demand for
+web programmers to be security aware.  
+This course covers the main types of web application vulnerabilities and current
+best practice professional coding and testing practices to be able to successfully
+develop secure web applications.  
+The course covers OWASP vulnerabilities cross site scripting browser security model and
+weaknesses Injection attacks DNS Man in the middle Data leakage Spoofing UI
+and Social vulnerabilities Assurance and Testing Standards. Course coverage will be constantly
+updated over time to reflect emerging vulnerabilities and practices.  
+There are numerous formative assessments and activities throughout the course to provide
+feedback and learning opportunities. These do not directly contribute to your final
+grade but are expected to be used to provide evidence of your
+capabilities in your portfolio.  
+A programming background is required. Students also need a keen devious and
+analytical mind. To get the most from this course students will need
+to engage in independent study and research and be able to act
+as independent self directed learners.  
+This is the extended version of COMP6443. This course includes the material
+of COMP6443 plus penetration testing, and red teaming. Students will work in
+teams to conduct penetration tests and report on them to real and
+simulated clients.  
+ 

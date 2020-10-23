@@ -1,0 +1,7 @@
+COMP1921 Computing 1B  
+Covers the topics of COMP1917 not covered in COMP1911. Including: approaches to
+problem solving, abstraction, low level structure of memory, memory allocation, stack frames,
+secure coding practice, recursion, linked lists.Introduction to ADTs. Introduction to simple binary
+trees. Also reinforces concepts introduced in COMP1911: style, unti testing, team programming,
+groupwork.  
+ 

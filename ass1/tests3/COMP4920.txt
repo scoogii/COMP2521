@@ -1,0 +1,22 @@
+COMP4920 Management and Ethics  
+This course will develop a framework on which management and ethical issues
+can be developed. and also develop skills in software project management.  
+Topics covered will include management issues such as:  
+ 
+management of innovation  
+engineering project planning and control  
+human factors  
+patents  
+technical strategy  
+ 
+In addition, the following ethics topics will be covered:  
+ 
+introduction to ethics  
+workable ethical theories  
+morality of breaking the law  
+privacy  
+public information and records  
+and related topics  
+ 
+Students carry out a significant software development project in teams.  
+ 

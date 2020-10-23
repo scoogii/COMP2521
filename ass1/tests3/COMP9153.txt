@@ -1,0 +1,12 @@
+COMP9153 Algorithmic Verification  
+This course replaces COMP4151, students can not receive credit for bothIt is
+virtually impossible to guarantee the correctness of a system, and in turn
+the absense of bugs by standard software engineering practice such as code
+review, systematic testing and good software design alone. The formal methods community
+has developed various rigorous, mathematically sound techniques and tools that allow the
+automatic analysis of systems and software. The application of these fully automatic
+techniques is typically called algorithmic verification.The course will describe several automatic verification
+techniques, the algoriths they are based on, and the tools that support
+them. We will discuss examples to which the techniques have been applied,
+and provide experience with the use of several tools.  
+ 

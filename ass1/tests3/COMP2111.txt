@@ -1,0 +1,10 @@
+COMP2111 System Modelling and Design  
+This course introduces rigorous and formal methods for modelling system behaviour. These
+methods support the modelling of abstract specifications and the refinement of abstract
+specifications through to concrete implementations. Consistency of formal development is verified by
+proof obligations and formal proof. The course will cover: specification, refinement, implementation,
+proof obligations, and proof. It re-inforces, and builds on, prerequisite knowledge from
+MATH1081, especially set theory and predicate logic. The course will use case-studies
+and assignments to develop competence. The methods developed in this course are
+used in the SENG2011 workshops and in safety-critical industrial contexts.  
+ 

@@ -1,0 +1,16 @@
+COMP6445 Digital Forensics  
+This course addresses the skills and knowledge needed by first responders to
+a discovered cyber breech, as well as law enforcement and criminal justice.
+ 
+This course covers both forensic theory / professional practice, and looking at
+the underlying engineering of hiding, finding, interpreting and responding to traces. Students
+will use of standard forensic tools to extract carve and analyse data
+as well as learning the low level technical skills and knowledge underlying
+them. By the end of the course students should be able to
+write and analyse simple forensic tools as well as being able to
+use them.  
+The course covers Memory Forensics, Disc Forensics Network, Device Forensics, Stealth Techniques,
+Anti-forensics, Professional Forensic Practice,  chain of custody, records etc, Logging. Course coverage
+will be constantly updated over time to reflect emerging forensic practice and
+methods.  
+ 

@@ -1,0 +1,9 @@
+COMP9222 Digital Circuits and Systems  
+This course aims to provide students with a knowledge of problem solving
+with digital systems  computer systems and digital circuits. The basic building blocks
+of combinational and sequential circuits are introduced to develop circuit solutions to
+problems and to understand and implement the design and operation of hardware
+models of digital and computer systems. HDLs will be used to describe
+circuits and state of the art computer aided design tools will be
+used to design complex systems.  
+ 

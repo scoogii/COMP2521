@@ -1,0 +1,13 @@
+COMP3152 Comparative Concurrency Semantics  
+This course tries to make students familiar with state-of-the-art techniques in modelling
+concurrent systems. This is done by comparing some of the more successful
+models of concurrency found in the literature. The focus will be on
+the rationale behind the design decisions underlying those models, viewed from philosophical,
+mathematical and computational perspectives. The course contains important background knowledge for students
+aiming at a scientific career in which the design of mathematical models
+of system behaviour is a component.Topics chosen from: semantic models of concurrent
+and distributed systems  e.g. process algebra, event structures, Petri nets, Chu spaces,
+operational and denotational semantics, semantic equivalences and implementation relations, linear versus branching
+time, interleaving versus partial order semantics, true concurrency, algorithms for equivalence checking
+and their complexity, modal and temporal logic for concurrent systems.  
+ 
