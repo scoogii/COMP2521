@@ -188,8 +188,8 @@ TfIdfList TfIdfListInsert(TfIdfList head, TfIdfList node) {
                 // Insert 'before' so filenames are ascending
                 prev->next = node;
                 node->next = curr;
-                return head;
             }
+            return head;
         }
     }
 
