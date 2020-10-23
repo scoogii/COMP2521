@@ -139,8 +139,8 @@ TfIdfList TfIdfListFind(TfIdfList head, char *filename) {
  * it is sorted in ascending filename order
  */
 TfIdfList TfIdfListInsert(TfIdfList head, TfIdfList node) {
+    // If node already exists, sum tfidf value instead
     TfIdfList filenameFound = TfIdfListFind(head, node->filename);
-    /*If node already exists, sum tfidf value instead*/
     if (filenameFound != NULL) {
         filenameFound->tfIdfSum += node->tfIdfSum;
         return head;
@@ -157,6 +157,7 @@ TfIdfList TfIdfListInsert(TfIdfList head, TfIdfList node) {
     TfIdfList prev = head;
     TfIdfList curr = head;
     for (; curr != NULL; prev = curr, curr = curr->next) {
+        // Insert 'before' current since current has smaller tfidf
         if (node->tfIdfSum > curr->tfIdfSum) {
             prev->next = node;
             node->next = curr;
@@ -170,10 +171,11 @@ TfIdfList TfIdfListInsert(TfIdfList head, TfIdfList node) {
                 prev->next = node;
                 node->next = curr;
             }
-            // Inserting 'after' or 'last'
+            // Inserting 'after' first match, loop to look for when node
+            // should be inserted such that the filenames are ascending
             else if (strcmp(node->filename, curr->filename) > 0) {
                 while (node->tfIdfSum == curr->tfIdfSum && curr != NULL) {
-                    // Inserting 'after'
+                    // Insert 'before'
                     if (strcmp(node->filename, curr->filename) < 0) {
                         prev->next = node;
                         node->next = curr;
@@ -182,17 +184,13 @@ TfIdfList TfIdfListInsert(TfIdfList head, TfIdfList node) {
                     prev = curr;
                     curr = curr->next;
                 }
-                // If the while loop ends, insert 'last'
-                prev->next = node;
-                node->next = curr;
-                return head;
             }
         }
     }
 
     // Case 4. node to be inserted as the tail of the list
     prev->next = node;
-    node->next = NULL;
+    node->next = curr;
     return head;
 }
 
@@ -203,8 +201,8 @@ TfIdfList TfIdfListInsert(TfIdfList head, TfIdfList node) {
  * Returns the merged TfIdfList
  */
 TfIdfList TfIdfListMerge(TfIdfList list1, TfIdfList list2) {
-    // If one of the lists are NULL, return the latter or if both are NULL,
-    // return NULL
+    // If one of the lists are NULL, return the latter
+    // or if both are NULL, return NULL
     if (list1 != NULL && list2 == NULL) {
         return list1;
     }
@@ -215,6 +213,7 @@ TfIdfList TfIdfListMerge(TfIdfList list1, TfIdfList list2) {
         return NULL;
     }
 
+    // Insert duplicates of list2 nodes into list1, 'merging' them together
     for (TfIdfList curr = list2; curr != NULL; curr = curr->next) {
         TfIdfList newNode = newTfIdfListNode(curr->filename, curr->tfIdfSum);
         list1 = TfIdfListInsert(list1, newNode);
