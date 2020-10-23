@@ -1,10 +1,10 @@
 ////////////////////////////////////////////////////////////////////////
-// 					    COMP2521 Assignment 1                         //
-//					    Information Retrieval                         //
-//					       Helper Functions                           //
-//                        Implementation File                         //
+//                      COMP2521 Assignment 1                         //
+//                      Information Retrieval                         //
+//                        Helper Functions                            //
+//                       Implementation File                          //
 //                                                                    //
-//				     Christian Nguyen - z5310911                      //
+//                   Christian Nguyen - z5310911                      //
 ////////////////////////////////////////////////////////////////////////
 
 #include <stdio.h>

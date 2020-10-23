@@ -1,10 +1,10 @@
 ////////////////////////////////////////////////////////////////////////
-// 					    COMP2521 Assignment 1                         //
-//					    Information Retrieval                         //
-//					    FileLists & TfIdfLists                        //
-//                           Header File                              //
+//                      COMP2521 Assignment 1                         //
+//                      Information Retrieval                         //
+//                      FileLists & TfIdfLists                        //
+//                          Header File                               //
 //                                                                    //
-//				     Christian Nguyen - z5310911                      //
+//                   Christian Nguyen - z5310911                      //
 ////////////////////////////////////////////////////////////////////////
 
 #ifndef _LIST_GUARD

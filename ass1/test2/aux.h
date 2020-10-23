@@ -1,10 +1,10 @@
 ////////////////////////////////////////////////////////////////////////
-// 					    COMP2521 Assignment 1                         //
-//					    Information Retrieval                         //
-//					       Helper Functions                           //
+//                      COMP2521 Assignment 1                         //
+//                      Information Retrieval                         //
+//                         Helper Functions                           //
 //                           Header File                              //
 //                                                                    //
-//				     Christian Nguyen - z5310911                      //
+//                   Christian Nguyen - z5310911                      //
 ////////////////////////////////////////////////////////////////////////
 
 #ifndef _AUX_GUARD

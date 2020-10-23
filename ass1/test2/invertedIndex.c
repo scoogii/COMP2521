@@ -1,10 +1,10 @@
 ////////////////////////////////////////////////////////////////////////
-// 					    COMP2521 Assignment 1                         //
-//					    Information Retrieval                         //
+//                      COMP2521 Assignment 1                         //
+//                      Information Retrieval                         //
 //                          InvertedIndex                             //
 //                       Implementation File                          //
 //                                                                    //
-//				     Christian Nguyen - z5310911                      //
+//                   Christian Nguyen - z5310911                      //
 ////////////////////////////////////////////////////////////////////////
 
 #include <ctype.h>
