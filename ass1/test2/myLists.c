@@ -1,8 +1,8 @@
 ////////////////////////////////////////////////////////////////////////
 // 					    COMP2521 Assignment 1                         //
 //					    Information Retrieval                         //
-//					    FileLists & TfIdfLists                        //
-//                        Implementation File                         //
+//                      FileLists & TfIdfLists                        //
+//                       Implementation File                          //
 //                                                                    //
 //				     Christian Nguyen - z5310911                      //
 ////////////////////////////////////////////////////////////////////////
