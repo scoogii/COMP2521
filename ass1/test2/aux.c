@@ -25,7 +25,7 @@
  */
 char *generateNewString(char *word) {
     // Allocate enough memory for the string + null terminator
-    char *newString = malloc(strlen(word + 1));
+    char *newString = malloc(strlen(word) + 1);
     strcpy(newString, word);
 
     return newString;
