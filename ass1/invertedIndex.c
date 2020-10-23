@@ -50,7 +50,7 @@ InvertedIndexBST newInvertedIndexBST(char *key) {
 
 /**
  * Inserts an initialised InvertedIndexBST node into the current tree and
- * returns the root of the updated tree. Does not insert duplicate keys
+ * returns the root of the updated tree
  */
 InvertedIndexBST InvertedIndexBSTInsert(InvertedIndexBST tree, char *filename, char *key) {
     if (tree == NULL) {
@@ -149,7 +149,6 @@ char *normaliseWord(char *str) {
     if (*lastChar == '.' || *lastChar == ',' || *lastChar == ';' || *lastChar == '?') lastChar--;
 
     // Adding new null terminator taken from Stack Overflow
-    // Post was about how to trim trailing whitespaces
     lastChar[1] = '\0';
 
     return str;
@@ -173,16 +172,16 @@ InvertedIndexBST generateInvertedIndex(char *collectionFilename) {
         exit(1);
     }
 
+    // Loop through the file and open each subsequent file
     char wordsFileName[MAX_WORD_LEN] = {};
     while (fscanf(collectionFile, "%s", wordsFileName) != EOF) {
-        // Open the words file
         FILE *wordsFile = fopen(wordsFileName, "r");
         if (wordsFile == NULL) {
             perror(wordsFileName);
             exit(1);
         }
 
-        // Parse words then insert/update the word's InvertedIndexBST node
+        // Parse words in file then insert/update the word's InvertedIndexBST node
         char word[MAX_WORD_LEN] = {};
         while (fscanf(wordsFile, "%s", word) != EOF) {
             root = InvertedIndexBSTInsert(root, wordsFileName, normaliseWord(word));
@@ -218,6 +217,7 @@ void printInvertedIndex(InvertedIndexBST tree) {
 
     // Print out tree nodes and their lists in ascending order (i.e. infix)
     BSTreeInfixToFile(outputStream, tree);
+
     fclose(outputStream);
 } 
 
@@ -246,10 +246,11 @@ TfIdfList calculateTfIdf(InvertedIndexBST tree, char *searchWord, int D) {
         return head;
     }
 
+    // Calculate idf for filenames
     double idf = log10(D / (double)findLengthList(filenames));
 
     for (FileList curr = filenames; curr != NULL; curr = curr->next) {
-        // Create new TfIdfList node to be inserted
+        // Create new TfIdfList node and insert in the new list
         TfIdfList newNode = newTfIdfListNode(curr->filename, (curr->tf * idf));
         head = TfIdfListInsert(head, newNode);
     }
@@ -272,14 +273,15 @@ TfIdfList retrieve(InvertedIndexBST tree, char *searchWords[], int D) {
     TfIdfList head = TfIdfListNew();
 
     // Search for each given 'key' in the array of words
-    // Generate a new TfIdfList from it and combine with other lists if appropriate
+    // Generate a new TfIdfList from it and merge it with other lists
     for (int i = 0; searchWords[i] != NULL; i++) {
         TfIdfList unsortedList = calculateTfIdf(tree, searchWords[i], D);
 
         head = TfIdfListMerge(head, unsortedList);
     }
 
-    // Re-insert nodes into another list such that it is ordered
+    // Insert duplicates of the current nodes into other list such that it is ordered
+    // If filenames are the same, sum tfidf values
     TfIdfList sortedList = TfIdfListNew();
     for (TfIdfList curr = head; curr != NULL; curr = curr->next) {
         TfIdfList newNode = newTfIdfListNode(curr->filename, curr->tfIdfSum);

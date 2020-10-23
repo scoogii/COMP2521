@@ -28,8 +28,8 @@ int main(void) {
         /*printf("'%lf'\n", curr->tfIdfSum);*/
     /*}*/
 
-    char *searchWords[] = {"software", "security", NULL};
-    TfIdfList list = retrieve(t, searchWords, 141);
+    char *searchWords[] = {"nasa", "mars", "moon", NULL};
+    TfIdfList list = retrieve(t, searchWords, 7);
     if (list == NULL) printf("why is list null...\n");
     for (; list != NULL; list = list->next) {
         printf("%lf %s\n", list->tfIdfSum, list->filename);
