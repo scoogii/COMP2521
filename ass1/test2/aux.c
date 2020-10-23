@@ -23,7 +23,7 @@
  * Function takes in a string and creates a new string with allocated
  * memory which is returned
  */
-char *generateNewString(char* word) {
+char *generateNewString(char *word) {
     // Allocate enough memory for the string + null terminator
     char *newString = malloc(strlen(word + 1));
     strcpy(newString, word);
