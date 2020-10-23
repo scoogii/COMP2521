@@ -166,31 +166,31 @@ TfIdfList TfIdfListInsert(TfIdfList head, TfIdfList node) {
 
         // If idf values are equal, insert in ascending filename order
         if (node->tfIdfSum == curr->tfIdfSum) {
-            // Inserting 'before'
+            // Inserting 'before' if filename belongs 'before' the current node
             if (strcmp(node->filename, curr->filename) < 0) {
                 prev->next = node;
                 node->next = curr;
             }
-            // Inserting 'after' first match, loop to look for when node
+            // Inserting 'after' the first tfidf match, loop to look for when node
             // should be inserted such that the filenames are ascending
             else if (strcmp(node->filename, curr->filename) > 0) {
                 while (node->tfIdfSum == curr->tfIdfSum && curr != NULL) {
-                    // Insert 'before'
-                    if (strcmp(node->filename, curr->filename) < 0) {
-                        prev->next = node;
-                        node->next = curr;
-                        return head;
-                    }
+                    // Find breaking case
+                    if (strcmp(node->filename, curr->filename) < 0) break;
                     prev = curr;
                     curr = curr->next;
                 }
+                // Insert 'before' so filenames are ascending
+                prev->next = node;
+                node->next = curr;
+                return head;
             }
         }
     }
 
     // Case 4. node to be inserted as the tail of the list
     prev->next = node;
-    node->next = curr;
+    node->next = NULL;
     return head;
 }
 

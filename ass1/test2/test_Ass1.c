@@ -13,10 +13,10 @@
 
 */
 
-#include <stdio.h>
-#include <ctype.h>
-#include <string.h>
 #include "invertedIndex.h" 
+#include <ctype.h>
+#include <stdio.h>
+#include <string.h>
 
 
 
@@ -70,7 +70,7 @@ void testNormalise(){
 }
 
 
-int main (int argc, char *argv[]) {
+int main () {
 
 	// =========   Part-1 Testing  =========  
 
