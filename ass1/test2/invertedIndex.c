@@ -138,10 +138,10 @@ char *normaliseWord(char *str) {
     // Make all characters lowercase
     for (char *currChar = str; *currChar; currChar++) { *currChar = tolower(*currChar); }
 
-    // Remove leading whitespaces
-    while (isspace(str[0])) str++;
+    // Remove leading whitespaces - shift chars to the left
+    while (isspace(str[0])) { for (int i = 0; i < (int)strlen(str); i++) str[i] = str[i + 1]; }
 
-    // Remove trailing whitespaces
+    // Remove trailing whitespaces - truncate from end of the string
     char *lastChar = str + strlen(str) - 1;
     while (isspace((*lastChar))) lastChar--;
 
@@ -219,7 +219,7 @@ void printInvertedIndex(InvertedIndexBST tree) {
     BSTreeInfixToFile(outputStream, tree);
 
     fclose(outputStream);
-} 
+}
 
 
 ////////////////////////////////////////////////////////////////////////

@@ -59,14 +59,14 @@ void checkNormalisedString(char *origString, char *answerString){
 
 void testNormalise(){
 	printf("Testing function  normaliseWord \n");
-	checkNormalisedString(".Net", ".net");
-	checkNormalisedString("smh.com.au", "smh.com.au");
-	checkNormalisedString("Sydney!", "sydney!");
-	checkNormalisedString("wHy?", "why");
-	checkNormalisedString("ORDER.", "order");
-	checkNormalisedString("Text;", "text");
-	checkNormalisedString("abc.net.au.", "abc.net.au");
-	checkNormalisedString("Sydney???", "sydney??");
+	checkNormalisedString("  .Net", ".net");
+	checkNormalisedString("smh.com.au   ", "smh.com.au");
+	checkNormalisedString("      Sydney!", "sydney!");
+	checkNormalisedString("wHy?     ", "why");
+	checkNormalisedString("ORDER.   ", "order");
+	checkNormalisedString("Text;    ", "text");
+	checkNormalisedString("abc.net.au.  ", "abc.net.au");
+	checkNormalisedString("Sydney???   ", "sydney??");
 }
 
 
