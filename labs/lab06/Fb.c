@@ -6,6 +6,7 @@
 #include <string.h>
 
 #include "Fb.h"
+#include "List.h"
 #include "Map.h"
 #include "Queue.h"
 
@@ -148,8 +149,20 @@ int  FbNumFriends(Fb fb, char *name) {
 // Your tasks
 
 List FbMutualFriends(Fb fb, char *name1, char *name2) {
-    // TODO: Add your code here
     List l = ListNew();
+
+    // Retrieve name1 and name2's IDs
+    int id1 = nameToId(fb, name1);
+    int id2 = nameToId(fb, name2);
+    
+    // Loop and compare a 3rd person's ID with name1 and name2's IDs
+    for (int id3 = 0; id3 < fb->numPeople; id3++) {
+        // If 3rd person is friends with both and their ID is unique, then mutual
+        if (fb->friends[id1][id3] && fb->friends[id1][id3] && id1 != id3 && id2 != id3) {
+            ListAppend(l, fb->names[id3]);
+        }
+    }
+
     return l;
 }
 
