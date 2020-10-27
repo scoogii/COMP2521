@@ -206,10 +206,6 @@ void FbFriendRecs2(Fb fb, char *name) {
             i++;
         }
 
-        // If person hasn't been recommended yet, continue
-        if (!visited[id1])
-            continue;
-
         // Find friends of friends of ... and enqueue
         for (int id2 = 0; id2 < fb->numPeople; id2++) {
             if (fb->friends[id1][id2] && id1 != id2 && !visited[id2]) {
