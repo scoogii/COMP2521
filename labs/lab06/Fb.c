@@ -197,30 +197,22 @@ void FbFriendRecs2(Fb fb, char *name) {
     QueueEnqueue(q, srcId);
     visited[srcId] = true;
 
-    for (int i = 0; i < MAX_RECOMMENDATIONS && !QueueIsEmpty(q); i++) {
-        printf("In this loop\n");
+    for (int i = 0; i < MAX_RECOMMENDATIONS && !QueueIsEmpty(q);) {
         int id1 = QueueDequeue(q);
-        printf("After dequeue\n");
 
         // Don't print out the first item, since that's the src name
-        if (id1 != srcId) printf("\t%s\n", fb->names[id1]);
+        if (id1 != srcId && !fb->friends[srcId][id1]) {
+            printf("\t%s\n", fb->names[id1]);
+            i++;
+        }
 
         // If person hasn't been recommended yet, continue
-        printf("BEFORE: i iteration on %d\n", i);
-        if (visited[id1]) {
-            printf("TRUE\n");
+        if (!visited[id1])
             continue;
-        } else {
-            printf("NOT TRUE\n");
-        }
-        printf("AFTER\n");
-
 
         // Find friends of friends of ... and enqueue
         for (int id2 = 0; id2 < fb->numPeople; id2++) {
-            printf("In this for loop\n");
             if (fb->friends[id1][id2] && id1 != id2 && !visited[id2]) {
-                printf("in this if statement\n");
                 QueueEnqueue(q, id2);
                 visited[id2] = true;
             }
