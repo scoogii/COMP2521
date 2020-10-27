@@ -11,6 +11,7 @@
 #include "Queue.h"
 
 #define MAX_PEOPLE 128
+#define MAX_RECOMMENDATIONS 20
 
 struct fb {
     int   numPeople;
@@ -186,7 +187,47 @@ void FbFriendRecs1(Fb fb, char *name) {
 }
 
 void FbFriendRecs2(Fb fb, char *name) {
-    // TODO: Add your code here
+    // Create a visited adjacency list for people in network
+    bool visited[MAX_PEOPLE] = {false};
+
+    // Traverse graph through BFS using Queue ADT
+    int srcId = nameToId(fb, name);
+
+    Queue q = QueueNew();
+    QueueEnqueue(q, srcId);
+    visited[srcId] = true;
+
+    for (int i = 0; i < MAX_RECOMMENDATIONS && !QueueIsEmpty(q); i++) {
+        printf("In this loop\n");
+        int id1 = QueueDequeue(q);
+        printf("After dequeue\n");
+
+        // Don't print out the first item, since that's the src name
+        if (id1 != srcId) printf("\t%s\n", fb->names[id1]);
+
+        // If person hasn't been recommended yet, continue
+        printf("BEFORE: i iteration on %d\n", i);
+        if (visited[id1]) {
+            printf("TRUE\n");
+            continue;
+        } else {
+            printf("NOT TRUE\n");
+        }
+        printf("AFTER\n");
+
+
+        // Find friends of friends of ... and enqueue
+        for (int id2 = 0; id2 < fb->numPeople; id2++) {
+            printf("In this for loop\n");
+            if (fb->friends[id1][id2] && id1 != id2 && !visited[id2]) {
+                printf("in this if statement\n");
+                QueueEnqueue(q, id2);
+                visited[id2] = true;
+            }
+        }
+    }
+
+    QueueFree(q);
 }
 
 ////////////////////////////////////////////////////////////////////////
