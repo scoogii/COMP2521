@@ -158,7 +158,7 @@ List FbMutualFriends(Fb fb, char *name1, char *name2) {
     // Loop and compare a 3rd person's ID with name1 and name2's IDs
     for (int id3 = 0; id3 < fb->numPeople; id3++) {
         // If 3rd person is friends with both and their ID is unique, then mutual
-        if (fb->friends[id1][id3] && fb->friends[id1][id3] && id1 != id3 && id2 != id3) {
+        if (fb->friends[id1][id3] && fb->friends[id2][id3] && id1 != id3 && id2 != id3) {
             ListAppend(l, fb->names[id3]);
         }
     }
@@ -167,7 +167,22 @@ List FbMutualFriends(Fb fb, char *name1, char *name2) {
 }
 
 void FbFriendRecs1(Fb fb, char *name) {
-    // TODO: Add your code here
+    int id1 =nameToId(fb, name);
+
+    // Check numMutuals from highest to lowest so we can print in descending order
+    // numMutals is at MOST (n - 2), i.e. everyone except the two being compared
+    for (int numMutuals = fb->numPeople - 2; numMutuals > 0; numMutuals--) {
+        // Check every person's mutuals with id1, if mutuals equal to current 'max' mutuals
+        // and id1 is not friends with them, print as a recommendation
+        for (int id2 = 0; id2 < fb->numPeople; id2++) {
+            List mutuals = FbMutualFriends(fb, name, fb->names[id2]);
+            if (ListSize(mutuals) == numMutuals && !fb->friends[id1][id2] && id1 != id2) {
+                printf("\t%-20s%4d mutual friends\n", fb->names[id2], numMutuals);
+            }
+            // Free list since FbMutualFriends mallocs new list in function
+            free(mutuals);
+        }
+    }
 }
 
 void FbFriendRecs2(Fb fb, char *name) {
