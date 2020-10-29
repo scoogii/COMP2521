@@ -8,31 +8,51 @@ NOTE:
   FbIsFriend
 ===============
 
-- Worst case time complexity: O(...)
+- Worst case time complexity: O(log(n))
 
-- Explanation: ...
+- Explanation: `FbisFriend` calls `nameToId` which uses two functions
+  `MapContains` and `MapGet` which are essentially BST search/get
+  operations which would have a time complexity of worst case O(log(n)).
+
+  Given that these two functions are called once each time in `nameToId`
+  and `FbisFriend` calls `nameToId` twice, the worst case time compelexity
+  for `FbisFriend` would be 4*O(log(n)) which is worst case O(log(n)).
 
 ===============
 FbMutualFriends
 ===============
 
-- Worst case time complexity: O(...)
+- Worst case time complexity: O(n)
 
-- Explanation: ...
+- Explanation: log(n) + O(n) where x is a constant
+  The 2 `nameToId` statements at the beginning amount to 2*O(log(n)). However,
+  the greater for loop after has higher order of O(n) since it loops through all
+  vertices once takes precedence. Taking into account that all operations within
+  this for loop is O(1) worst case, we can deduce that the worst case time complexity
+  for this function would be O(n).
 
 ===============
  FbFriendRecs1
 ===============
 
-- Worst case time complexity: O(...)
+- Worst case time complexity: O(n^3)
 
-- Explanation: ...
+- Explanation: O(n-2) * (O (n) * O (n)) = O(n^3)
+  `nameToId` is O(log(n)) but the O(n) and higher orders take precedence.
+  Outer for loop is O(n-2) while the inner for loop is O(n) (the ListFree)
+  iterating n times (O(n)). This would make this inner for loop have a worst
+  case time complexity of O(n^2) which is contained inside another for loop with
+  worst case time compelxity O(n-2). Hence since n^2 operations is done (n-2) times
+  the worst case time complexity for the whole function is O(n^3).
 
 ===============
  FbFriendRecs2
 ===============
 
-- Worst case time complexity: O(...)
+- Worst case time complexity: O(|V|)
 
-- Explanation: ...
-
+- Explanation: O(log(n)) + O(n) + O(n) = O(n)
+  `nameToId` is O(log(n)) worst case, the outer for loop is O(1), inner
+  for loop is O(n) since we iterate through every vertice every time, and
+  the free at the end of the function is O(n). Hence given O(n) > O(log(n)),
+  the worst case time complexity is O(n).

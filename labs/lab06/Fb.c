@@ -168,7 +168,7 @@ List FbMutualFriends(Fb fb, char *name1, char *name2) {
 }
 
 void FbFriendRecs1(Fb fb, char *name) {
-    int id1 =nameToId(fb, name);
+    int id1 = nameToId(fb, name);
 
     // Check numMutuals from highest to lowest so we can print in descending order
     // numMutals is at MOST (n - 2), i.e. everyone except the two being compared
@@ -181,13 +181,13 @@ void FbFriendRecs1(Fb fb, char *name) {
                 printf("\t%-20s%4d mutual friends\n", fb->names[id2], numMutuals);
             }
             // Free list since FbMutualFriends mallocs new list in function
-            free(mutuals);
+            ListFree(mutuals);
         }
     }
 }
 
 void FbFriendRecs2(Fb fb, char *name) {
-    // Create a visited adjacency list for people in network
+    // Create a visited adjacency matrix for people in network
     bool visited[MAX_PEOPLE] = {false};
 
     // Traverse graph through BFS using Queue ADT
