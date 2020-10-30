@@ -22,34 +22,34 @@ NOTE:
 FbMutualFriends
 ===============
 
-- Worst case time complexity: O(n)
+- Worst case time complexity: O(n^2)
 
-- Explanation: log(n) + O(n) where x is a constant
+- Explanation: log(n) + O(n)*O(n)
   The 2 `nameToId` statements at the beginning amount to 2*O(log(n)). However,
   the greater for loop after has higher order of O(n) since it loops through all
   vertices once takes precedence. Taking into account that all operations within
-  this for loop is O(1) worst case, we can deduce that the worst case time complexity
-  for this function would be O(n).
+  this for loop is O(n) worst case, we can deduce that the worst case time complexity
+  for this function would be O(n^2).
 
 ===============
  FbFriendRecs1
 ===============
 
-- Worst case time complexity: O(n^3)
+- Worst case time complexity: O(n^4)
 
-- Explanation: O(n-2) * (O (n) * O (n)) = O(n^3)
+- Explanation: O(n-2) * (O(n)*O(n^2)) = O(n^4)
   `nameToId` is O(log(n)) but the O(n) and higher orders take precedence.
-  Outer for loop is O(n-2) while the inner for loop is O(n) (the ListFree)
+  Outer for loop is O(n-2) while the inner for loop is O(n^2) (mutuals)
   iterating n times (O(n)). This would make this inner for loop have a worst
-  case time complexity of O(n^2) which is contained inside another for loop with
-  worst case time compelxity O(n-2). Hence since n^2 operations is done (n-2) times
+  case time complexity of O(n^3) which is contained inside another for loop with
+  worst case time complexity O(n-2). Hence since n^3 operations is done (n-2) times
   the worst case time complexity for the whole function is O(n^3).
 
 ===============
  FbFriendRecs2
 ===============
 
-- Worst case time complexity: O(|V|)
+- Worst case time complexity: O(n)
 
 - Explanation: O(log(n)) + O(n) + O(n) = O(n)
   `nameToId` is O(log(n)) worst case, the outer for loop is O(1), inner
