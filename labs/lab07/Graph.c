@@ -92,6 +92,7 @@ int buildPath(Graph g, int *path, int *pred, Vertex dest) {
 
     // Reverse the reversed array
     for (int i = 0, j = (numV - 1); i < numV; i++, j--) path[i] = reversedArray[j];
+    free(reversedArray);
 
     return numV;
 }
@@ -138,8 +139,9 @@ int findPath(Graph g, Vertex src, Vertex dest, int max, int *path)
     QueueFree(q);
     free(visited);
 
-    // Update shortest path
+    // Update shortest path and free predecessor array after
     int numVertices = buildPath(g, path, pred, dest);
+    free(pred);
 	
     // Only return the number of vertices 
     if (path[0] == src) return numVertices;
