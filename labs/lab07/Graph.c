@@ -146,7 +146,7 @@ int findPath(Graph g, Vertex src, Vertex dest, int max, int *path)
     // Only return the number of vertices 
     if (path[0] == src) return numVertices;
 
-    return numVertices;
+    return 0;
 }
 
 ////////////////////////////////////////////////////////////////////////
