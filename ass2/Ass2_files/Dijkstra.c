@@ -38,7 +38,30 @@ ShortestPaths dijkstra(Graph g, Vertex src) {}
  * We  will  not call this function during testing, so you may print out
  * the given ShortestPaths structure in whatever format you want.
  */
-void showShortestPaths(ShortestPaths sps) {}
+void showShortestPaths(ShortestPaths sps) {
+    printf("Node %d\n", sps.src);
+
+    // Printing distances of src to vertices
+    printf("\tDistance\n");
+    for (int i = 0; i < sps.numNodes; i++) {
+        if (i == sps.src) {
+            printf("\t\t%d: X\n", sps.src);
+        } else {
+            printf("\t\t%d: %d\n", i, sps.dist[i]);
+        }
+    }
+
+    // Printing the predecessor(s) of each vertex in the graph
+    printf("\tPreds\n");
+    struct PredNode **current = sps.pred;
+    for (int i = 0; i < sps.numNodes; i++) {
+        printf("\t\t%d : ", i);
+        for (; current[i] != NULL; current[i] = current[i]->next) {
+            printf("[%d]->", current[i]->v);
+        }
+        printf("NULL\n");
+    }
+}
 
 
 /**
