@@ -12,6 +12,8 @@
 #include <stdlib.h>
 
 #include "Dijkstra.h"
+#include "Graph.h"
+#include "PQ.h"
 
 ////////////////////////////////////////////////////////////////////////
 //  					 PART 1 FUNCTIONS                             //
@@ -28,7 +30,26 @@
  * (if  they  exist)  by storing the predecessor(s) in the corresponding
  * linked list for that vertex.
  */
-ShortestPaths dijkstra(Graph g, Vertex src) {}
+ShortestPaths dijkstra(Graph g, Vertex src) {
+    // Create a new shortest path struct and initialise data
+    ShortestPaths sps;
+    sps.numNodes = GraphNumVertices(g);
+    sps.src = src;
+    
+    // Initialisation sourced from `dijkstraSSSP` lecture code
+    // Initalise all distances to INT_MAX 
+    for (int i = 0; i < sps.numNodes; i++) sps.dist[i] = INT_MAX;
+    sps.dist[src] = 0;
+
+    // Initialise all predecessor nodes of vertices to NULL (i.e. no parent found)
+    for (int i = 0; i < sps.numNodes; i++) sps.pred[i] = NULL;
+
+    // Create a 'vSet' via a PQueue
+    PQ vSet = PQnew();
+
+
+    return sps;
+}
 
 
 /**
