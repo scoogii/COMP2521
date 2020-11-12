@@ -21,6 +21,54 @@
 
 
 /**
+ * Creates a new predecessor node and returns it
+ */
+static PredNode *newPredNode(Vertex v) {
+    PredNode *new = malloc(sizeof(struct PredNode));
+    new->v = v;
+    new->next = NULL;
+
+    return new;
+}
+
+
+/**
+ * Inserts a new predecessor node to a given predecessor list
+ */
+static PredNode *PredNodeInsert(PredNode *pred, PredNode *newNode) {
+    // If the predecessor list is empty, 
+    if (pred == NULL) {
+        pred = newNode;
+        return pred;
+    }
+        
+    // Otherwise, insert as tail
+    PredNode *current = pred;
+    while (current->next != NULL) current = current->next;
+    current->next = pred;
+
+    return pred;
+}
+
+
+/**
+ * Edge relaxation function that updates the data of dist array if a shorter
+ * path is found. For example, if dist[v] + weight < dist[w] then we update
+ * the distance array such that dist[w] <-- dist[v] + weight and pred[w] <--v
+ * where dist[v] is the length of shortest known path from src to v
+ * and dist[w] is the length of shortest known path from src to w
+ */
+static ShortestPaths relaxEdge(ShortestPaths sps, int v, int w, int weight) {
+    if (v + weight < w) {
+        sps.dist[w] = v + weight;
+        sps.pred[w] = PredNodeInsert(sps.pred[w], newPredNode(v));
+    }
+
+    return sps;
+}
+
+
+/**
  * Finds  all  shortest  paths  from  a given source vertex to all other
  * vertices
  *
@@ -37,15 +85,26 @@ ShortestPaths dijkstra(Graph g, Vertex src) {
     sps.src = src;
     
     // Initialisation sourced from `dijkstraSSSP` lecture code
-    // Initalise all distances to INT_MAX 
-    for (int i = 0; i < sps.numNodes; i++) sps.dist[i] = INT_MAX;
+    for (int i = 0; i < sps.numNodes - 1; i++) sps.dist[i] = INT_MAX;
     sps.dist[src] = 0;
 
     // Initialise all predecessor nodes of vertices to NULL (i.e. no parent found)
-    for (int i = 0; i < sps.numNodes; i++) sps.pred[i] = NULL;
+    for (int i = 0; i < sps.numNodes - 1; i++) sps.pred[i] = NULL;
 
-    // Create a 'vSet' via a PQueue
-    PQ vSet = PQnew();
+    // Create a 'vertice set' via a PQueue - src should start at highest priority
+    PQ vSet = PQNew();
+    for (int i = 0; i < sps.numNodes - 1; i++) PQInsert(vSet, i, 1);
+    PQUpdate(vSet, src, 0);
+
+    while (!PQIsEmpty(vSet)) {
+        int v = PQDequeue(vSet);
+    
+        // Get all adjacent vertices from current vertex v
+        AdjList outLinks = GraphOutIncident(g, v);
+        for (; outLinks != NULL; outLinks = outLinks->next) {
+            sps = relaxEdge(sps, sps.dist[v], sps.dist[outLinks->v], outLinks->weight);
+        }
+    }
 
 
     return sps;
@@ -88,4 +147,11 @@ void showShortestPaths(ShortestPaths sps) {
 /**
  * Frees all memory associated with the given ShortestPaths structure.
  */
-void freeShortestPaths(ShortestPaths sps) {}
+void freeShortestPaths(ShortestPaths sps) {
+    // Loop through all predecessor lists and free one node at a time
+    for (int i = 0; i < sps.numNodes; i++) {
+        struct PredNode *current = sps.pred[i];
+        sps.pred[i] = sps.pred[i]->next;
+        free(current);
+    }
+}
