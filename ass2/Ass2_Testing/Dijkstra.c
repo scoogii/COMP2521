@@ -61,7 +61,7 @@ static PredNode *PredNodeInsert(PredNode *pred, PredNode *newNode) {
  */
 static ShortestPaths relaxEdge(ShortestPaths sps, Vertex v, Vertex w, int weight) {
     // If a shorter path is found, make that the new shortest path and free the old predecessor list
-    if (sps.dist[v] + weight < sps.dist[w] && v != w) {
+    if (sps.dist[v] + weight < sps.dist[w]) {
         sps.dist[w] = sps.dist[v] + weight;
 
         /*for (; sps.pred[w] != NULL; sps.pred[w] = sps.pred[w]->next) {*/
@@ -112,7 +112,7 @@ ShortestPaths dijkstra(Graph g, Vertex src) {
         // Get all adjacent vertices from current vertex v
         AdjList outLinks = GraphOutIncident(g, v);
         for (; outLinks != NULL; outLinks = outLinks->next) {
-            if (v != outLinks->v) sps = relaxEdge(sps, v, outLinks->v, outLinks->weight);
+            sps = relaxEdge(sps, v, outLinks->v, outLinks->weight);
         }
     }
 
