@@ -7,6 +7,7 @@
 //                   Christian Nguyen - z5310911                      //
 ////////////////////////////////////////////////////////////////////////
 
+#include <assert.h>
 #include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -45,7 +46,7 @@ static PredNode *PredNodeInsert(PredNode *pred, PredNode *newNode) {
     // Otherwise, insert as tail
     PredNode *current = pred;
     while (current->next != NULL) current = current->next;
-    current->next = pred;
+    current->next = newNode;
 
     return pred;
 }
@@ -58,9 +59,16 @@ static PredNode *PredNodeInsert(PredNode *pred, PredNode *newNode) {
  * where dist[v] is the length of shortest known path from src to v
  * and dist[w] is the length of shortest known path from src to w
  */
-static ShortestPaths relaxEdge(ShortestPaths sps, int v, int w, int weight) {
-    if (v + weight < w) {
-        sps.dist[w] = v + weight;
+static ShortestPaths relaxEdge(ShortestPaths sps, Vertex v, Vertex w, int weight) {
+    // If a shorter path is found, make that the new shortest path and free the old predecessor list
+    if (sps.dist[v] + weight < sps.dist[w] && v != w) {
+        sps.dist[w] = sps.dist[v] + weight;
+
+        /*for (; sps.pred[w] != NULL; sps.pred[w] = sps.pred[w]->next) {*/
+            /*struct PredNode *current = sps.pred[w];*/
+            /*free(current);*/
+        /*}*/
+
         sps.pred[w] = PredNodeInsert(sps.pred[w], newPredNode(v));
     }
 
@@ -83,31 +91,30 @@ ShortestPaths dijkstra(Graph g, Vertex src) {
     ShortestPaths sps;
     sps.numNodes = GraphNumVertices(g);
     sps.src = src;
-    sps.dist = malloc(sizeof(int) * sps.numNodes);
+    sps.dist = malloc(sps.numNodes * sizeof(int));
     sps.pred = malloc(sps.numNodes * sizeof(PredNode *));
 
     // Initialisation sourced from `dijkstraSSSP` lecture code
-    for (int i = 0; i < sps.numNodes; i++) sps.dist[i] = INT_MAX;
+    for (Vertex i = 0; i < sps.numNodes; i++) sps.dist[i] = INT_MAX;
     sps.dist[src] = 0;
 
     // Initialise all predecessor nodes of vertices to NULL (i.e. no parent found)
-    for (int i = 0; i < sps.numNodes; i++) sps.pred[i] = NULL;
+    for (Vertex i = 0; i < sps.numNodes; i++) sps.pred[i] = NULL;
 
     // Create a 'vertice set' via a PQueue - src should start at highest priority
     PQ vSet = PQNew();
-    for (int i = 0; i < sps.numNodes; i++) PQInsert(vSet, i, 1);
+    for (Vertex i = 0; i < sps.numNodes; i++) PQInsert(vSet, i, 1);
     PQUpdate(vSet, src, 0);
 
     while (!PQIsEmpty(vSet)) {
-        int v = PQDequeue(vSet);
+        Vertex v = PQDequeue(vSet);
     
         // Get all adjacent vertices from current vertex v
         AdjList outLinks = GraphOutIncident(g, v);
         for (; outLinks != NULL; outLinks = outLinks->next) {
-            sps = relaxEdge(sps, sps.dist[v], sps.dist[outLinks->v], outLinks->weight);
+            if (v != outLinks->v) sps = relaxEdge(sps, v, outLinks->v, outLinks->weight);
         }
     }
-
 
     return sps;
 }
@@ -124,20 +131,20 @@ void showShortestPaths(ShortestPaths sps) {
     printf("Node %d\n", sps.src);
 
     // Printing distances of src to vertices
-    printf("\tDistance\n");
+    printf("  Distance\n");
     for (int i = 0; i < sps.numNodes; i++) {
         if (i == sps.src) {
-            printf("\t\t%d: X\n", sps.src);
+            printf("    %d: X\n", sps.src);
         } else {
-            printf("\t\t%d: %d\n", i, sps.dist[i]);
+            printf("    %d: %d\n", i, sps.dist[i]);
         }
     }
 
     // Printing the predecessor(s) of each vertex in the graph
-    printf("\tPreds\n");
+    printf("    Preds\n");
     struct PredNode **current = sps.pred;
     for (int i = 0; i < sps.numNodes; i++) {
-        printf("\t\t%d : ", i);
+        printf("    %d: ", i);
         for (; current[i] != NULL; current[i] = current[i]->next) {
             printf("[%d]->", current[i]->v);
         }
