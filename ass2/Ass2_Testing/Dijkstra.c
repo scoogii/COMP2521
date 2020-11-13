@@ -83,17 +83,19 @@ ShortestPaths dijkstra(Graph g, Vertex src) {
     ShortestPaths sps;
     sps.numNodes = GraphNumVertices(g);
     sps.src = src;
-    
+    sps.dist = malloc(sizeof(int) * sps.numNodes);
+    sps.pred = malloc(sps.numNodes * sizeof(PredNode *));
+
     // Initialisation sourced from `dijkstraSSSP` lecture code
-    for (int i = 0; i < sps.numNodes - 1; i++) sps.dist[i] = INT_MAX;
+    for (int i = 0; i < sps.numNodes; i++) sps.dist[i] = INT_MAX;
     sps.dist[src] = 0;
 
     // Initialise all predecessor nodes of vertices to NULL (i.e. no parent found)
-    for (int i = 0; i < sps.numNodes - 1; i++) sps.pred[i] = NULL;
+    for (int i = 0; i < sps.numNodes; i++) sps.pred[i] = NULL;
 
     // Create a 'vertice set' via a PQueue - src should start at highest priority
     PQ vSet = PQNew();
-    for (int i = 0; i < sps.numNodes - 1; i++) PQInsert(vSet, i, 1);
+    for (int i = 0; i < sps.numNodes; i++) PQInsert(vSet, i, 1);
     PQUpdate(vSet, src, 0);
 
     while (!PQIsEmpty(vSet)) {
@@ -149,9 +151,12 @@ void showShortestPaths(ShortestPaths sps) {
  */
 void freeShortestPaths(ShortestPaths sps) {
     // Loop through all predecessor lists and free one node at a time
-    for (int i = 0; i < sps.numNodes; i++) {
-        struct PredNode *current = sps.pred[i];
-        sps.pred[i] = sps.pred[i]->next;
-        free(current);
-    }
+    /*for (int i = 0; i < sps.numNodes; i++) {*/
+        /*struct PredNode *current = sps.pred[i];*/
+        /*sps.pred[i] = sps.pred[i]->next;*/
+        /*free(current);*/
+    /*}*/
+
+    // Free dist array
+    free(sps.dist);
 }
