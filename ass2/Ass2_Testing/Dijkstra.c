@@ -17,7 +17,7 @@
 #include "PQ.h"
 
 ////////////////////////////////////////////////////////////////////////
-//  					 PART 1 FUNCTIONS                             //
+//                         PART 1 HELPERS                             //
 ////////////////////////////////////////////////////////////////////////
 
 
@@ -34,7 +34,7 @@ static PredNode *newPredNode(Vertex v) {
 
 
 /**
- * Inserts a new predecessor node to a given predecessor list
+ * Inserts a new predecessor node as head to a given predecessor list
  */
 static PredNode *PredNodeInsert(PredNode *pred, PredNode *newNode) {
     // If the predecessor list is empty, 
@@ -43,27 +43,21 @@ static PredNode *PredNodeInsert(PredNode *pred, PredNode *newNode) {
         return pred;
     }
         
-    // Otherwise, insert as tail
-    PredNode *current = pred;
-    while (current->next != NULL) {
-        if (current->v == newNode->v) {
-            free(newNode);
-            return pred;
-        }
-        current = current->next;
-    }
-    current->next = newNode;
+    // Otherwise, insert as head
+    newNode->next = pred;
+    pred = newNode;
 
     return pred;
 }
 
 
 /**
- * Frees a predecessor list of predecessor vertices of a given vertex
+ * Frees the memory of a predecessor linked list using recursion
  */
-static void freePred(PredNode *PredList) {
-    for (PredNode *current = PredList; PredList != NULL; PredList = PredList->next)
-        free(current);
+static void freePredList(PredNode *pred) {
+    if (pred == NULL) return;
+    freePredList(pred->next);
+    free(pred);
 }
 
 
@@ -76,9 +70,9 @@ static void freePred(PredNode *PredList) {
  */
 static ShortestPaths relaxEdge(ShortestPaths sps, Vertex v, Vertex w, int weight) {
     // If a shorter path is found, make that the new shortest path and free the old predecessor list
-    if (sps.dist[v] + weight < sps.dist[w]) {
+    if (sps.dist[v] + weight < sps.dist[w] && sps.dist[v] != INT_MAX) {
         sps.dist[w] = sps.dist[v] + weight;
-        freePred(sps.pred[w]);
+        freePredList(sps.pred[w]);
         sps.pred[w] = PredNodeInsert(NULL, newPredNode(v));
     }
     // If an equal shortest path is found, append to predecessor list
@@ -88,6 +82,22 @@ static ShortestPaths relaxEdge(ShortestPaths sps, Vertex v, Vertex w, int weight
 
     return sps;
 }
+
+
+/**
+ * Sets all unreachables vertices in the graph to '0' instead of leaving
+ * it as INT_MAX
+ */
+void setUnreachedZero(int *dist, int numVertices) {
+    for (int i = 0; i < numVertices; i++) {
+        if (dist[i] == INT_MAX) dist[i] = 0;
+    }
+}
+
+
+////////////////////////////////////////////////////////////////////////
+//                        PART 1 FUNCTIONS                            //
+////////////////////////////////////////////////////////////////////////
 
 
 /**
@@ -101,7 +111,7 @@ static ShortestPaths relaxEdge(ShortestPaths sps, Vertex v, Vertex w, int weight
  * linked list for that vertex.
  */
 ShortestPaths dijkstra(Graph g, Vertex src) {
-    // Create a new shortest path struct and initialise data
+    // Initialise a new shortest path struct
     ShortestPaths sps;
     sps.numNodes = GraphNumVertices(g);
     sps.src = src;
@@ -128,8 +138,10 @@ ShortestPaths dijkstra(Graph g, Vertex src) {
             PQUpdate(vSet, outLinks->v, sps.dist[outLinks->v]);
         }
     }
-
     PQFree(vSet);
+
+    // Set nodes that cannot be reached to 0 instead of INT_MAX
+    setUnreachedZero(sps.dist, sps.numNodes);
 
     return sps;
 }
@@ -169,24 +181,24 @@ void showShortestPaths(ShortestPaths sps) {
 
 
 /**
- * Frees the memory of a linked list using recursion
- */
-static void freeList(PredNode *pred) {
-    if (pred == NULL) return;
-    freeList(pred->next);
-    free(pred);
-}
-
-
-/**
  * Frees all memory associated with the given ShortestPaths structure.
  */
 void freeShortestPaths(ShortestPaths sps) {
-    // Loop through all predecessor lists and free one node at a time
+    // Loop through all predecessor lists and free each node
     for (int i = 0; i < sps.numNodes; i++) {
-        freeList(sps.pred[i]);
+        freePredList(sps.pred[i]);
     }
 
-    // Free dist array
+    // Free pred and dist of sps
+    free(sps.pred);
     free(sps.dist);
 }
+
+
+////////////////////////////////////////////////////////////////////////
+//                          PART 2 HELPERS                            //
+////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////
+//                         PART 2 FUNCTIONS                           //
+////////////////////////////////////////////////////////////////////////
