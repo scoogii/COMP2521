@@ -45,10 +45,25 @@ static PredNode *PredNodeInsert(PredNode *pred, PredNode *newNode) {
         
     // Otherwise, insert as tail
     PredNode *current = pred;
-    while (current->next != NULL) current = current->next;
+    while (current->next != NULL) {
+        if (current->v == newNode->v) {
+            free(newNode);
+            return pred;
+        }
+        current = current->next;
+    }
     current->next = newNode;
 
     return pred;
+}
+
+
+/**
+ * Frees a predecessor list of predecessor vertices of a given vertex
+ */
+static void freePred(PredNode *PredList) {
+    for (PredNode *current = PredList; PredList != NULL; PredList = PredList->next)
+        free(current);
 }
 
 
@@ -63,12 +78,11 @@ static ShortestPaths relaxEdge(ShortestPaths sps, Vertex v, Vertex w, int weight
     // If a shorter path is found, make that the new shortest path and free the old predecessor list
     if (sps.dist[v] + weight < sps.dist[w]) {
         sps.dist[w] = sps.dist[v] + weight;
-
-        /*for (; sps.pred[w] != NULL; sps.pred[w] = sps.pred[w]->next) {*/
-            /*struct PredNode *current = sps.pred[w];*/
-            /*free(current);*/
-        /*}*/
-
+        freePred(sps.pred[w]);
+        sps.pred[w] = PredNodeInsert(NULL, newPredNode(v));
+    }
+    // If an equal shortest path is found, append to predecessor list
+    else if (sps.dist[v] + weight == sps.dist[w]) {
         sps.pred[w] = PredNodeInsert(sps.pred[w], newPredNode(v));
     }
 
@@ -103,18 +117,19 @@ ShortestPaths dijkstra(Graph g, Vertex src) {
 
     // Create a 'vertice set' via a PQueue - src should start at highest priority
     PQ vSet = PQNew();
-    for (Vertex i = 0; i < sps.numNodes; i++) PQInsert(vSet, i, 1);
-    PQUpdate(vSet, src, 0);
+    for (Vertex i = 0; i < sps.numNodes; i++) PQInsert(vSet, i, sps.dist[i]);
 
     while (!PQIsEmpty(vSet)) {
         Vertex v = PQDequeue(vSet);
     
         // Get all adjacent vertices from current vertex v and do edge relaxation
-        AdjList outLinks = GraphOutIncident(g, v);
-        for (; outLinks != NULL; outLinks = outLinks->next) {
+        for (AdjList outLinks = GraphOutIncident(g, v); outLinks != NULL; outLinks = outLinks->next) {
             sps = relaxEdge(sps, v, outLinks->v, outLinks->weight);
+            PQUpdate(vSet, outLinks->v, sps.dist[outLinks->v]);
         }
     }
+
+    PQFree(vSet);
 
     return sps;
 }
@@ -158,11 +173,11 @@ void showShortestPaths(ShortestPaths sps) {
  */
 void freeShortestPaths(ShortestPaths sps) {
     // Loop through all predecessor lists and free one node at a time
-    /*for (int i = 0; i < sps.numNodes; i++) {*/
-        /*struct PredNode *current = sps.pred[i];*/
-        /*sps.pred[i] = sps.pred[i]->next;*/
-        /*free(current);*/
-    /*}*/
+    for (int i = 0; i < sps.numNodes; i++) {
+        struct PredNode *current = sps.pred[i];
+        sps.pred[i] = sps.pred[i]->next;
+        free(current);
+    }
 
     // Free dist array
     free(sps.dist);
