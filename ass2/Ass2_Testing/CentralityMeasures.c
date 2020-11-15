@@ -51,7 +51,7 @@ static int numReachableVertices(int *dist, int numVertices) {
  * Calculates the closeness centrality of a vertex using the
  * Wasserman and Faust formula
  */
-static double calcClosenessCentrality(int sum, int n, int N) {
+static double calculateCC(int sum, int n, int N) {
     return (double)(n - 1)/(N-1) * (n - 1)/sum;
 }
 
@@ -61,7 +61,8 @@ static double calcClosenessCentrality(int sum, int n, int N) {
  * Returns true if reachable, otherwise false
  */
 static bool isReachable(Graph g, Vertex v) {
-    if (GraphInIncident(g, v) == NULL && GraphOutIncident(g, v) == NULL) return false;
+    if (GraphInIncident(g, v) == NULL && GraphOutIncident(g, v) == NULL)
+        return false;
 
     return true;
 }
@@ -116,7 +117,7 @@ NodeValues closenessCentrality(Graph g) {
         if (!isReachable(g, i) || distSum == 0) {
             ccData.values[i] = 0;
         } else {
-            ccData.values[i] = calcClosenessCentrality(distSum, n, numVertices);
+            ccData.values[i] = calculateCC(distSum, n, numVertices);
         }
 
         freeShortestPaths(sps);
