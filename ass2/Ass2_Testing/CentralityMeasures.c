@@ -112,7 +112,7 @@ NodeValues closenessCentrality(Graph g) {
         int n = numReachableVertices(sps.dist, numVertices) + 1;
 
         // If the vertex is unreachable, it's cc is 0, otherwise calculate
-        // Also, if there is only one node in entire graph, also set cc to 0
+        // Also, if the total shortest paths distance is 0, then also set cc 0
         if (!isReachable(g, i) || distSum == 0) {
             ccData.values[i] = 0;
         } else {
