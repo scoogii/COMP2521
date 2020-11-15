@@ -110,14 +110,13 @@ NodeValues closenessCentrality(Graph g) {
         ShortestPaths sps = dijkstra(g, i);
         int distSum = sumDistances(sps.dist, numVertices);
         int n = numReachableVertices(sps.dist, numVertices) + 1;
-        int N = numVertices;
 
         // If the vertex is unreachable, it's cc is 0, otherwise calculate
         // Also, if there is only one node in entire graph, also set cc to 0
         if (!isReachable(g, i) || distSum == 0) {
             ccData.values[i] = 0;
         } else {
-            ccData.values[i] = calcClosenessCentrality(distSum, n, N);
+            ccData.values[i] = calcClosenessCentrality(distSum, n, numVertices);
         }
 
         freeShortestPaths(sps);
