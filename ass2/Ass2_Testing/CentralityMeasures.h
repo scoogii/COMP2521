@@ -28,13 +28,13 @@ NodeValues closenessCentrality(Graph g);
  * Finds  the  betweenness centrality for each vertex in the given graph
  * and returns the results in a NodeValues structure.
  */
-NodeValues betweennessCentrality(Graph g);
+//NodeValues betweennessCentrality(Graph g);
 
 /**
  * Finds  the  normalised  betweenness centrality for each vertex in the
  * given graph and returns the results in a NodeValues structure.
  */
-NodeValues betweennessCentralityNormalised(Graph g);
+//NodeValues betweennessCentralityNormalised(Graph g);
 
 /**
  * Prints  the values in the given NodeValues structure to stdout in the
