@@ -169,14 +169,22 @@ void showShortestPaths(ShortestPaths sps) {
 
 
 /**
+ * Frees the memory of a linked list using recursion
+ */
+static void freeList(PredNode *pred) {
+    if (pred == NULL) return;
+    freeList(pred->next);
+    free(pred);
+}
+
+
+/**
  * Frees all memory associated with the given ShortestPaths structure.
  */
 void freeShortestPaths(ShortestPaths sps) {
     // Loop through all predecessor lists and free one node at a time
     for (int i = 0; i < sps.numNodes; i++) {
-        struct PredNode *current = sps.pred[i];
-        sps.pred[i] = sps.pred[i]->next;
-        free(current);
+        freeList(sps.pred[i]);
     }
 
     // Free dist array
