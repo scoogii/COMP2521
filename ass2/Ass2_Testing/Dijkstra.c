@@ -87,7 +87,7 @@ static ShortestPaths relaxEdge(ShortestPaths sps, Vertex v, Vertex w, int weight
  * Sets all unreachables vertices in the graph to '0' instead of leaving
  * it as INT_MAX
  */
-void setUnreachedZero(int *dist, int numVertices) {
+static void setUnreachedZero(int *dist, int numVertices) {
     for (int i = 0; i < numVertices; i++) {
         if (dist[i] == INT_MAX) dist[i] = 0;
     }
