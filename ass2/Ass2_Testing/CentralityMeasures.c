@@ -15,6 +15,12 @@
 #include "Graph.h"
 
 ////////////////////////////////////////////////////////////////////////
+
+static int findNumPaths(PredNode **pred, Vertex src, Vertex dest);
+static int countAppearances(PredNode **pred, Vertex src, Vertex v, Vertex dest);
+
+
+////////////////////////////////////////////////////////////////////////
 //                         PART 2 HELPERS                             //
 ////////////////////////////////////////////////////////////////////////
 
@@ -137,41 +143,31 @@ NodeValues closenessCentrality(Graph g) {
 
 
 /*
- * Given src vertex's predecessor list for dest, finds the total number of
- * shortest paths from vertex src to dest and returns number
+ * Finds the numbers of shortest paths from src to dest and returns it
  */
-static int findNumSPS(PredNode *destPred) {
-    int numSPS = 0;
-    // A shortest path is counted whenever there exists a predecessor node for dest
-    for (PredNode *current = destPred; current != NULL; current = current->next) {
-        numSPS++;
+static int findNumPaths(PredNode **pred, Vertex src, Vertex dest) {
+    if (src == dest) return 1;
+
+    int numPaths = 0;
+    for (PredNode *current = pred[dest]; current != NULL; current = current->next) {
+        numPaths += findNumPaths(pred, src, current->v);
     }
 
-    return numSPS;
+    return numPaths;
 }
 
 
 /*
- * Checks whether a vertex is in between two vertices in a shortest path route
- * Returns true if vertex is indeed betwee, otherwise false
+ * Finds the number of appearances of vertex v in shortest path from src to dest
+ * Backtracks from dest to src and counts when vertex v appears
  */
-static bool isBetween(ShortestPaths srcSPS, ShortestPaths bwSPS, Vertex bw, Vertex dest) {
-    if (srcSPS.dist[bw] != 0 && bwSPS.dist[dest] != 0) return true;
+static int countAppearances(PredNode **pred, Vertex src, Vertex v, Vertex dest) {
+    if (v == dest) return findNumPaths(pred, src, v);
 
-    return false;
-}
-
-
-/*
- * Finds the number of appearances of vertex bw in shortest path from src to dest
- * Backtracks from dest to src and counts when vertex bw appears
- */
-static int countAppearances(ShortestPaths srcSPS, Vertex bw, Vertex dest) {
+    // Loop and backtrack - increment whenever vertex bw appears
     int numAppearances = 0;
-    // Loop and backtrack - increment whenever vertex bw appears with ***RECURSION*** :D
-    for (PredNode *current = srcSPS.pred[dest]; current != NULL; current = current->next) {
-        if (current->v == bw) return 1;
-        numAppearances += countAppearances(srcSPS, bw, current->v);
+    for (PredNode *current = pred[dest]; current != NULL; current = current->next) {
+        numAppearances += countAppearances(pred, src, v, current->v);
     }
 
     return numAppearances;
@@ -179,51 +175,37 @@ static int countAppearances(ShortestPaths srcSPS, Vertex bw, Vertex dest) {
 
 
 /*
- * Calculates the number of times the vertex v is between vertex src and dest
- * in the shortest path of src to dest
+ * Calculates betweenness centrality using the provided formula
  */
-static int findNumBetween(ShortestPaths srcSPS, ShortestPaths bwSPS, Vertex src, Vertex bw, Vertex dest) {
-    if (isBetween(srcSPS, bwSPS, bw, dest)) {
-        return countAppearances(srcSPS, bw, dest);
-    }
+static double calculateBC(PredNode **pred, Vertex src, Vertex bw, Vertex dest) {
+    int numSPS = findNumPaths(pred, src, dest);
+    if (numSPS == 0) return 0;
 
-    return 0;
-}
+    int numBW = countAppearances(pred, src, bw, dest);
 
-
-static double calculateBC(int numerator, int denominator) {
-    return (double)(numerator)/denominator;
+    return (double)(numBW)/numSPS;
 }
 
 
 /**
  * Finds the betweenness centrality for each vertex in the given graph
  * and returns the results in a NodeValues structure.
- * Really bad time complexity I know SORRY
  */
 NodeValues betweennessCentrality(Graph g) {
     int numVertices = GraphNumVertices(g);
     // Create new NodeValues struct to store betweenness centrality data
     NodeValues bcData = newNVS(numVertices);
 
-    for (Vertex bw = 0; bw < numVertices; bw++) {
-        ShortestPaths bwSPS = dijkstra(g, bw);
-
-        for (Vertex src = 0; src < numVertices; src++) {
+    for (Vertex bw = 0; bw < numVertices; bw++) {  // Loop through each 'between' vertex
+        for (Vertex src = 0; src < numVertices; src++) {  // Loop through each 'source' vertex
             ShortestPaths srcSPS = dijkstra(g, src);
-            
-            for (Vertex dest = 0; dest < numVertices; dest++) {
+            for (Vertex dest = 0; dest < numVertices; dest++) {  // Loop through each 'dest' vertex
                 if (src != bw && bw != dest && src != dest) {
-                    int numSPS = findNumSPS(srcSPS.pred[dest]);
-                    if (numSPS != 0) {
-                        int numBetween = findNumBetween(srcSPS, bwSPS, src, bw, dest);
-                        bcData.values[bw] += calculateBC(numBetween, numSPS); 
-                    }
+                    bcData.values[bw] += calculateBC(srcSPS.pred, src, bw, dest); 
                 }
             }
             freeShortestPaths(srcSPS);
         }
-        freeShortestPaths(bwSPS);
     }    
 
     return bcData;
