@@ -16,9 +16,10 @@
 #include "PQ.h"
 
 ////////////////////////////////////////////////////////////////////////
+//                                                                    //
 //                         PART 1 HELPERS                             //
+//                                                                    //
 ////////////////////////////////////////////////////////////////////////
-
 
 /**
  * Creates a new predecessor node and returns it
@@ -93,11 +94,11 @@ static void setUnreachedZero(int *dist, int numVertices) {
     }
 }
 
-
 ////////////////////////////////////////////////////////////////////////
+//                                                                    //
 //                        PART 1 FUNCTIONS                            //
+//                                                                    //
 ////////////////////////////////////////////////////////////////////////
-
 
 /**
  * Finds  all  shortest  paths  from  a given source vertex to all other
@@ -192,3 +193,5 @@ void freeShortestPaths(ShortestPaths sps) {
     free(sps.pred);
     free(sps.dist);
 }
+
+////////////////////////////////////////////////////////////////////////

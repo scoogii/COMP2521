@@ -20,30 +20,30 @@
 static void printUsage(void);
 
 int main(int argc, char *argv[]) {
-    if (argc < 3) {
-        printUsage();
-        return EXIT_FAILURE;
-    }
-    
-    NodeValues (*fn)(Graph) = NULL;
+	if (argc < 3) {
+		printUsage();
+		return EXIT_FAILURE;
+	}
+	
+	NodeValues (*fn)(Graph) = NULL;
 	
 	Graph g = readGraph(argv[1]);
 
-    if (argv[2][0] == 'c' && argv[2][1] == '\0') {
-        fn = closenessCentrality;
-    } else if (argv[2][0] == 'b' && argv[2][1] == '\0') {
-        fn = betweennessCentrality;
-    } else if (argv[2][0] == 'b' && argv[2][1] == 'n' ) {
-        fn = betweennessCentralityNormalised;
-    } else {
-        printUsage();
-    }
+	if (argv[2][0] == 'c' && argv[2][1] == '\0') {
+		fn = closenessCentrality;
+	} else if (argv[2][0] == 'b' && argv[2][1] == '\0') {
+		fn = betweennessCentrality;
+	} else if (argv[2][0] == 'b' && argv[2][1] == 'n' ) {
+		fn = betweennessCentralityNormalised;
+	} else {
+		printUsage();
+	}
 	
-    if (fn != NULL) {
-        NodeValues val = fn(g);
-        showNodeValues(val);
-        freeNodeValues(val);
-    }
+	if (fn != NULL) {
+		NodeValues val = fn(g);
+		showNodeValues(val);
+		freeNodeValues(val);
+	}
 	
 	GraphFree(g);
 	
@@ -57,3 +57,4 @@ static void printUsage(void) {
 	printf("    b    : betweenness centrality\n");
 	printf("    bn   : betweenness centrality normalised\n");
 }
+

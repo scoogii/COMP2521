@@ -15,15 +15,14 @@
 #include "Graph.h"
 
 ////////////////////////////////////////////////////////////////////////
-
-static int findNumPaths(PredNode **pred, Vertex src, Vertex dest);
-static int countAppearances(PredNode **pred, Vertex src, Vertex v, Vertex dest);
-
-
-////////////////////////////////////////////////////////////////////////
+//                                                                    //
 //                         PART 2 HELPERS                             //
+//                                                                    //
 ////////////////////////////////////////////////////////////////////////
 
+////////////////////////////////////////////////////////////////////////
+//                             GRAPHS                                 //
+////////////////////////////////////////////////////////////////////////
 
 /*
  * Sums the total distance of all reachable vertices from
@@ -54,15 +53,6 @@ static int numReachableVertices(int *dist, int numVertices) {
 
 
 /*
- * Calculates the closeness centrality of a vertex using the
- * Wasserman and Faust formula
- */
-static double calculateCC(int sum, int n, int N) {
-    return (double)(n - 1)/(N-1) * (n - 1)/sum;
-}
-
-
-/*
  * Determines whether a vertex is isolated or not
  * Returns true if reachable, otherwise false
  */
@@ -73,6 +63,9 @@ static bool isIsolated(Graph g, Vertex v) {
     return true;
 }
 
+////////////////////////////////////////////////////////////////////////
+//                           CENTRALITY                               //
+////////////////////////////////////////////////////////////////////////
 
 /*
  * Creates a new NodeValues struct and returns it
@@ -86,10 +79,72 @@ static NodeValues newNVS(int numVertices) {
 }
 
 
-////////////////////////////////////////////////////////////////////////
-//                        PART 2 FUNCTIONS                            //
-////////////////////////////////////////////////////////////////////////
+/*
+ * Calculates the closeness centrality of a vertex using the
+ * Wasserman and Faust formula
+ */
+static double calculateCC(int sum, int n, int N) {
+    return (double)(n - 1)/(N-1) * (n - 1)/sum;
+}
 
+
+/*
+ * Finds the numbers of shortest paths from src to dest and returns it
+ * Function deos so by backtracking from dest to src
+ */
+static int findNumPaths(PredNode **pred, Vertex src, Vertex dest) {
+    if (src == dest) return 1;
+
+    int numPaths = 0;
+    for (PredNode *current = pred[dest]; current != NULL; current = current->next) {
+        numPaths += findNumPaths(pred, src, current->v);
+    }
+
+    return numPaths;
+}
+
+
+/*
+ * Finds the number of appearances of vertex v in shortest path from src to dest
+ * Backtracks from dest to src and counts when vertex v appears
+ */
+static int findBetween(PredNode **pred, Vertex src, Vertex v, Vertex dest) {
+    if (v == dest) return findNumPaths(pred, src, v);
+
+    int numAppearances = 0;
+    for (PredNode *current = pred[dest]; current != NULL; current = current->next) {
+        numAppearances += findBetween(pred, src, v, current->v);
+    }
+
+    return numAppearances;
+}
+
+
+/*
+ * Calculates betweenness centrality using the provided formula
+ */
+static double calculateBC(PredNode **pred, Vertex src, Vertex bw, Vertex dest) {
+    int numSPS = findNumPaths(pred, src, dest);
+    if (numSPS == 0) return 0;
+    int numBW = findBetween(pred, src, bw, dest);
+
+    return (double)(numBW)/numSPS;
+}
+
+
+/*
+ * Helper function that normalises the betweenness centrality of a vertex
+ */
+static double normaliseBC(double bc, int n) {
+    if (n < 2) return 0;
+    return (double)1/((n - 1) * (n - 2)) * bc;
+}
+
+////////////////////////////////////////////////////////////////////////
+//                                                                    //
+//                        PART 2 FUNCTIONS                            //
+//                                                                    //
+////////////////////////////////////////////////////////////////////////
 
 /**
  * Prints  the values in the given NodeValues structure to stdout in the
@@ -142,51 +197,6 @@ NodeValues closenessCentrality(Graph g) {
 }
 
 
-/*
- * Finds the numbers of shortest paths from src to dest and returns it
- */
-static int findNumPaths(PredNode **pred, Vertex src, Vertex dest) {
-    if (src == dest) return 1;
-
-    int numPaths = 0;
-    for (PredNode *current = pred[dest]; current != NULL; current = current->next) {
-        numPaths += findNumPaths(pred, src, current->v);
-    }
-
-    return numPaths;
-}
-
-
-/*
- * Finds the number of appearances of vertex v in shortest path from src to dest
- * Backtracks from dest to src and counts when vertex v appears
- */
-static int countAppearances(PredNode **pred, Vertex src, Vertex v, Vertex dest) {
-    if (v == dest) return findNumPaths(pred, src, v);
-
-    // Loop and backtrack - increment whenever vertex bw appears
-    int numAppearances = 0;
-    for (PredNode *current = pred[dest]; current != NULL; current = current->next) {
-        numAppearances += countAppearances(pred, src, v, current->v);
-    }
-
-    return numAppearances;
-}
-
-
-/*
- * Calculates betweenness centrality using the provided formula
- */
-static double calculateBC(PredNode **pred, Vertex src, Vertex bw, Vertex dest) {
-    int numSPS = findNumPaths(pred, src, dest);
-    if (numSPS == 0) return 0;
-
-    int numBW = countAppearances(pred, src, bw, dest);
-
-    return (double)(numBW)/numSPS;
-}
-
-
 /**
  * Finds the betweenness centrality for each vertex in the given graph
  * and returns the results in a NodeValues structure.
@@ -209,16 +219,6 @@ NodeValues betweennessCentrality(Graph g) {
     }    
 
     return bcData;
-}
-
-
-/*
- * Helper function that normalises the betweenness centrality of a vertex
- */
-static double normaliseBC(double bc, int n) {
-    if (n < 2) return 0;
-
-    return (double)1/((n - 1) * (n - 2)) * bc;
 }
 
 
