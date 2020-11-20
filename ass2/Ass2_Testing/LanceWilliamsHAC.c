@@ -21,39 +21,8 @@
 ////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////
-//                           AUXILLARY                                //
+//                               DIST                                 //
 ////////////////////////////////////////////////////////////////////////
-
-/*
- * Finds the weight of an edge given an adjacency list and a vertex
- * If the given AdjList has vertices, then the correct weight is returned
- * Otherwise, if there are no edges, return INT_MAX (i.e. infinity)
- */
-static int findWeight(AdjList l, Vertex v) {
-    // If AdjList NULL, then no outgoing edges exist, return infinity
-    if (l == NULL) return INT_MAX;
-
-    for (AdjList current = l; current != NULL; current = current->next) {
-        if (l->v == v) break;
-    }
-
-    return l->weight;
-}
-
-
-/*
- * Returns the max between two edges
- * Takes infinity edges into account
- */
-static double max(int w1, int w2) {
-    // If one edge doesn't exist, return other edge
-    if (w1 == INT_MAX) return w2;
-    if (w2 == INT_MAX) return w1;
-
-    // Otherwise, return the larger weight
-    return (w1 > w2) ? w1 : w2;
-}
-
 
 /*
  * Sets all cells of a newly created distance 2-D array to infinity
@@ -66,20 +35,18 @@ static void setInfinity(int numV, double dist[numV][numV]) {
     }
 }
 
-////////////////////////////////////////////////////////////////////////
-//                               DIST                                 //
-////////////////////////////////////////////////////////////////////////
 
 /*
- * Updates the distance array after merging clusters
+ * Initialises the distances in the 2-D dist array via the formula
+ * provided by the spec
  */
 static void initialiseDist(Graph g, int numV, double dist[numV][numV]) {
     for (Vertex v = 0; v < numV; v++) {
         AdjList vOutEdges = GraphOutIncident(g, v);
         for (AdjList current = vOutEdges; current != NULL; current = current->next) {
             int w = current->v;
-            int vOut = findWeight(vOutEdges, w);  // edge weight v->w
-            dist[v][w] = 1/max(vOut, dist[v][w]);
+            int vOut = current->weight;  // edge v->w
+            dist[v][w] = ((double)1/vOut < dist[v][w]) ? (double)1/vOut : dist[v][w];
             dist[w][v] = dist[v][w];
         }
     }
@@ -115,7 +82,28 @@ static void initialiseDend(int numV, Dendrogram dendA[numV]) {
 
 
 /*
+ * Finds the two closest clusters and returns which clusters are the closest
+ * Stores the clusters in separate pointers
+ */
+static void getClosestClusters(int numC, double dist[numC][numC], int *c1, int *c2) {
+    // Start comparing closest clusters at (0,0)
+    *c1 = 0; *c2 = 0;
+    for (int i = 0; i < numC; i++) {
+        for (int j = 0; j < numC; j++) {
+            // Set new min distance b/w clusters if new min found
+            if (dist[i][j] < dist[*c1][*c2] && i != j) {
+                *c1 = i;
+                *c2 = j;
+            }
+        }
+    }
+}
+
+
+/*
  * Inserts a dendrogram node into a another dendrogram tree structure
+ * Leaves the vertex field uninitialised since excel example doesn't require
+ * it to be
  */
 static Dendrogram mergeClusters(Dendrogram c1, Dendrogram c2) {
     Dendrogram new = newDend();
@@ -127,63 +115,115 @@ static Dendrogram mergeClusters(Dendrogram c1, Dendrogram c2) {
 
 
 /*
- * Finds the two closest clusters and returns which clusters are the closest
- * Stores the clusters in separate variables
- */
-static void findClosestClusters(int numC, double dist[numC][numC], int *c1, int *c2) {
-    int currentMin = INT_MAX;
-    for (int i = 0; i < numC; i++) {
-        for (int j = 0; j < numC; j++) {
-            if (i == 0) j++; // don't compare 0,0 on first iteration
-            if (dist[i][j] < currentMin) {
-                *c1 = i;
-                *c2 = j;
-            }
-        }
-    }
-}
-
-
-/*
  * 'Copies' the cells of the reduced dendrogram array to dendA
  */
-static void copytoDendA(int numC, Dendrogram dendA[numC], Dendrogram temp[numC - 1]) {
-    for (int i = 0; i < (numC - 1); i++) dendA[numC] = temp[numC];
+/*static void copytoDendA(int numC, Dendrogram dendA[numC], Dendrogram temp[numC - 1]) {*/
+    /*for (int i = 0; i < (numC - 2); i++) dendA[numC] = temp[numC];*/
+/*}*/
+
+
+/*
+ * Reduces dendA by making a smaller copy of the array and adding the merged 
+ * cluster at the last index
+ */
+static void reduceDendA(int numC, Dendrogram dendA[numC], Dendrogram reducedDendA[numC - 1], int c1, int c2) {
+    int i = 0;
+    for (int j = 0; i < (numC - 2); i++, j++) {
+        while (j == c1 || j == c2) j++;  // leave closest clusters for last index
+        if (j < numC) reducedDendA[i] = dendA[j];
+    }
+    /*copytoDendA(numC, dendA, reducedDendA);*/
+
+    // Last index becomes newly merged cluster
+    reducedDendA[i] = mergeClusters(dendA[c1], dendA[c2]);
 }
 
 
 /*
- * Updates dendA by making a copy of the dendrogram and adding the merged 
- * cluster at the last index
- * Copies back into the original dendA after
+ * Updates the newly merged cluster's values in dist array
+ * using the LW formula
+ * Updates the last row and last column in the reduced array
  */
-static void reduceDendA(int numC, Dendrogram dendA[numC], int c1, int c2) {
-    Dendrogram tempDendA[numC - 1];
-    int i = 0;
-    for (int j = 0; i < (numC - 1); i++) {
-        while (j == c1 || j == c2) j++;  // leave closest clusters for last index
-        tempDendA[i] = dendA[j];
-    }
+static void updateDist(int numC, double dist[numC][numC], double reducedDist[numC - 1][numC - 1],
+                       int c1, int c2, int method) {
+    for (int i = 0, rowColCount = 0; i < numC; i++, rowColCount++) {
+        while (i == c1 || i == c2) i++;  // skip past cluster 1 and 2
+        if (i < numC) {
+            double a = dist[c1][i];  // Dist(ci, ck)
+            double b = dist[c2][i];  // Dist(cj, ck)
+            double c = (a - b > 0) ? (a - b) : (b - a);  // abs(a - b)
+            double methodLW = (method == SINGLE_LINKAGE) ? -1 : 1;
 
-    tempDendA[i] = mergeClusters(dendA[c1], dendA[c2]);
-    copytoDendA(numC, dendA, tempDendA);
+            // LW formula for both single and complete linkage
+            double newDist = ((0.5) * a) + ((0.5) * b) + ((methodLW * (0.5)) * c);
+
+            // Update new clusters' LW distances
+            reducedDist[numC - 2][rowColCount] = newDist;
+            reducedDist[rowColCount][numC - 2] = newDist;
+        }
+    }
+    // Set distance to the newly merged cluster itself to infinity
+    reducedDist[numC - 2][numC - 2] = INT_MAX;
+}
+
+
+/*
+ * 'Copies' the cells from reduced size dist array to the original dist array
+ */
+/*static void copyToDist(int numC, double dist[numC][numC], double temp[numC - 1][numC - 1]) {*/
+    /*for (int i = 0; i < (numC - 1); i++) {*/
+        /*for (int j = 0; j < (numC - 1); j++) {*/
+            /*dist[i][j] = temp[i][j];*/
+        /*}*/
+    /*}*/
+/*}*/
+
+
+/*
+ * Reduces the dist array by making a smaller copy with newly merged clusters
+ * New dist values for merged clusters are updated and is
+ * copied back into the original dist array from the temporary one
+ */
+static void reduceDist(int numC, double dist[numC][numC], double reducedDist[numC - 1][numC - 1], int c1, int c2, int method) {
+    int i = 0;
+    // Skip past clusters 1 and 2 since we want to update it at the last index
+    for (int distRow = 0; i < numC; i++, distRow++) {
+        while (i == c1 || i == c2) i++;
+        for (int distCol = 0, j = 0; j < numC; j++, distCol++) {
+            while (j == c1 || j == c2) j++;
+            if (i < numC && j < numC) reducedDist[distRow][distCol] = dist[i][j];
+        }
+    }
+    
+    updateDist(numC, dist, reducedDist, c1, c2, method);
+    /*copyToDist(numC, dist, reducedDist);*/
 }
 
 
 /*
  * Generates a final dendrogram by incrementally 'reducing' the size of
  * the dendA array and dist 2-D array
+ * Uses *recursion* to progressively reduce the size of the dendA array until it
+ * contains the final, completed dendrogram
  */ 
 static Dendrogram makeFinalDend(int numC, double dist[numC][numC], Dendrogram dendA[numC], int method) {
+    // Stopping case: when all clusters are merged hence return complete dendrogram
+    if (numC == 1) return dendA[0];
+
+    // Start comparing clusters at (0, 1) since (0, 0) invalid
     int c1; int c2;
-    for (int i = 0, numIters = numC; i < numIters; i++, numC--) {
-        findClosestClusters(numC, dist, &c1, &c2);
-        reduceDendA(numC, dendA, c1, c2);
-    }
+    getClosestClusters(numC, dist, &c1, &c2);
 
+    // Generate a smaller dendrogram with a newly merged cluster
+    Dendrogram reducedDendA[numC - 1];
+    reduceDendA(numC, dendA, reducedDendA, c1, c2);
 
-    Dendrogram final = dendA[0];
-    return final;
+    // Generate a smaller dist 2-D array with updated LW distances
+    double reducedDist[numC - 1][numC - 1];
+    reduceDist(numC, dist, reducedDist, c1, c2, method);
+
+    // Recurse until size of dendrogram array reduces to 1, i.e. 1 complete cluster
+    return makeFinalDend((numC - 1), reducedDist, reducedDendA, method);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -207,20 +247,12 @@ Dendrogram LanceWilliamsHAC(Graph g, int method) {
     setInfinity(numVertices, dist);
 
     // Calculate distances for vertices in the dist array using LW method
-    // and initialise an array of dendrograms
     initialiseDist(g, numVertices, dist);
 
+    // Initialise an array of dendrograms to store clusters
     Dendrogram dendA[numVertices];
     initialiseDend(numVertices, dendA);
 
-    for (int i = 0; i < numVertices; i++) {
-        for (int j = 0; j < numVertices; j++) {
-            printf("\t%lf\t", dist[i][j]);
-        }
-        printf("\n");
-    }
-
-    // Call function that returns the final completed dendrogram
     Dendrogram final = makeFinalDend(numVertices, dist, dendA, method);
 
     return final;
@@ -231,7 +263,7 @@ Dendrogram LanceWilliamsHAC(Graph g, int method) {
  * Frees all memory associated with the given Dendrogram structure.
  */
 void freeDendrogram(Dendrogram d) {
-    // Yeah... totally didn't get this from BSTree.h
+    // Yeah... totally didn't get this from BSTree.h :D
     if (d != NULL) {
         freeDendrogram(d->left);
         freeDendrogram(d->right);
