@@ -153,10 +153,9 @@ static void copytoDendA(int numC, Dendrogram dendA[numC], Dendrogram temp[numC -
 
 
 /*
- * Updates dendA after 'reducing' the array in size
- * Moves all the Dendrograms to a smaller array, and inserts the new cluster
- * at the last index
- * Copies this reduced Dendrogram back into the original after
+ * Updates dendA by making a copy of the dendrogram and adding the merged 
+ * cluster at the last index
+ * Copies back into the original dendA after
  */
 static void reduceDendA(int numC, Dendrogram dendA[numC], int c1, int c2) {
     Dendrogram tempDendA[numC - 1];
@@ -165,6 +164,7 @@ static void reduceDendA(int numC, Dendrogram dendA[numC], int c1, int c2) {
         while (j == c1 || j == c2) j++;  // leave closest clusters for last index
         tempDendA[i] = dendA[j];
     }
+
     tempDendA[i] = mergeClusters(dendA[c1], dendA[c2]);
     copytoDendA(numC, dendA, tempDendA);
 }
@@ -178,7 +178,6 @@ static Dendrogram makeFinalDend(int numC, double dist[numC][numC], Dendrogram de
     int c1; int c2;
     for (int i = 0, numIters = numC; i < numIters; i++, numC--) {
         findClosestClusters(numC, dist, &c1, &c2);
-
         reduceDendA(numC, dendA, c1, c2);
     }
 
