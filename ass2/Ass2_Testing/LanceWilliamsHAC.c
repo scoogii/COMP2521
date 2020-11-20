@@ -21,7 +21,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////
- //                          AUXILLARY                                //
+//                           AUXILLARY                                //
 ////////////////////////////////////////////////////////////////////////
 
 /*
@@ -91,10 +91,10 @@ static void initialiseDist(Graph g, int numV, double dist[numV][numV]) {
 
 /*
  * Initialises a new dendrogram node and returns it
+ * Leaves vertex uninitialised in the case of merging
  */
-static Dendrogram newDend(int v) {
+static Dendrogram newDend() {
     Dendrogram new = malloc(sizeof(DNode));
-    new->vertex = v;
     new->left = NULL;
     new->right = NULL;
 
@@ -107,7 +107,22 @@ static Dendrogram newDend(int v) {
  * that stores a single vertex in it
  */
 static void initialiseDend(int numV, Dendrogram dendA[numV]) {
-    for (int i = 0; i < numV; i++) dendA[i] = newDend(i);
+    for (int i = 0; i < numV; i++) {
+        dendA[i] = newDend();
+        dendA[i]->vertex = i;
+    }
+}
+
+
+/*
+ * Inserts a dendrogram node into a another dendrogram tree structure
+ */
+static Dendrogram mergeClusters(Dendrogram c1, Dendrogram c2) {
+    Dendrogram new = newDend();
+    new->left = c1;
+    new->right = c2;
+
+    return new;
 }
 
 
@@ -115,10 +130,11 @@ static void initialiseDend(int numV, Dendrogram dendA[numV]) {
  * Finds the two closest clusters and returns which clusters are the closest
  * Stores the clusters in separate variables
  */
-static void findClosestClusters(int numV, double dist[numV][numV], int *c1, int *c2) {
+static void findClosestClusters(int numC, double dist[numC][numC], int *c1, int *c2) {
     int currentMin = INT_MAX;
-    for (int i = 0; i < numV; i++) {
-        for (int j = 0; j < numV; j++) {
+    for (int i = 0; i < numC; i++) {
+        for (int j = 0; j < numC; j++) {
+            if (i == 0) j++; // don't compare 0,0 on first iteration
             if (dist[i][j] < currentMin) {
                 *c1 = i;
                 *c2 = j;
@@ -129,26 +145,46 @@ static void findClosestClusters(int numV, double dist[numV][numV], int *c1, int 
 
 
 /*
- * Merges the two closest clusters together and adds it to a smaller
- * dendrogram array
+ * 'Copies' the cells of the reduced dendrogram array to dendA
  */
-static Dendrogram mergeClusters(int numV, double dist[numV][numV], Dendrogram dendA[numV]) {
-    int c1; int c2;
-    findClosestClusters(numV, dist, &c1, &c2);
-    int currentMin = INT_MAX;
-
+static void copytoDendA(int numC, Dendrogram dendA[numC], Dendrogram temp[numC - 1]) {
+    for (int i = 0; i < (numC - 1); i++) dendA[numC] = temp[numC];
 }
 
+
 /*
- * Generates a final dendrogram by incrementally reducing the size of
+ * Updates dendA after 'reducing' the array in size
+ * Moves all the Dendrograms to a smaller array, and inserts the new cluster
+ * at the last index
+ * Copies this reduced Dendrogram back into the original after
+ */
+static void reduceDendA(int numC, Dendrogram dendA[numC], int c1, int c2) {
+    Dendrogram tempDendA[numC - 1];
+    int i = 0;
+    for (int j = 0; i < (numC - 1); i++) {
+        while (j == c1 || j == c2) j++;  // leave closest clusters for last index
+        tempDendA[i] = dendA[j];
+    }
+    tempDendA[i] = mergeClusters(dendA[c1], dendA[c2]);
+    copytoDendA(numC, dendA, tempDendA);
+}
+
+
+/*
+ * Generates a final dendrogram by incrementally 'reducing' the size of
  * the dendA array and dist 2-D array
  */ 
-static Dendrogram makeFinalDend(int numV, double dist[numV][numV], Dendrogram dendA[numV]) {
-    int i = 1; int j = 1;
-    for (int i = 0; i < numV; i++) {
-        mergeClusters(numV, dist, dendA);
+static Dendrogram makeFinalDend(int numC, double dist[numC][numC], Dendrogram dendA[numC], int method) {
+    int c1; int c2;
+    for (int i = 0, numIters = numC; i < numIters; i++, numC--) {
+        findClosestClusters(numC, dist, &c1, &c2);
+
+        reduceDendA(numC, dendA, c1, c2);
     }
 
+
+    Dendrogram final = dendA[0];
+    return final;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -186,9 +222,8 @@ Dendrogram LanceWilliamsHAC(Graph g, int method) {
     }
 
     // Call function that returns the final completed dendrogram
-    /*Dendrogram final = makeFinalDend(numVertices, dist, dendA);*/
+    Dendrogram final = makeFinalDend(numVertices, dist, dendA, method);
 
-    Dendrogram final = dendA[0];
     return final;
 }
 
