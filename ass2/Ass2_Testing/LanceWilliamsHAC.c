@@ -117,25 +117,26 @@ static Dendrogram mergeClusters(Dendrogram c1, Dendrogram c2) {
 /*
  * 'Copies' the cells of the reduced dendrogram array to dendA
  */
-/*static void copytoDendA(int numC, Dendrogram dendA[numC], Dendrogram temp[numC - 1]) {*/
-    /*for (int i = 0; i < (numC - 2); i++) dendA[numC] = temp[numC];*/
-/*}*/
+static void copytoDendA(int numC, Dendrogram dendA[numC], Dendrogram temp[numC - 1]) {
+    for (int i = 0; i < (numC - 2); i++) dendA[numC] = temp[numC];
+}
 
 
 /*
  * Reduces dendA by making a smaller copy of the array and adding the merged 
  * cluster at the last index
  */
-static void reduceDendA(int numC, Dendrogram dendA[numC], Dendrogram reducedDendA[numC - 1], int c1, int c2) {
+static void reduceDendA(int numC, Dendrogram dendA[numC], int c1, int c2) {
+    Dendrogram reducedDendA[numC - 1];
     int i = 0;
     for (int j = 0; i < (numC - 2); i++, j++) {
         while (j == c1 || j == c2) j++;  // leave closest clusters for last index
         if (j < numC) reducedDendA[i] = dendA[j];
     }
-    /*copytoDendA(numC, dendA, reducedDendA);*/
+    copytoDendA(numC, dendA, reducedDendA);
 
     // Last index becomes newly merged cluster
-    reducedDendA[i] = mergeClusters(dendA[c1], dendA[c2]);
+    dendA[i] = mergeClusters(dendA[c1], dendA[c2]);
 }
 
 
@@ -163,20 +164,20 @@ static void updateDist(int numC, double dist[numC][numC], double reducedDist[num
         }
     }
     // Set distance to the newly merged cluster itself to infinity
-    reducedDist[numC - 2][numC - 2] = INT_MAX;
+    dist[numC - 2][numC - 2] = INT_MAX;
 }
 
 
 /*
  * 'Copies' the cells from reduced size dist array to the original dist array
  */
-/*static void copyToDist(int numC, double dist[numC][numC], double temp[numC - 1][numC - 1]) {*/
-    /*for (int i = 0; i < (numC - 1); i++) {*/
-        /*for (int j = 0; j < (numC - 1); j++) {*/
-            /*dist[i][j] = temp[i][j];*/
-        /*}*/
-    /*}*/
-/*}*/
+static void copyToDist(int numC, double dist[numC][numC], double temp[numC - 1][numC - 1]) {
+    for (int i = 0; i < (numC - 2); i++) {
+        for (int j = 0; j < (numC - 1); j++) {
+            dist[i][j] = temp[i][j];
+        }
+    }
+}
 
 
 /*
@@ -184,7 +185,8 @@ static void updateDist(int numC, double dist[numC][numC], double reducedDist[num
  * New dist values for merged clusters are updated and is
  * copied back into the original dist array from the temporary one
  */
-static void reduceDist(int numC, double dist[numC][numC], double reducedDist[numC - 1][numC - 1], int c1, int c2, int method) {
+static void reduceDist(int numC, double dist[numC][numC], int c1, int c2, int method) {
+    double reducedDist[numC - 1][numC - 1];
     int i = 0;
     // Skip past clusters 1 and 2 since we want to update it at the last index
     for (int distRow = 0; i < numC; i++, distRow++) {
@@ -196,7 +198,7 @@ static void reduceDist(int numC, double dist[numC][numC], double reducedDist[num
     }
     
     updateDist(numC, dist, reducedDist, c1, c2, method);
-    /*copyToDist(numC, dist, reducedDist);*/
+    copyToDist(numC, dist, reducedDist);
 }
 
 
@@ -207,23 +209,26 @@ static void reduceDist(int numC, double dist[numC][numC], double reducedDist[num
  * contains the final, completed dendrogram
  */ 
 static Dendrogram makeFinalDend(int numC, double dist[numC][numC], Dendrogram dendA[numC], int method) {
-    // Stopping case: when all clusters are merged hence return complete dendrogram
-    if (numC == 1) return dendA[0];
+    for (int i = 0, numIters = numC; i < numIters; i++, numC--) {
+        for (int i = 0; i < numC; i++) {
+            for (int j = 0; j < numC; j++) {
+                printf("%lf ", dist[i][j]);
+            }
+            printf("\n");
+        }
+        printf("\n\n\n");
+        // Start comparing clusters at (0, 1) since (0, 0) invalid
+        int c1; int c2;
+        getClosestClusters(numC, dist, &c1, &c2);
 
-    // Start comparing clusters at (0, 1) since (0, 0) invalid
-    int c1; int c2;
-    getClosestClusters(numC, dist, &c1, &c2);
+        // Reduce current dend array by size 1 with a newly merged cluster
+        reduceDendA(numC, dendA, c1, c2);
 
-    // Generate a smaller dendrogram with a newly merged cluster
-    Dendrogram reducedDendA[numC - 1];
-    reduceDendA(numC, dendA, reducedDendA, c1, c2);
+        // Reduce current dist array by size 1 with a newly merged cluster
+        reduceDist(numC, dist, c1, c2, method);
+    }
 
-    // Generate a smaller dist 2-D array with updated LW distances
-    double reducedDist[numC - 1][numC - 1];
-    reduceDist(numC, dist, reducedDist, c1, c2, method);
-
-    // Recurse until size of dendrogram array reduces to 1, i.e. 1 complete cluster
-    return makeFinalDend((numC - 1), reducedDist, reducedDendA, method);
+    return dendA[0];
 }
 
 ////////////////////////////////////////////////////////////////////////

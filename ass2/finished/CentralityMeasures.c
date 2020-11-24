@@ -107,6 +107,8 @@ static int findNumPaths(PredNode **pred, Vertex src, Vertex dest) {
 /**
  * Finds the number of appearances of vertex v in shortest path from src to dest
  * Backtracks from dest to src and counts when vertex v appears
+ * When a between vertex is found, find the branching paths to src from that vertex
+ * to ensure that all paths are correctly counted
  */
 static int findBetween(PredNode **pred, Vertex src, Vertex v, Vertex dest) {
     if (v == dest) return findNumPaths(pred, src, v);
@@ -211,7 +213,8 @@ NodeValues betweennessCentrality(Graph g) {
             ShortestPaths srcSPS = dijkstra(g, src);
             for (Vertex dest = 0; dest < numVertices; dest++) {  // Loop through each 'dest' vertex
                 if (src != bw && bw != dest && src != dest) {
-                    bcData.values[bw] += calculateBC(srcSPS.pred, src, bw, dest); 
+                    // Incrementally sum the bc value
+                    bcData.values[bw] += calculateBC(srcSPS.pred, src, bw, dest);
                 }
             }
             freeShortestPaths(srcSPS);
@@ -231,6 +234,7 @@ NodeValues betweennessCentralityNormalised(Graph g) {
     // Create new NodeValues struct that contains bc values to be normalise
     NodeValues bnData = betweennessCentrality(g);
 
+    // Normalise each bc value in the NVS
     for (Vertex i = 0; i < numVertices; i++) {
         bnData.values[i] = normaliseBC(bnData.values[i], numVertices);
     }

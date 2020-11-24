@@ -52,7 +52,7 @@ static PredNode *PredNodeInsert(PredNode *pred, PredNode *newNode) {
 
 
 /**
- * Frees the memory of a predecessor linked list using recursion
+ * Frees the memory of a predecessor linked list using ~recursion~
  */
 static void freePredList(PredNode *pred) {
     if (pred == NULL) return;
@@ -131,7 +131,6 @@ ShortestPaths dijkstra(Graph g, Vertex src) {
 
     while (!PQIsEmpty(vSet)) {
         Vertex v = PQDequeue(vSet);
-    
         // Get all adjacent vertices from current vertex v and do edge relaxation
         for (AdjList outLinks = GraphOutIncident(g, v); outLinks != NULL; outLinks = outLinks->next) {
             sps = relaxEdge(sps, v, outLinks->v, outLinks->weight);

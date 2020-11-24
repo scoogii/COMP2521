@@ -19,7 +19,6 @@
 //  					 PART 1 FUNCTIONS                             //
 ////////////////////////////////////////////////////////////////////////
 
-
 /**
  * Creates a new predecessor node and returns it
  */
