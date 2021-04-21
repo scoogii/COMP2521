@@ -82,7 +82,7 @@ ShortestPaths dijkstra(Graph g, Vertex src) {
     ShortestPaths sps;
     sps.numNodes = GraphNumVertices(g);
     sps.src = src;
-    
+
     // Initialisation sourced from `dijkstraSSSP` lecture code
     for (int i = 0; i < sps.numNodes - 1; i++) sps.dist[i] = INT_MAX;
     sps.dist[src] = 0;
